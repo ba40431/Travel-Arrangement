@@ -1,0 +1,302 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    padding: 0; /*左右不留白*/
+    box-sizing: border-box;
+    font-family: 'Noto Sans TC';
+}
+body::-webkit-scrollbar {
+    /*調整滾動條的寬度*/
+    width: 8px;
+}
+body::-webkit-scrollbar-button {
+    /*調整滾動條和視窗上下間距的樣式*/
+    background: transparent;
+    border-radius: 4px;
+}
+body::-webkit-scrollbar-track-piece {
+    /*調整滾動條背後區塊的樣式，如果要讓它看不見使用background: transparent*/
+    background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+    /*調整滾動條滑塊的樣式*/
+    border-radius: 4px;
+    background-color: #e8e8e8;
+    border: 1px solid #e8e8e8;
+}
+body::-webkit-scrollbar-thumb:hover {
+    background-color: #cccccc;
+    border: 1px solid #cccccc;
+}
+body::-webkit-scrollbar-track {
+    /*調整滾動條軌道的樣式*/
+    box-shadow: transparent;
+}
+header {
+    background-color: #eb9091;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    border-bottom: 1px solid #eb9091;
+    opacity: 0.9;
+    z-index: 5; /*z-index的數字愈大，代表愈上層*/
+}
+.header-menu {
+    width: 1200px;
+    height: 54px;
+    display: grid;
+    margin-left: auto;
+    margin-right: auto;
+    grid-template-columns: 300px auto;
+}
+.left {
+    font-weight: 700;
+    font-size: 30px;
+    color: #ffffff;
+    margin-top: auto;
+    margin-bottom: auto;
+    text-decoration: none;
+    cursor: pointer;
+}
+.right {
+    display: grid;
+    justify-content: flex-end;
+    grid-template-columns: auto auto auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.menu {
+    font-weight: 400;
+    font-size: 16px;
+    color: #ffffff;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+}
+/* .sign-in-display , .sign-out-display , .schedule-display {
+	display : none;
+} */
+.sign-in {
+    height: 275px;
+    width: 100%;
+    z-index: 15;
+    position: fixed;
+    top: 80px;
+    right: auto;
+    left: auto;
+    text-align: center;
+    display: none;
+}
+.sign-in-container {
+    width: 340px;
+    height: 275px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sign-in-background {
+    background-image: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+    width: 340px;
+    height: 10px;
+    border-radius: 6px 6px 0 0;
+}
+.sign-in-content {
+    background-color: #ffffff;
+    width: 340px;
+    height: 250px;
+    border-radius: 0 0 6px 6px;
+    padding-top: 15px;
+    text-align: center;
+}
+.sign-in-title {
+    font-weight: 700;
+    font-size: 24px;
+    color: #666666;
+    margin-bottom: 5px;
+}
+.sign-in-title > a {
+    position: absolute;
+    padding-left: 65px;
+    top: 17px;
+    cursor: pointer;
+}
+.sign-in-content > input {
+    width: 278px;
+    height: 46px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 0;
+    color: #666666;
+    font-family: 'Noto Sans TC';
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 8px;
+}
+.sign-in-button {
+    width: 310px;
+    height: 47px;
+    background: #448899;
+    border: 0px solid #448899;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 19px;
+}
+.sign-in-text {
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 10px;
+    color: #666666;
+}
+.sign-in-text > a {
+    cursor: pointer;
+}
+.sign-in-failed {
+    font-weight: 400;
+    font-size: 18px;
+    color: #448899;
+    margin-top: 10px;
+}
+.sign-up {
+    height: 332px;
+    width: 100%;
+    z-index: 15;
+    position: fixed;
+    top: 80px;
+    right: auto;
+    left: auto;
+    text-align: center;
+    display: none;
+}
+.sign-up-container {
+    width: 340px;
+    height: 332px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sign-up-background {
+    background-image: linear-gradient(270deg, #337788 0%, #66aabb 100%);
+    width: 340px;
+    height: 10px;
+    border-radius: 6px 6px 0 0;
+}
+.sign-up-content {
+    background-color: #ffffff;
+    width: 340px;
+    height: 307px;
+    border-radius: 0 0 6px 6px;
+    padding-top: 15px;
+    text-align: center;
+}
+.sign-up-title {
+    font-weight: 700;
+    font-size: 24px;
+    color: #666666;
+    margin-bottom: 5px;
+    border: 0;
+}
+.sign-up-title > a {
+    position: absolute;
+    padding-left: 65px;
+    top: 17px;
+    cursor: pointer;
+}
+.sign-up-content > input {
+    width: 278px;
+    height: 46px;
+    background: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 0;
+    color: #666666;
+    font-family: 'Noto Sans TC';
+    font-weight: 400;
+    font-size: 16px;
+    padding-left: 15px;
+    padding-right: 15px;
+    margin-top: 8px;
+}
+input.valid {
+    background: url(../pic/bx-x-circle.png) no-repeat;
+    background-position: 98%;
+    background-size: 30px;
+    background-repeat: no-repeat;
+}
+input.invalid {
+    background: url(../pic/bx-circle.png) no-repeat;
+    background-position: 98%;
+    background-size: 30px;
+    background-repeat: no-repeat;
+}
+.sign-up-button {
+    width: 310px;
+    height: 47px;
+    background: #448899;
+    border: 0px solid #448899;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 19px;
+}
+.sign-up-text {
+    font-weight: 400;
+    font-size: 16px;
+    margin-top: 10px;
+    color: #666666;
+}
+.sign-up-text > a {
+    cursor: pointer;
+}
+.sign-up-failed {
+    font-weight: 400;
+    font-size: 18px;
+    color: #448899;
+    margin-top: 10px;
+}
+.cover {
+    position: fixed;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000000;
+    opacity: 0.25;
+    z-index: 10;
+    display: none;
+}
+footer {
+    display: grid;
+    background-color: #ffbc7d;
+    height: 104px;
+    justify-content: center;
+    align-items: center;
+    /* width : 100%;
+	position : absolute;
+	bottom : 0; */
+}
+.footer-text {
+    font-family: 'Noto Sans TC';
+    font-weight: 700;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+}
+@media (max-width: 1200px) {
+    .header-menu {
+        width: auto;
+    }
+    .left {
+        margin-left: 10px;
+    }
+}

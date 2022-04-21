@@ -1,0 +1,94 @@
+.hotel-container {
+    width: 1100px;
+    margin-top: 120px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.title {
+    font-weight: 700;
+    font-size: 19px;
+    color: #666666;
+}
+.hotel-block > div {
+    color: #666666;
+}
+.hotel-block > div > input {
+    width: 200px;
+    height: 24px;
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+}
+hr {
+    width: 1100px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #e8e8e8;
+}
+.transport-container,
+.prefer-container,
+.must-to-go-container,
+.button-container {
+    width: 1100px;
+    margin-top: 60px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.hotel-block,
+.transport-block,
+.prefer-block,
+.must-to-go-block {
+    margin-bottom: 60px;
+    margin-top: 40px;
+    margin-left: 40px;
+}
+.transport-block {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+.prefer-block {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+.must-to-go-block > input {
+    width: 200px;
+    height: 24px;
+    padding-right: 4px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+}
+.finish-button {
+    width: 100px;
+    height: 36px;
+    float: right;
+    background-color: #ff9b9d;
+    border: 0px solid #ff9b9d;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 19px;
+    color: #ffffff;
+    cursor: pointer;
+}
+.finish-button:hover {
+    background-color: #eb9091;
+    border: 0px solid #eb9091;
+}
+footer {
+    margin-top: 230px;
+}

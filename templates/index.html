@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+
+{% block CSS %}
+<link rel = 'stylesheet' type = 'text/css' href = 'css/index.css'>
+{% endblock %}
+
+    {% block main %}
+    <main>
+        <div class = 'date-container'>
+            <div class = 'title'>一、選擇想要出發的時間</div>
+            <div class = 'date-block'>
+                <div>出發日期 ：<input type = 'date' id = 'departure-date'></div>
+                <div>回程日期 ：<input type = 'date' id = 'return-date'></div>
+            </div>
+        </div>
+        <hr/>
+        <div class = 'city-container'>
+            <div class = 'title'>二、選擇想要前往的縣市 ( 最多可選擇3個縣市 )</div>
+            <div class = 'city-block'>
+                <img class = 'taiwan-photo' src = 'pic/TW-map.png'>
+                <div class = 'city-content'>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '基隆市' class = 'city'>
+						<label for = '基隆市'><span>基隆市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '臺北市' class = 'city'>
+						<label for = '臺北市'><span>臺北市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '新北市' class = 'city'>
+						<label for = '新北市'><span>新北市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '桃園市' class = 'city'>
+						<label for = '桃園市'><span>桃園市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '新竹縣' class = 'city'>
+						<label for = '新竹縣'><span>新竹縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '新竹市' class = 'city'>
+						<label for = '新竹市'><span>新竹市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '苗栗縣' class = 'city'>
+						<label for = '苗栗縣'><span>苗栗縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '臺中市' class = 'city'>
+						<label for = '臺中市'><span>臺中市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '彰化縣' class = 'city'>
+						<label for = '彰化縣'><span>彰化縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '南投縣' class = 'city'>
+						<label for = '南投縣'><span>南投縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '雲林縣' class = 'city'>
+						<label for = '雲林縣'><span>雲林縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '嘉義縣' class = 'city'>
+						<label for = '嘉義縣'><span>嘉義縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '嘉義市' class = 'city'>
+						<label for = '嘉義市'><span>嘉義市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '臺南市' class = 'city'>
+						<label for = '臺南市'><span>臺南市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '高雄市' class = 'city'>
+						<label for = '高雄市'><span>高雄市</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '屏東縣' class = 'city'>
+						<label for = '屏東縣'><span>屏東縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '宜蘭縣' class = 'city'>
+						<label for = '宜蘭縣'><span>宜蘭縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '花蓮縣' class = 'city'>
+						<label for = '花蓮縣'><span>花蓮縣</span></label>
+					</div>
+                    <div class = 'checkbox-item'>
+						<input type = 'checkbox' name = 'city' id = '臺東縣' class = 'city'>
+						<label for = '臺東縣'><span>臺東縣</span></label>
+					</div>
+                </div>
+            </div>
+        </div>
+        <div class = 'button-container'>
+            <a>
+                <button class = 'next-button' onclick = next()>下一步</button>
+            </a>
+        </div>
+
+    </main>
+    {% endblock %}
+
+{% block JavaScript %}
+<script type = 'text/javascript' src = 'javascript/index.js'></script>
+{% endblock %}
+
