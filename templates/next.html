@@ -17,26 +17,62 @@
         <div class = 'transport-container'>
             <div class = 'title'>四、使用的交通工具</div>
             <div class = 'transport-block'>
-                <div><input type = 'checkbox'><span>開車</span></div>
-                <div><input type = 'checkbox'><span>機車</span></div>
-                <div><input type = 'checkbox'><span>大眾運輸</span></div>
-                <div><input type = 'checkbox'><span>腳踏車</span></div>
-                <div><input type = 'checkbox' checked><span>走路</span></div>
+                <div class = 'checkbox-item'>
+                    <input type = 'checkbox' name = 'transport' id = '開車' class = 'transport'>
+                    <label for = '開車'><span>開車</span>
+                        <img class = 'transport-photo' src = 'pic/car.png'>
+                    </label>
+                </div>
+                <div class = 'checkbox-item'>
+                    <input type = 'checkbox' name = 'transport' id = '機車' class = 'transport'>
+                    <label for = '機車'><span>機車</span>
+                        <img class = 'transport-photo' src = 'pic/motorcycle.png'>
+                    </label>
+                </div>
+                <div class = 'checkbox-item'>
+                    <input type = 'checkbox' name = 'transport' id = '大眾運輸' class = 'transport'>
+                    <label for = '大眾運輸'><span>大眾運輸</span>
+                        <img class = 'transport-photo' src = 'pic/mrt.png'>
+                    </label>
+                </div>
+                <div class = 'checkbox-item'>
+                    <input type = 'checkbox' name = 'transport' id = '腳踏車' class = 'transport'>
+                    <label for = '腳踏車'><span>腳踏車</span>
+                        <img class = 'transport-photo' src = 'pic/bike.png'>
+                    </label>
+                </div>
+                <div class = 'checkbox-item'>
+                    <input type = 'checkbox' name = 'transport' id = '走路' class = 'transport' checked>
+                    <label for = '走路'><span>走路</span>
+                        <img class = 'transport-photo' src = 'pic/walking.png'>
+                    </label>
+                </div>
             </div>
         </div>
         <hr/>
         <div class = 'prefer-container'>
             <div class = 'title'>五、行程安排的偏好</div>
             <div class = 'prefer-block'>
-                <div><input type = 'radio'><span>悠遊輕旅行</span></div>
-                <div><input type = 'radio'><span>排好排滿</span></div>
+                <div><input type = 'radio' name = 'prefer'><span>悠遊輕旅行</span></div>
+                <div><input type = 'radio' name = 'prefer'><span>排好排滿</span></div>
             </div>
         </div>
         <hr/>
         <div class = 'must-to-go-container'>
             <div class = 'title'>六、必去的景點 ( 選填 )</div>
             <div class = 'must-to-go-block'>
-                <input type = 'text'>
+                <div class = 'input-block'>
+                    <input type = 'text'>
+                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
+                </div>
+                <div class = 'input-block'>
+                    <input type = 'text'>
+                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
+                </div>
+                <div class = 'input-block'>
+                    <input type = 'text'>
+                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
+                </div>
             </div>
         </div>
         <div class = 'button-container'>
