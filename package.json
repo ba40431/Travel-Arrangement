@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
-    "stop": "node app.stop.js"
+    "stop": "node app.stop.js",
+    "lint": "eslint \"**/*.js\""
   },
   "author": "abby",
   "license": "ISC",
@@ -16,5 +17,8 @@
     "express": "^4.17.3",
     "mysql2": "^2.3.3",
     "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.14.0"
   }
 }
