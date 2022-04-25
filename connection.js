@@ -3,10 +3,11 @@ require('dotenv').config()
 
 const pool = mysql.createPool({
     connectionLimit: 5,
-    host: process.env.host,
-    user: process.env.user,
-    password: process.env.password, 
-    database: process.env.database
+    host: process.env.RDS_HOST,
+    port: process.env.RDS_PORT,
+    user: process.env.RDS_USER,
+    password: process.env.RDS_PASSWORD, 
+    database: process.env.RDS_BOARD_DATABASE
 });
 
 // connection.connect((err) => {  //直接連接資料庫
