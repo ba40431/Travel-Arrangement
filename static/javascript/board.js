@@ -10,18 +10,24 @@ async function submit() {
     }else if (image.files[0] == null) {
         error_message.textContent = '請選擇圖片'
     }else {
-        let body = {
+        // let headers = {
+        //     'Content-Type': 'multipart/form-data,boundary=MyBoundary',
+        // }
+        // let body = {
+        //     'title': title.value,
+        //     'image': image.files[0]
+        // }
+        let formData = new FormData();
+        formData = {
             'title': title.value,
             'image': image.files[0]
         }
-        // let formData = new FormData();
-        // formData.append('title', title.value);
-        // formData.append('image', image.files[0]);
         let response = await fetch(boardAPI, {
             method: 'POST',
-            body: body
+            // headers: headers,
+            body: formData
         });
-        console.log(body)
+        console.log(formData)
         let result = await response.json();
         console.log(result)
     }
