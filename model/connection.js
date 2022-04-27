@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-require('dotenv').config()
+require('dotenv').config({path:'./.env'})
 
 const pool = mysql.createPool({
     connectionLimit: 5,
@@ -18,10 +18,12 @@ const pool = mysql.createPool({
 //     console.log('Connected to the MySQL server.');
 // });
 
-pool.getConnection((err, connection) => { //使用Connection Pool連資料庫
-    if (err) {
-        return console.log(err.message);
-    }
-    console.log('Connected to the MySQL server.');
-    connection.release();
-});
+// pool.getConnection((err, connection) => { //使用Connection Pool連資料庫
+//     if (err) {
+//         return console.log(err.message);
+//     }
+//     console.log('Connected to the MySQL server.');
+//     connection.release();
+// });
+
+module.exports = pool;
