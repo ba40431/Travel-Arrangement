@@ -1,0 +1,43 @@
+<div class = 'sign-in'>
+    <div  class = 'sign-in-container'>
+        <div class = 'sign-in-background'></div>
+        <div class = 'sign-in-content'>
+            <div class = 'sign-in-title'>登入會員帳號
+                <a id = 'sign-in-close' onclick = closeSignIn()>
+                    <img src = ''>
+                </a>
+            </div>
+            <input type = 'email' id = 'sign-in-email' class = 'sign-in-email' placeholder = '輸入電子信箱'>
+            <input type = 'password' id = 'sign-in-password' class = 'sign-in-password' placeholder = '輸入密碼'>
+            <button class = 'sign-in-button' onclick = checkSignIn()>登入帳戶</button>
+            <div id = 'sign-in-failed' class = 'sign-in-failed'></div>
+            <div class = 'sign-in-text'>還沒有帳戶？
+                <a onclick = signUp()>點此註冊</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--遮罩層 -->
+<div class = 'cover'></div> 
+
+<div class = 'sign-up'>
+    <div  class = 'sign-up-container'>
+        <div class = 'sign-up-background'></div>
+        <div class = 'sign-up-content'>
+            <div class = 'sign-up-title'>註冊會員帳號
+                <a id = 'sign-up-close' onclick = closeSignUp()>
+                    <img src = ''>
+                </a>
+            </div>
+            <input type = 'text' id = 'sign-up-name' class = 'sign-up-name' placeholder = '輸入姓名'>
+            <input type = 'email' id = 'sign-up-email' class = 'sign-up-email' placeholder = '輸入電子信箱'>
+            <input type = 'password' id = 'sign-up-password' class = 'sign-up-password' placeholder = '輸入密碼'>
+            <button class = 'sign-up-button' onclick = checkSignUp()>註冊新帳戶</button>
+            <div id = 'sign-up-failed' class = 'sign-up-failed'></div>
+            <div class = 'sign-up-text'>已經有帳戶了？
+                <a onclick = signIn()>點此登入</a>
+            </div>
+        </div>
+    </div>
+</div>
