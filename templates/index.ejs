@@ -1,10 +1,13 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 
-{% block CSS %}
-<link rel = 'stylesheet' type = 'text/css' href = 'css/index.css'>
-{% endblock %}
+<html>
 
-    {% block main %}
+    <head>
+        <%- include('head'); %>
+        <link rel = 'stylesheet' type = 'text/css' href = 'css/index.css'>
+    </head>
+<body>
+    <%- include('header'); %>
     <main>
         <div class = 'date-container'>
             <div class = 'title'>一、選擇想要出發的時間</div>
@@ -103,11 +106,9 @@
                 <button class = 'next-button' onclick = next()>下一步</button>
             </a>
         </div>
+        <%- include('user'); %>
+        <%- include('footer'); %>
+        <script type = 'text/javascript' src = 'javascript/index.js'></script>
 
-    </main>
-    {% endblock %}
-
-{% block JavaScript %}
-<script type = 'text/javascript' src = 'javascript/index.js'></script>
-{% endblock %}
-
+</body>
+</html>

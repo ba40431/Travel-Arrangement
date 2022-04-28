@@ -1,10 +1,13 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 
-{% block CSS %}
-<link rel = 'stylesheet' type = 'text/css' href = 'css/schedule.css'>
-{% endblock %}
+<html>
 
-    {% block main %}
+    <head>
+        <%- include('head'); %>
+        <link rel = 'stylesheet' type = 'text/css' href = 'css/schedule.css'>
+    </head>
+<body>
+    <%- include('header'); %>
     <main>
         <div class = 'schedule-container'>
             <div class = 'title'>行程安排</div>
@@ -50,8 +53,9 @@
         </div>
 
     </main>
-    {% endblock %}
 
-{% block JavaScript %}
-<script type = 'text/javascript' src = 'javascript/schedule.js'></script>
-{% endblock %}
+    <%- include('user'); %>
+    <%- include('footer'); %>
+    <script type = 'text/javascript' src = 'javascript/schedule.js'></script>
+</body>
+</html>

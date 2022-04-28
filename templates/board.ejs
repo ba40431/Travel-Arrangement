@@ -1,10 +1,13 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
 
-{% block CSS %}
-<link rel = 'stylesheet' type = 'text/css' href = 'css/board.css'>
-{% endblock %}
+<html>
 
-    {% block main %}
+    <head>
+        <%- include('head'); %>
+        <link rel = 'stylesheet' type = 'text/css' href = 'css/board.css'>
+    </head>
+<body>
+    <%- include('header'); %>
     <main>
         <div class = 'board-container'>
             <h2>發表一篇圖文</h2>
@@ -17,8 +20,10 @@
         </div>
         
     </main>
-    {% endblock %}
-    
-{% block JavaScript %}
-<script type = 'text/javascript' src = 'javascript/board.js'></script>
-{% endblock %}
+
+    <%- include('user'); %>
+    <%- include('footer'); %>
+    <script type = 'text/javascript' src = 'javascript/board.js'></script>
+
+</body>
+</html>

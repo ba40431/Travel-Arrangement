@@ -1,18 +1,12 @@
 const express = require('express');
-const swig = require('swig');
 const path = require('path')
 const app = express();
 const port = 3000;
 
-// Disable Express's and Swig Cache
-swig.setDefaults({
-  cache: false
-})
-app.set('view cache', false);
-app.set('views','templates');
-app.set('view engine','html');
 
-app.engine('html', swig.renderFile);
+app.set('views','templates');
+app.set('view engine', 'ejs');
+
 
 app.use(express.static(__dirname + '/static'));
 app.use(express.static('routes'));
