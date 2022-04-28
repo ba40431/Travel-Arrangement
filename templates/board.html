@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block CSS %}
+<link rel = 'stylesheet' type = 'text/css' href = 'css/board.css'>
+{% endblock %}
+
+    {% block main %}
+    <main>
+        <div class = 'board-container'>
+            <h2>發表一篇圖文</h2>
+            <div>文字內容<input type = 'text' id = 'title'></div>
+            <div>圖片檔案<input type = 'file' accept = 'image/*' id = 'image'></div>
+            <button onclick = submit()>送出</button>
+            <div class = 'error-message'></div>
+            <hr/>
+            <div class = 'board-block'></div>
+        </div>
+        
+    </main>
+    {% endblock %}
+    
+{% block JavaScript %}
+<script type = 'text/javascript' src = 'javascript/board.js'></script>
+{% endblock %}
