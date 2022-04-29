@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
-const { insertMessage } = require('../../model/board');
+const { insertMessage, checkMessage } = require('../../model/board');
 const mysql = require('mysql2');
 const pool = require('../../model/connection')
 const boardAPI = express.Router();
@@ -38,31 +38,33 @@ const upload = multer({
   })
 })
 boardAPI.get('/board', async (req, res) => {
-  pool.getConnection((err, connection) => {
-      if (err) {
-        res.send(err,500);
-        return console.log(err.message);
-      }
-      connection.query('SELECT * FROM `message`',
-      function (err, result) {
-          if (err) {
-            res.send(err,400);
-            throw err
-          };
-          connection.release();
-          return res.status(200).jsonp(result);
-      });
-  });
+  checkMessage((err, result) => {
+    if(err) {
+      console.log(err)
+      return res.status(500).json({
+        'error': true,
+        'message': '伺服器發生錯誤'
+      })
+    }
+    return res.status(200).json(result)
+  })
 }) 
 
 boardAPI.post('/board', upload.single('image'), async (req, res, next) => { 
   let imageUrl = `https://d92adaktwu3r8.cloudfront.net/${req.file.originalname}`;
-  insertMessage(req.body.title,imageUrl);
-  let data = {
-    'data': 'ok',
-    'imageUrl': imageUrl
-  };
-  res.send(data,200);
+  insertMessage(req.body.title, imageUrl, (err, result) => {
+    if(err) {
+      console.log(err)
+      return res.status(500).json({
+        'error': true,
+        'message': '伺服器發生錯誤'
+      })
+    }
+    return res.status(200).json({
+      'data': 'ok',
+      'imageUrl': imageUrl
+    })
+  });
 });
 
 module.exports = boardAPI;

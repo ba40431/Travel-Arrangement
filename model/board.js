@@ -2,40 +2,42 @@ const express = require('express');
 const mysql = require('mysql2');
 const pool = require('./connection')
 
-function insertMessage(title,imageUrl) {
-    pool.getConnection((err, connection) => {
-        if (err) {
-            return console.log(err.message);
-        }
-        console.log('Connected to the MySQL server.');
-        connection.query('INSERT INTO `message` (title, image_url) VALUES (?, ?);', [title, imageUrl],
-        function (err, result) {
-            if (err) {
-                throw err
-            };
+module.exports = {
+    insertMessage: (title, imageUrl, cb) => {
+        pool.getConnection((error, connection) => {
+            if (error) {
+                return cb(error.message);
+            }
+            console.log('Connected to the MySQL server.');
+            connection.query(
+                'INSERT INTO `message` (title, image_url) VALUES (?, ?);', [title, imageUrl],
+                (error, result) => {
+                    if (error) {
+                        return cb(error);
+                    }
+                    console.log("Number of records inserted: " + result.affectedRows);
+                    return cb(null,result)
+                }
+            )
             connection.release();
-            return console.log("Number of records inserted: " + result.affectedRows);
+        })
+    },
+    checkMessage: (cb) => {
+        pool.getConnection((error, connection) => { 
+            if (error) {
+                return cb(error.message);
+            }
+            console.log('Connected to the MySQL server.');
+            connection.query(
+                'SELECT * FROM `message`',
+                (error, result) => {
+                    if (error) {
+                        return cb(error);
+                    }
+                    return cb(null,result)
+                }
+            )
+            connection.release();
         });
-    });
-};
-
-// function checkMessage() {
-//     pool.getConnection((err, connection) => {
-//         if (err) {
-//             return console.log(err.message);
-//         }
-//         console.log('Connected to the MySQL server.');
-//         connection.query('SELECT * FROM `message`',
-//         function (err, result) {
-//             if (err) {
-//                 throw err
-//             };
-//             // console.log(result)
-//             connection.release();
-//             return result
-//         });
-//     });
-// }
-
-// module.exports = { insertMessage, checkMessage }
-module.exports = { insertMessage }
+    }
+}

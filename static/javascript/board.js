@@ -45,7 +45,6 @@ async function submit() {
             method: 'POST',
             body: formData
         });
-        // console.log(formData);
         let result = await response.json();
         if(result.data == 'ok') {
             window.location.replace(location.href)
