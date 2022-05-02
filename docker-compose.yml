@@ -1,0 +1,20 @@
+
+version: '2'
+
+services:
+  nginx:
+    image: nginx
+    depends_on:
+      - website
+      # - website
+    ports:
+      - 80:80
+  website:
+    build: .
+    image: ba40431/travel-project:2022-4-30
+    environment:
+      - PORT=3000
+  # website:
+  #   build: ./
+  #   environment:
+  #     - port=3001

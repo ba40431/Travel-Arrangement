@@ -1,7 +1,7 @@
 const express = require('express');
-const path = require('path')
+const path = require('path');
 const app = express();
-const port = 80;
+const {PORT = 3000} = process.env
 
 
 app.set('views','templates');
@@ -38,6 +38,6 @@ app.use(mySchedulePage)
 app.use(userCenterPage)
 app.use(boardPage)
 
-app.listen(port, () => {
-  console.log(`server is started at http://localhost:${port}`)
+app.listen( PORT, () => {
+  console.log(`server is started at http://localhost:${PORT}`)
 })

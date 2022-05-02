@@ -1,6 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
-require('dotenv').config({path:'./.env'})
+require('dotenv').config({path:'../../.env'})
 
 const pool = mysql.createPool({
     connectionLimit: 5,
