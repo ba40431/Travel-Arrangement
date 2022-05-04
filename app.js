@@ -18,11 +18,13 @@ const attractionAPI = require('./routes/api/attraction')
 const requireAPI = require('./routes/api/require')
 const scheduleAPI = require('./routes/api/schedule')
 const boardAPI = require('./routes/api/board')
+const loaderio = require('./routes/api/loaderio')
 app.use('/api', userAPI)
 app.use('/api', attractionAPI)
 app.use('/api', requireAPI)
 app.use('/api', scheduleAPI)
 app.use('/api', boardAPI)
+app.use(loaderio)
 
 // Page
 const indexPage = require('./routes/page/index')
