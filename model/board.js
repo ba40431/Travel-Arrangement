@@ -1,7 +1,5 @@
-const express = require('express');
-const mysql = require('mysql2');
-const pool = require('./connection')
-
+const pool = require('./connection');
+//如果要使用board頁面，改connection database: process.env.RDS_BOARD_DATABASE
 module.exports = {
     insertMessage: (title, imageUrl, cb) => {
         pool.getConnection((error, connection) => {

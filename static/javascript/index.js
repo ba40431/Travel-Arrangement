@@ -1,3 +1,6 @@
+let citiesCount = 0;
+let citiesName = null;
+
 // 限制只能選今天以後的日期
 const departureDate = document.querySelector('#departure-date');
 const returnDate = document.querySelector('#return-date');
@@ -8,10 +11,62 @@ returnDate.setAttribute('min', today.toISOString().split('T')[0]);
 // checkbox數量限制
 const cities = document.querySelectorAll('.city');
 const checkedMax = 3;
-for (let i = 0; i < cities.length; i++) { cities[i].onclick = selectiveCheck; }
+
+for (let i = 0; i < cities.length; i++) {
+   cities[i].onclick = selectiveCheck;
+}
 function selectiveCheck(e) {
   const checkedCities = document.querySelectorAll('.city:checked');
-  if (checkedCities.length >= checkedMax + 1) { return false; }
+  const cities = document.querySelectorAll('.city');
+  if (checkedCities.length > checkedMax) { return false; }
+  else {
+    citiesCount = checkedCities.length;
+    citiesName = checkedCities;
+  }
+  for(let i = 0; i < cities.length; i++) {
+    let pin = document.querySelector('.pin-'+ cities[i].value);
+    if(cities[i].checked) {
+      pin.style.display = 'block';
+    }else {
+      pin.style.display = 'none';
+    }
+  }
 }
 
-function next() {}
+//下一頁按鈕
+const warning_text = document.querySelector('.warning-text');
+function next() {
+  if(departureDate.value === '' || returnDate.value === '') {
+    warning_text.textContent = '請輸入出發和回程日期';
+  }else if(citiesCount === 0) {
+    warning_text.textContent = '請至少選擇一個縣市';
+  }else if(departureDate.value > returnDate.value) {
+    warning_text.textContent = '回程日期須大於出發日期';
+  }else {
+    let citiesList = [];
+    for(let i = 0; i < citiesCount; i++){
+      let checkedCitiesName = citiesName[i].id;
+      citiesList.push(checkedCitiesName)
+    };
+    fetch('api/require' ,{
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        'departureDate': departureDate.value,
+        'returnDate': returnDate.value,
+        'checkedCities': citiesList
+      })
+    }).then((response) => {
+      return response.json()
+    }).then((result) => {
+      console.log(result)
+      if(result.ok) {
+        location.href = '/next';
+      }else {
+        warning_text.textContent = '伺服器發生錯誤';
+      }
+    })
+  }
+}
+
+

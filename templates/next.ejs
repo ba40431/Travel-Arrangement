@@ -11,10 +11,7 @@
     <main>
         <div class = 'hotel-container'>
             <div class = 'title'>三、選擇住宿飯店</div>
-            <div class = 'hotel-block'>
-                <div>MM/YY<input type = 'text'></div>
-                <div>MM/YY<input type = 'text'></div>
-            </div>
+            <div class = 'hotel-block'></div>
         </div>
         <hr/>
         <div class = 'transport-container'>
@@ -83,9 +80,10 @@
                 <button class = 'finish-button'>行程安排</button>
             </a>
         </div>
-
+        
+        <%- include('user'); %>
     </main>
-    <%- include('user'); %>
+    
     <%- include('footer'); %>
     <script type = 'text/javascript' src = 'javascript/next.js'></script>
 

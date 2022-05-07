@@ -15,17 +15,13 @@
     margin-top: 40px;
     display: grid;
     grid-template-columns: auto auto;
-}
-.hotel-block > div {
     color: #666666;
 }
-.hotel-block > div > input {
-    width: 200px;
-    height: 24px;
+.city-select {
+    width: 90px;
+    height: 30px;
     padding-right: 4px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
+    padding-left: 8px;
     margin-left: 10px;
     margin-bottom: 10px;
     font-size: 16px;
