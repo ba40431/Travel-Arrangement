@@ -1,10 +1,11 @@
 const express = require('express');
-const { checkTown } = require('../../model/require');
+const { checkTown, searchHotel } = require('../../model/require');
 const requireAPI = express.Router();
 
 let departureDate = null;
 let returnDate = null;
 let checkedCities = null;
+let cityData = null
 
 //POST router
 requireAPI.post('/require', (req, res) => {
@@ -45,32 +46,36 @@ requireAPI.get('/require', async (req, res) => {
     }
 
     //取得縣市區域
-    let regionList_1 = [];
-    let regionList_2 = [];
-    let regionList_3 = [];
-    for(let i = 0; i < result.length; i++) {
-      if(checkedCities[0] !== undefined && checkedCities[0] === result[i].region) {
-        let town = result[i].town;
-        regionList_1.push(town);
-      }else if(checkedCities[1] !== undefined && checkedCities[1] === result[i].region) {
-        let town = result[i].town;
-        regionList_2.push(town);
-      }else if(checkedCities[2] !== undefined && checkedCities[2] === result[i].region) {
-        let town = result[i].town;
-        regionList_3.push(town)
+    cityData = result;
+    let regionList1 = [];
+    let regionList2 = [];
+    let regionList3 = [];
+    for(let i = 0; i < cityData.length; i++) {
+      if(checkedCities[0] !== undefined && checkedCities[0] === cityData[i].region) {
+        // let town = `${cityData[i].zipcode} ${cityData[i].town}`;
+        let town = `${cityData[i].town}`;
+        regionList1.push(town);
+      }else if(checkedCities[1] !== undefined && checkedCities[1] === cityData[i].region) {
+        // let town = `${cityData[i].zipcode} ${cityData[i].town}`;
+        let town = `${cityData[i].town}`;
+        regionList2.push(town);
+      }else if(checkedCities[2] !== undefined && checkedCities[2] === cityData[i].region) {
+        // let town = `${cityData[i].zipcode} ${cityData[i].town}`;
+        let town = `${cityData[i].town}`;
+        regionList3.push(town)
       }else {
         return
       }
     }
     let data = [{
         'city': checkedCities[0],
-        'region': regionList_1
+        'region': regionList1
       },{
         'city': checkedCities[1],
-        'region': regionList_2
+        'region': regionList2
       },{
         'city': checkedCities[2],
-        'region': regionList_3
+        'region': regionList3
       }]
 
 
@@ -84,9 +89,42 @@ requireAPI.get('/require', async (req, res) => {
 })
 
 //GET :town router
-requireAPI.get('/require/:town', (req, res) => {
-  res.status(200).json({
+// requireAPI.get('/require/:townId', (req, res) => {
+//   const townId = req.params.townId
+//   searchHotel(townId, async (err, result) => {
+//     if(err) {
+//       console.log(err)
+//       return res.status(500).json({
+//         'error': true,
+//         'message': '伺服器發生錯誤'
+//       })
+//     }
+//     res.status(200).json({
+//       result
+//     })
+//   })
+// })
 
+//POST Hotels router
+requireAPI.post('/hotels', async (req, res) => {
+  let selectTown = req.body.selectTown;
+  let townId = null;
+  for(let i = 0; i < cityData.length; i++) {
+    if(selectTown === cityData[i].town) {
+      townId = cityData[i].zipcode
+    }
+  }
+  searchHotel(townId, async (err, result) => {
+    if(err) {
+      console.log(err)
+      return res.status(500).json({
+        'error': true,
+        'message': '伺服器發生錯誤'
+      })
+    }
+    res.status(200).json({
+      result
+    })
   })
 })
 

@@ -34,21 +34,21 @@ function selectiveCheck(e) {
 }
 
 //下一頁按鈕
-const warning_text = document.querySelector('.warning-text');
+const warningText = document.querySelector('.warning-text');
 function next() {
   if(departureDate.value === '' || returnDate.value === '') {
-    warning_text.textContent = '請輸入出發和回程日期';
+    warningText.textContent = '請輸入出發和回程日期';
   }else if(citiesCount === 0) {
-    warning_text.textContent = '請至少選擇一個縣市';
+    warningText.textContent = '請至少選擇一個縣市';
   }else if(departureDate.value > returnDate.value) {
-    warning_text.textContent = '回程日期須大於出發日期';
+    warningText.textContent = '回程日期須大於出發日期';
   }else {
     let citiesList = [];
     for(let i = 0; i < citiesCount; i++){
       let checkedCitiesName = citiesName[i].id;
       citiesList.push(checkedCitiesName)
     };
-    fetch('api/require' ,{
+    fetch('api/require', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
@@ -59,11 +59,10 @@ function next() {
     }).then((response) => {
       return response.json()
     }).then((result) => {
-      console.log(result)
       if(result.ok) {
         location.href = '/next';
       }else {
-        warning_text.textContent = '伺服器發生錯誤';
+        warningText.textContent = '伺服器發生錯誤';
       }
     })
   }

@@ -19,5 +19,23 @@ module.exports = {
             )
             connection.release();
         });
-    }
+    },
+    searchHotel: (townId, cb) => {
+        pool.getConnection((error, connection) => { 
+            if (error) {
+                return cb(error.message);
+            }
+            console.log('Connected to the MySQL server.');
+            connection.query(
+                'select * from `hotel` where `zipcode`= ?', [townId],
+                (error, result) => {
+                    if (error) {
+                        return cb(error);
+                    }
+                    return cb(null,result)
+                }
+            )
+            connection.release();
+        });
+    },
 }
