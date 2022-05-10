@@ -1,5 +1,7 @@
+const warningText = document.querySelector('.warning-text');
 let requireData = null;
 let hotelData = null;
+let tripLength = null;
 
 window.onload = () => {
     init();
@@ -26,7 +28,7 @@ function initData() {
 function renderCityInput(data) {
     const hotelBlock = document.querySelector('.hotel-block');
     const departureDate = data.departureDate;
-    const tripLength = data.tripLength;
+    tripLength = data.tripLength;
     for(let i = 0; i < tripLength; i++) {
         //取得住宿日期
         const div = document.createElement('div');
@@ -87,14 +89,13 @@ function renderSelect(data, num) {
 function selectTowns() {
     let towns = document.querySelectorAll('.city-select');
     for(let i = 0; i < towns.length; i++) {
-        towns[i].addEventListener('input', handleSelect);
+        towns[i].addEventListener('input', handleCitySelect);
     }
 }
 
-function handleSelect(e) {
+function handleCitySelect(e) {
     let selectDay = e.target.id
     let selectTown = e.target.value;
-    console.log(selectDay.slice(12,))
     fetch('api/hotels', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -120,3 +121,85 @@ function renderHotel(data, num) {
     }
 }
 
+//增加必去景點 input
+// let plusCount = 0;
+// function plusInput() {
+//     if(plusCount < 2) {
+//         const mustToGoBlock = document.querySelector('.must-to-go-block');
+//         let div = document.createElement('div');
+//         let input = document.createElement('input');
+//         let button = document.createElement('button');
+//         let img = document.createElement('img');
+//         div.setAttribute('class', 'input-block');
+//         div.setAttribute('id', `input-block-${plusCount}`);
+//         mustToGoBlock.appendChild(div);
+//         let inputBlock = document.querySelector(`#input-block-${plusCount}`);
+//         input.setAttribute('type', 'text');
+//         button.setAttribute('class', 'plus-button');
+//         button.setAttribute('id', `button-${plusCount}`);
+//         button.setAttribute('onclick', 'plusInput()');
+//         inputBlock.appendChild(input);
+//         inputBlock.appendChild(button);
+//         let buttonId = document.querySelector(`#button-${plusCount}`);
+//         img.src = 'pic/bx-plus-medical.png';
+//         buttonId.appendChild(img);
+//         plusCount += 1
+//     }else {
+//         warningText.textContent = '超過可增加之上限';
+//     }
+
+// }
+
+
+//行程規劃按鈕
+function getSchedule() {
+    //取得飯店資料
+    let selectHotel = document.querySelectorAll('.hotel-select'); 
+    let selectHotelList = [];
+    for(let i = 0; i < selectHotel.length; i++) {
+        if(selectHotel[i].value === '') {
+            break
+        }
+        selectHotelList.push(selectHotel[i].value)
+    }
+    //取得交通工具資料
+    let selectTransport = document.querySelectorAll('.transport'); 
+    let selectTransportList = [];
+    for(let i = 0; i < selectTransport.length; i++) {
+        if(selectTransport[i].checked) {
+            selectTransportList.push(selectTransport[i].id)
+        }
+    }
+    //取得安排偏好
+    let selectPreference = document.querySelector('input[type = radio]:checked')
+    //取得必去景點
+
+    if(selectHotelList.length !==  tripLength) {
+        warningText.textContent = '請選擇住宿飯店';
+    }else if(selectTransportList.length === 0) {
+        warningText.textContent = '請選擇交通工具';
+    }else if(selectPreference === null) {
+        warningText.textContent = '請選擇行程安排偏好';
+    }else if(document.querySelector('#place-id').innerHTML === '') {
+        fetch('api/schedule', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+              'departureDate': departureDate.value,
+              'returnDate': returnDate.value,
+              'checkedCities': citiesList
+            })
+          }).then((response) => {
+            return response.json()
+          }).then((result) => {
+            if(result.ok) {
+                console.log('ok')
+            //   location.href = '/next';
+            }else {
+              warningText.textContent = '伺服器發生錯誤';
+            }
+          })
+    }else {
+        console.log('ok')
+    }
+}

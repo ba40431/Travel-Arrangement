@@ -1,10 +1,12 @@
-<!DOCTYPE html>
 
 <html>
 
     <head>
         <%- include('head'); %>
         <link rel = 'stylesheet' type = 'text/css' href = 'css/next.css'>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <link rel="stylesheet" type="text/css" href="css/map.css" />
+        <script type="module" src="javascript/map.js"></script>
     </head>
 <body>
     <%- include('header'); %>
@@ -62,32 +64,42 @@
         <hr/>
         <div class = 'must-to-go-container'>
             <div class = 'title'>六、必去的景點 ( 選填 )</div>
-            <div class = 'must-to-go-block'>
-                <div class = 'input-block'>
-                    <input type = 'text'>
-                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
-                </div>
-                <div class = 'input-block'>
-                    <input type = 'text'>
-                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
-                </div>
-                <div class = 'input-block'>
-                    <input type = 'text'>
-                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
-                </div>
+            <div style="display: none">
+                <input
+                  id="pac-input"
+                  class="controls"
+                  type="text"
+                  placeholder="Enter a location"
+                />
             </div>
+            <div id="map"></div>
+              <div id="infowindow-content">
+                <span id="place-name" class="title"></span><br />
+                <strong>Place ID:</strong> <span id="place-id"></span><br />
+                <span id="place-address"></span>
+            </div>
+            <!-- <div class = 'must-to-go-block'>
+                <div class = 'input-block'>
+                    <input type = 'text'>
+                    <button class = 'plus-button' onclick = plusInput()><img src = 'pic/bx-plus-medical.png'></button>
+                </div>
+            </div> -->
         </div>
         <div class = 'button-container'>
-            <a href = '/schedule'> 
-                <button class = 'finish-button'>行程安排</button>
-            </a>
+            <!-- <a href = '/schedule'>  -->
+                <div class = 'warning-text'></div>
+                <button class = 'finish-button' onclick = getSchedule()>行程安排</button>
+            <!-- </a> -->
         </div>
-        
+
         <%- include('user'); %>
     </main>
     
     <%- include('footer'); %>
     <script type = 'text/javascript' src = 'javascript/next.js'></script>
-
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqrhAQBbRZxXk4rRvcjvHIwhjTKAlzhWU&callback=initMap&libraries=places&v=weekly"
+    async defer
+  ></script>
 </body>
 </html>

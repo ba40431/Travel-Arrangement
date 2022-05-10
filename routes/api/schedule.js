@@ -2,7 +2,7 @@ const express = require('express');
 
 const scheduleAPI = express.Router();
 
-scheduleAPI.get('/schedule', (req, res) => {
+scheduleAPI.post('/schedule', (req, res) => {
   res.send('ok');
 });
 

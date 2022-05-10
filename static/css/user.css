@@ -44,11 +44,12 @@ header {
 }
 .header-menu {
     width: 1200px;
-    height: 54px;
+    height: 75px;
     display: grid;
     margin-left: auto;
     margin-right: auto;
     grid-template-columns: 300px auto;
+    font-family: 'Comic Sans MS';
 }
 .left {
     font-weight: 700;
@@ -57,6 +58,7 @@ header {
     margin-top: auto;
     margin-bottom: auto;
     text-decoration: none;
+    /* font-family: 'Comic Sans MS'; */
     cursor: pointer;
 }
 .right {
@@ -68,7 +70,7 @@ header {
 }
 .menu {
     font-weight: 400;
-    font-size: 16px;
+    font-size: 20px;
     color: #ffffff;
     margin-right: 10px;
     margin-left: 10px;
@@ -291,6 +293,7 @@ footer {
     color: #ffffff;
     text-align: center;
     font-size: 16px;
+    font-family: 'Comic Sans MS';
 }
 @media (max-width: 1200px) {
     .header-menu {
