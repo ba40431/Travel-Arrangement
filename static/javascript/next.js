@@ -115,52 +115,32 @@ function renderHotel(data, num) {
     document.querySelector(`#hotel-select-${num}`).innerHTML = '';
     for(let i = 0; i < data.result.length; i++) {
         let option = document.createElement('option');
+        option.id = `hotel-number-${data.result[i].id}`
         option.value = data.result[i].name;
         option.innerHTML = data.result[i].name;
         document.querySelector(`#hotel-select-${num}`).appendChild(option);
     }
 }
 
-//增加必去景點 input
-// let plusCount = 0;
-// function plusInput() {
-//     if(plusCount < 2) {
-//         const mustToGoBlock = document.querySelector('.must-to-go-block');
-//         let div = document.createElement('div');
-//         let input = document.createElement('input');
-//         let button = document.createElement('button');
-//         let img = document.createElement('img');
-//         div.setAttribute('class', 'input-block');
-//         div.setAttribute('id', `input-block-${plusCount}`);
-//         mustToGoBlock.appendChild(div);
-//         let inputBlock = document.querySelector(`#input-block-${plusCount}`);
-//         input.setAttribute('type', 'text');
-//         button.setAttribute('class', 'plus-button');
-//         button.setAttribute('id', `button-${plusCount}`);
-//         button.setAttribute('onclick', 'plusInput()');
-//         inputBlock.appendChild(input);
-//         inputBlock.appendChild(button);
-//         let buttonId = document.querySelector(`#button-${plusCount}`);
-//         img.src = 'pic/bx-plus-medical.png';
-//         buttonId.appendChild(img);
-//         plusCount += 1
-//     }else {
-//         warningText.textContent = '超過可增加之上限';
-//     }
-
-// }
-
-
 //行程規劃按鈕
 function getSchedule() {
     //取得飯店資料
     let selectHotel = document.querySelectorAll('.hotel-select'); 
+    let selectHotelOption = document.querySelectorAll('.hotel-select > option'); 
     let selectHotelList = [];
+    let hotelId = null;
     for(let i = 0; i < selectHotel.length; i++) {
         if(selectHotel[i].value === '') {
             break
         }
-        selectHotelList.push(selectHotel[i].value)
+        for(let j = 0; j < selectHotelOption.length; j++) {
+            if (selectHotel[i].value === selectHotelOption[j].value) {
+                hotelId = selectHotelOption[j].id.slice(13,); 
+                break
+            }
+        }
+        let hotelName = selectHotel[i].value;
+        selectHotelList.push({hotelId,hotelName})
     }
     //取得交通工具資料
     let selectTransport = document.querySelectorAll('.transport'); 
@@ -173,6 +153,9 @@ function getSchedule() {
     //取得安排偏好
     let selectPreference = document.querySelector('input[type = radio]:checked')
     //取得必去景點
+    let placeName = document.querySelector('#place-name').innerHTML;
+    let placeId = document.querySelector('#place-id').innerHTML;
+    let placeAddress = document.querySelector('#place-address').innerHTML;
 
     if(selectHotelList.length !==  tripLength) {
         warningText.textContent = '請選擇住宿飯店';
@@ -180,26 +163,54 @@ function getSchedule() {
         warningText.textContent = '請選擇交通工具';
     }else if(selectPreference === null) {
         warningText.textContent = '請選擇行程安排偏好';
-    }else if(document.querySelector('#place-id').innerHTML === '') {
+    }else if(placeId === '') {
         fetch('api/schedule', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-              'departureDate': departureDate.value,
-              'returnDate': returnDate.value,
-              'checkedCities': citiesList
+                'travelDate':{
+                    'departureDate': requireData.departureDate,
+                    'returnDate': requireData.returnDate,
+                    'tripLength': requireData.tripLength,
+                },
+                'travelRequireData':{
+                    'cities': requireData.checkedCities,
+                    'hotelList': selectHotelList,
+                    'transportList': selectTransportList,
+                    'preference': selectPreference.id,
+                }
             })
           }).then((response) => {
             return response.json()
           }).then((result) => {
-            if(result.ok) {
-                console.log('ok')
-            //   location.href = '/next';
-            }else {
-              warningText.textContent = '伺服器發生錯誤';
-            }
+            result.ok ? location.href = '/schedule' : warningText.textContent = '伺服器發生錯誤';
           })
     }else {
-        console.log('ok')
+        fetch('api/schedule', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                'travelDate':{
+                    'departureDate': requireData.departureDate,
+                    'returnDate': requireData.returnDate,
+                    'tripLength': requireData.tripLength,
+                },
+                'travelRequireData':{
+                    'cities': requireData.checkedCities,
+                    'hotelList': selectHotelList,
+                    'transportList': selectTransportList,
+                    'preference': selectPreference.id,
+                    'mustToGoPlace':{
+                        'placeName': placeName,
+                        'placeId': placeId,
+                        'placeAddress': placeAddress
+                    }
+                }
+            })
+          }).then((response) => {
+            return response.json()
+          }).then((result) => {
+            result.ok ? location.href = '/schedule' : warningText.textContent = '伺服器發生錯誤';
+          })
     }
 }

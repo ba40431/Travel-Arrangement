@@ -8,6 +8,18 @@ const today = new Date(+new Date() + 8 * 3600 * 1000); // 加入相差八小時
 departureDate.setAttribute('min', today.toISOString().split('T')[0]); // toISOString()方法使用ISO標準將Date對象轉換為字符串
 returnDate.setAttribute('min', today.toISOString().split('T')[0]);
 
+
+//限制回程日期範圍
+function handler(e){
+  let date = new Date(e.value);
+  let minDate = date.setDate(date.getDate());
+  let maxDate = date.setDate(date.getDate() + 4);
+  minDate = new Date(minDate);
+  maxDate = new Date(maxDate);
+  returnDate.setAttribute('min', minDate.toISOString().split('T')[0]);
+  returnDate.setAttribute('max', maxDate.toISOString().split('T')[0]);
+}
+
 // checkbox數量限制
 const cities = document.querySelectorAll('.city');
 const checkedMax = 3;
@@ -23,13 +35,10 @@ function selectiveCheck(e) {
     citiesCount = checkedCities.length;
     citiesName = checkedCities;
   }
+
   for(let i = 0; i < cities.length; i++) {
     let pin = document.querySelector('.pin-'+ cities[i].value);
-    if(cities[i].checked) {
-      pin.style.display = 'block';
-    }else {
-      pin.style.display = 'none';
-    }
+    cities[i].checked ? pin.style.display = 'block' : pin.style.display = 'none';
   }
 }
 
@@ -59,11 +68,7 @@ function next() {
     }).then((response) => {
       return response.json()
     }).then((result) => {
-      if(result.ok) {
-        location.href = '/next';
-      }else {
-        warningText.textContent = '伺服器發生錯誤';
-      }
+      result.ok ? location.href = '/next' : warningText.textContent = '伺服器發生錯誤';
     })
   }
 }

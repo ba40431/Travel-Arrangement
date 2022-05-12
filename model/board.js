@@ -6,7 +6,6 @@ module.exports = {
             if (error) {
                 return cb(error.message);
             }
-            console.log('Connected to the MySQL server.');
             connection.query(
                 'INSERT INTO `message` (title, image_url) VALUES (?, ?);', [title, imageUrl],
                 (error, result) => {

@@ -6,7 +6,6 @@ module.exports = {
             if (error) {
                 return cb(error.message);
             }
-            console.log('Connected to the MySQL server.');
             connection.query(
                 'select * from `town` where `region`= ? or `region`= ? or `region`= ?',
                 [regionA, regionB, regionC],
@@ -25,7 +24,6 @@ module.exports = {
             if (error) {
                 return cb(error.message);
             }
-            console.log('Connected to the MySQL server.');
             connection.query(
                 'select * from `hotel` where `zipcode`= ?', [townId],
                 (error, result) => {

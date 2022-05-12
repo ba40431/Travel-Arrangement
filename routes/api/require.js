@@ -52,15 +52,12 @@ requireAPI.get('/require', async (req, res) => {
     let regionList3 = [];
     for(let i = 0; i < cityData.length; i++) {
       if(checkedCities[0] !== undefined && checkedCities[0] === cityData[i].region) {
-        // let town = `${cityData[i].zipcode} ${cityData[i].town}`;
         let town = `${cityData[i].town}`;
         regionList1.push(town);
       }else if(checkedCities[1] !== undefined && checkedCities[1] === cityData[i].region) {
-        // let town = `${cityData[i].zipcode} ${cityData[i].town}`;
         let town = `${cityData[i].town}`;
         regionList2.push(town);
       }else if(checkedCities[2] !== undefined && checkedCities[2] === cityData[i].region) {
-        // let town = `${cityData[i].zipcode} ${cityData[i].town}`;
         let town = `${cityData[i].town}`;
         regionList3.push(town)
       }else {
@@ -78,7 +75,6 @@ requireAPI.get('/require', async (req, res) => {
         'region': regionList3
       }]
 
-
     res.status(200).json({
       'departureDate':departureDate,
       'returnDate': returnDate,
@@ -87,23 +83,6 @@ requireAPI.get('/require', async (req, res) => {
     })
   });
 })
-
-//GET :town router
-// requireAPI.get('/require/:townId', (req, res) => {
-//   const townId = req.params.townId
-//   searchHotel(townId, async (err, result) => {
-//     if(err) {
-//       console.log(err)
-//       return res.status(500).json({
-//         'error': true,
-//         'message': '伺服器發生錯誤'
-//       })
-//     }
-//     res.status(200).json({
-//       result
-//     })
-//   })
-// })
 
 //POST Hotels router
 requireAPI.post('/hotels', async (req, res) => {
