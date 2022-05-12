@@ -10,22 +10,18 @@
     color: #666666;
 }
 .hotel-block {
-    margin-left: 180px;
+    margin-left: 160px;
     margin-bottom: 60px;
     margin-top: 40px;
     display: grid;
     grid-template-columns: auto auto;
-}
-.hotel-block > div {
     color: #666666;
 }
-.hotel-block > div > input {
-    width: 200px;
-    height: 24px;
+.city-select {
+    width: 95px;
+    height: 30px;
     padding-right: 4px;
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 10px;
+    padding-left: 2px;
     margin-left: 10px;
     margin-bottom: 10px;
     font-size: 16px;
@@ -33,12 +29,35 @@
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid #e8e8e8;
+    text-align: center;
+    color: #666666;
+}
+
+.hotel-select {
+    width: 250px;
+    height: 30px;
+    padding-right: 4px;
+    padding-left: 4px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    cursor: pointer;
+    border-radius: 5px;
+    border: 1px solid #e8e8e8;
+    text-align: center;
+    color: #666666;
 }
 hr {
     width: 1100px;
     margin-left: auto;
     margin-right: auto;
-    border: 1px solid #e8e8e8;
+    border: 0;
+    padding: 3px;
+    background: linear-gradient(135deg, red, orange,green, blue, purple);
+    --mask-image: repeating-linear-gradient(135deg, #000 0px, #000 1px, transparent 1px, transparent 6px);
+    -webkit-mask-image: var(--mask-image);
+    mask-image: var(--mask-image);
 }
 .transport-container,
 .prefer-container,
@@ -48,6 +67,9 @@ hr {
     margin-top: 60px;
     margin-left: auto;
     margin-right: auto;
+}
+.button-container {
+    position: relative;
 }
 .transport-block {
     display: grid;
@@ -127,8 +149,7 @@ hr {
 .checkbox-item input[type="checkbox"]:focus + label::before {
     outline: 0;
 }
-.prefer-block,
-.must-to-go-block {
+.prefer-block {
     margin-bottom: 60px;
     margin-top: 40px;
     margin-left: 180px;
@@ -165,15 +186,23 @@ hr {
     visibility: visible;
     border: 2px solid white;
 }
-.prefer-block > div > span {
+.prefer-block > div > label {
     margin-left: 10px;
     cursor: pointer;
+}
+.must-to-go-block {
+    margin-bottom: 60px;
+    margin-top: 60px;
+    margin-left: 180px;
+    color: #666666;
+    /* display: grid;
+    grid-template-columns: auto auto; */
 }
 .input-block {
     display: flex;
 }
 .input-block > input {
-    width: 200px;
+    width: 240px;
     height: 24px;
     padding-right: 4px;
     padding-top: 3px;
@@ -198,10 +227,16 @@ hr {
     cursor: pointer;
 }
 .plus-button > img {
-    width: 18px;
+    width: 22px;
     position: absolute;
-    top: 8px;
-    left: 8px;
+    top: 6px;
+    left: 6px;
+}
+.warning-text {
+    position: absolute;
+    right: 0;
+    color: #666666;
+    font-weight: 700px;
 }
 .finish-button {
     width: 100px;
@@ -214,11 +249,12 @@ hr {
     font-size: 19px;
     color: #ffffff;
     cursor: pointer;
+    margin-top: 50px;
 }
 .finish-button:hover {
     background-color: #eb9091;
     border: 0px solid #eb9091;
 }
 footer {
-    margin-top: 230px;
+    margin-top: 300px;
 }

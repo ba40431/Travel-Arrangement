@@ -1,5 +1,5 @@
 const mysql = require('mysql2');
-require('dotenv').config({path:'./.env'})
+require('dotenv').config({path:'./.env'});
 
 const pool = mysql.createPool({
     connectionLimit: 5,
@@ -7,7 +7,7 @@ const pool = mysql.createPool({
     port: process.env.RDS_PORT,
     user: process.env.RDS_USER,
     password: process.env.RDS_PASSWORD, 
-    database: process.env.RDS_BOARD_DATABASE
+    database: process.env.RDS_DATABASE
 });
 
 // connection.connect((err) => {  //直接連接資料庫

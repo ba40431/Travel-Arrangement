@@ -1,20 +1,19 @@
-<!DOCTYPE html>
 
 <html>
 
     <head>
         <%- include('head'); %>
         <link rel = 'stylesheet' type = 'text/css' href = 'css/next.css'>
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+        <link rel="stylesheet" type="text/css" href="css/map.css" />
+        <script type="module" src="javascript/map.js"></script>
     </head>
 <body>
     <%- include('header'); %>
     <main>
         <div class = 'hotel-container'>
             <div class = 'title'>三、選擇住宿飯店</div>
-            <div class = 'hotel-block'>
-                <div>MM/YY<input type = 'text'></div>
-                <div>MM/YY<input type = 'text'></div>
-            </div>
+            <div class = 'hotel-block'></div>
         </div>
         <hr/>
         <div class = 'transport-container'>
@@ -56,38 +55,45 @@
         <div class = 'prefer-container'>
             <div class = 'title'>五、行程安排的偏好</div>
             <div class = 'prefer-block'>
-                <div><input type = 'radio' name = 'prefer'><span>悠遊輕旅行</span></div>
-                <div><input type = 'radio' name = 'prefer'><span>排好排滿</span></div>
+                <div><input type = 'radio' name = 'prefer' id = '悠遊輕旅行'>
+                    <label for = '悠遊輕旅行'><span>悠遊輕旅行</span></label></div>
+                <div><input type = 'radio' name = 'prefer' id = '排好排滿'>
+                    <label for = '排好排滿'><span>排好排滿</span></label></div>
             </div>
         </div>
         <hr/>
         <div class = 'must-to-go-container'>
             <div class = 'title'>六、必去的景點 ( 選填 )</div>
-            <div class = 'must-to-go-block'>
-                <div class = 'input-block'>
-                    <input type = 'text'>
-                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
-                </div>
-                <div class = 'input-block'>
-                    <input type = 'text'>
-                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
-                </div>
-                <div class = 'input-block'>
-                    <input type = 'text'>
-                    <button class = 'plus-button'><img src = 'pic/bx-plus-medical.png'></button>
-                </div>
+            <div style = 'display: none'>
+                <input
+                  id = 'pac-input'
+                  class = 'controls'
+                  type = 'text'
+                  placeholder = 'Enter a location'
+                />
+            </div>
+            <div id = 'map'></div>
+              <div id = 'infowindow-content'>
+                <span id = 'place-name' class = 'title'></span><br />
+                <strong>Place ID:</strong> <span id = 'place-id'></span><br />
+                <span id = 'place-address'></span>
             </div>
         </div>
         <div class = 'button-container'>
-            <a href = '/schedule'> 
-                <button class = 'finish-button'>行程安排</button>
-            </a>
+            <!-- <a href = '/schedule'>  -->
+                <div class = 'warning-text'></div>
+                <button class = 'finish-button' onclick = getSchedule()>行程安排</button>
+            <!-- </a> -->
         </div>
 
+        <%- include('user'); %>
     </main>
-    <%- include('user'); %>
+    
     <%- include('footer'); %>
     <script type = 'text/javascript' src = 'javascript/next.js'></script>
-
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=places&v=weekly"
+    async defer
+  ></script> 
 </body>
 </html>

@@ -1,7 +1,7 @@
 const express = require('express');
-const path = require('path')
+const path = require('path');
 const app = express();
-const port = 3000;
+const {PORT = 3000} = process.env
 
 
 app.set('views','templates');
@@ -18,11 +18,13 @@ const attractionAPI = require('./routes/api/attraction')
 const requireAPI = require('./routes/api/require')
 const scheduleAPI = require('./routes/api/schedule')
 const boardAPI = require('./routes/api/board')
+const loaderio = require('./routes/api/loaderio')
 app.use('/api', userAPI)
 app.use('/api', attractionAPI)
 app.use('/api', requireAPI)
 app.use('/api', scheduleAPI)
 app.use('/api', boardAPI)
+app.use(loaderio)
 
 // Page
 const indexPage = require('./routes/page/index')
@@ -38,6 +40,6 @@ app.use(mySchedulePage)
 app.use(userCenterPage)
 app.use(boardPage)
 
-app.listen(port, () => {
-  console.log(`server is started at http://localhost:${port}`)
+app.listen( PORT, () => {
+  console.log(`server is started at http://localhost:${PORT}`)
 })
