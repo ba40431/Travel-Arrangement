@@ -2,11 +2,11 @@ const axios = require('axios').default;
 const express = require('express');
 require('dotenv').config({path:'./.env'});
 
-const scheduleAPI = express.Router();
-const { getHotelData, searchAttraction } = require('../../model/schedule');
+const itineraryAPI = express.Router();
+const { getHotelData, searchAttraction } = require('../../model/itinerary');
 
 
-scheduleAPI.post('/schedule', (req, res) => {
+itineraryAPI.post('/itinerary', (req, res) => {
   // console.log(req.body)
   let departureDate = req.body.travelDate.departureDate;
   let returnDate = req.body.travelDate.returnDate;
@@ -92,50 +92,50 @@ scheduleAPI.post('/schedule', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               if(preference === '悠遊輕旅行') {
-                let schedule = []
+                let itinerary = []
                 for(let i = 0; i < attractionDataList.length; i++) {
                   if(i === (attractionDataList.length - 1)) {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 8))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 8))
                   }else {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 4))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 4))
                   }
                 }
-                let scheduleList = []
+                let itineraryList = []
                 let hotelName = hotelData
-                let dailySchedule = schedule
-                for(let i = 0; i < schedule.length + 1; i++) {
+                let dailyItinerary = itinerary
+                for(let i = 0; i < itinerary.length + 1; i++) {
                   if(hotelData[i] === undefined) {
-                    dailySchedule = schedule[i-1].slice(4,8);
-                    scheduleList.push({dailySchedule})
+                    dailyItinerary = itinerary[i-1].slice(4,8);
+                    itineraryList.push({dailyItinerary})
                   }else {
                     hotelName = hotelData[i]
-                    dailySchedule = schedule[i].slice(0,4)
-                    scheduleList.push({hotelName,dailySchedule})
+                    dailyItinerary = itinerary[i].slice(0,4)
+                    itineraryList.push({hotelName,dailyItinerary})
                   }
                 }
                 res.status(200).json({
                   'ok': true
                 })
               }else {
-                let schedule = []
+                let itinerary = []
                 for(let i = 0; i < attractionDataList.length; i++) {
                   if(i === (attractionDataList.length - 1)) {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 12))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 12))
                   }else {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 6))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 6))
                   }
                 }
-                let scheduleList = []
+                let itineraryList = []
                 let hotelName = hotelData
-                let dailySchedule = schedule
-                for(let i = 0; i < schedule.length + 1; i++) {
+                let dailyItinerary = itinerary
+                for(let i = 0; i < itinerary.length + 1; i++) {
                   if(hotelData[i] === undefined) {
-                    dailySchedule = schedule[i-1].slice(6,12);
-                    scheduleList.push({dailySchedule})
+                    dailyItinerary = itinerary[i-1].slice(6,12);
+                    itineraryList.push({dailyItinerary})
                   }else {
                     hotelName = hotelData[i]
-                    dailySchedule = schedule[i].slice(0,6)
-                    scheduleList.push({hotelName,dailySchedule})
+                    dailyItinerary = itinerary[i].slice(0,6)
+                    itineraryList.push({hotelName,dailyItinerary})
                   }
                 }
                 res.status(200).json({
@@ -157,50 +157,50 @@ scheduleAPI.post('/schedule', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               if(preference === '悠遊輕旅行') {
-                let schedule = []
+                let itinerary = []
                 for(let i = 0; i < attractionDataList.length; i++) {
                   if(i === (attractionDataList.length - 1)) {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 8))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 8))
                   }else {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 4))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 4))
                   }
                 }
-                let scheduleList = []
+                let itineraryList = []
                 let hotelName = hotelData
-                let dailySchedule = schedule
-                for(let i = 0; i < schedule.length + 1; i++) {
+                let dailyItinerary = itinerary
+                for(let i = 0; i < itinerary.length + 1; i++) {
                   if(hotelData[i] === undefined) {
-                    dailySchedule = schedule[i-1].slice(4,8);
-                    scheduleList.push({dailySchedule})
+                    dailyItinerary = itinerary[i-1].slice(4,8);
+                    itineraryList.push({dailyItinerary})
                   }else {
                     hotelName = hotelData[i]
-                    dailySchedule = schedule[i].slice(0,4)
-                    scheduleList.push({hotelName,dailySchedule})
+                    dailyItinerary = itinerary[i].slice(0,4)
+                    itineraryList.push({hotelName,dailyItinerary})
                   }
                 }
                 res.status(200).json({
                   'ok': true
                 })
               }else {
-                let schedule = []
+                let itinerary = []
                 for(let i = 0; i < attractionDataList.length; i++) {
                   if(i === (attractionDataList.length - 1)) {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 12))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 12))
                   }else {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 6))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 6))
                   } 
                 }
-                let scheduleList = []
+                let itineraryList = []
                 let hotelName = hotelData
-                let dailySchedule = schedule
-                for(let i = 0; i < schedule.length + 1; i++) {
+                let dailyItinerary = itinerary
+                for(let i = 0; i < itinerary.length + 1; i++) {
                   if(hotelData[i] === undefined) {
-                    dailySchedule = schedule[i-1].slice(6,12);
-                    scheduleList.push({dailySchedule})
+                    dailyItinerary = itinerary[i-1].slice(6,12);
+                    itineraryList.push({dailyItinerary})
                   }else {
                     hotelName = hotelData[i]
-                    dailySchedule = schedule[i].slice(0,6)
-                    scheduleList.push({hotelName,dailySchedule})
+                    dailyItinerary = itinerary[i].slice(0,6)
+                    itineraryList.push({hotelName,dailyItinerary})
                   }
                 }
                 res.status(200).json({
@@ -221,64 +221,64 @@ scheduleAPI.post('/schedule', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               if(preference === '悠遊輕旅行') {
-                let schedule = []
+                let itinerary = []
                 for(let i = 0; i < attractionDataList.length; i++) {
                   if(i === (attractionDataList.length - 1)) {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 8))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 8))
                   }else {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 4))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 4))
                   }
                 }
-                let scheduleList = []
+                let itineraryList = []
                 let hotelName = hotelData
-                let dailySchedule = schedule
-                for(let i = 0; i < schedule.length + 1; i++) {
+                let dailyItinerary = itinerary
+                for(let i = 0; i < itinerary.length + 1; i++) {
                   if(hotelData[i] === undefined) {
-                    dailySchedule = schedule[i-1].slice(4,8);
-                    scheduleList.push({dailySchedule})
+                    dailyItinerary = itinerary[i-1].slice(4,8);
+                    itineraryList.push({dailyItinerary})
                   }else {
                     hotelName = hotelData[i]
-                    dailySchedule = schedule[i].slice(0,4)
-                    scheduleList.push({hotelName,dailySchedule})
+                    dailyItinerary = itinerary[i].slice(0,4)
+                    itineraryList.push({hotelName,dailyItinerary})
                   }
                 }
                 res.status(200).json({
                   'ok': true
                 })
               }else {
-                let schedule = []
+                let itinerary = []
                 for(let i = 0; i < attractionDataList.length; i++) {
                   if(i === (attractionDataList.length - 1)) {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 12))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 12))
                   }else {
-                    schedule.push(getRandomArrayElements(attractionDataList[i], 6))
+                    itinerary.push(getRandomArrayElements(attractionDataList[i], 6))
                   }
                 };
-                let scheduleList = []
+                let itineraryList = []
                 let hotelName = hotelData
-                let dailySchedule = schedule
-                for(let i = 0; i < schedule.length + 1; i++) {
+                let dailyItinerary = itinerary
+                for(let i = 0; i < itinerary.length + 1; i++) {
                   if(hotelData[i] === undefined) {
-                    dailySchedule = schedule[i-1].slice(6,12);
-                    scheduleList.push({dailySchedule})
+                    dailyItinerary = itinerary[i-1].slice(6,12);
+                    itineraryList.push({dailyItinerary})
                   }else {
                     hotelName = hotelData[i]
-                    dailySchedule = schedule[i].slice(0,6)
-                    scheduleList.push({hotelName,dailySchedule})
+                    dailyItinerary = itinerary[i].slice(0,6)
+                    itineraryList.push({hotelName,dailyItinerary})
                   }
                 }
-                res.status(200).json({
-                  'ok': true
-                })
                 // res.status(200).json({
-                //   'travelDate': {
-                //     'departureDate': departureDate,
-                //     'returnDate': returnDate,
-                //     'tripLength': tripLength,
-                //     'cities': cities,
-                //   },
-                //   'schedule': scheduleList
+                //   'ok': true
                 // })
+                res.status(200).json({
+                  'travelDate': {
+                    'departureDate': departureDate,
+                    'returnDate': returnDate,
+                    'tripLength': tripLength,
+                    'cities': cities,
+                  },
+                  'itinerary': itineraryList
+                })
               }
 
             })
@@ -290,7 +290,7 @@ scheduleAPI.post('/schedule', (req, res) => {
   }
 });
 
-module.exports = scheduleAPI;
+module.exports = itineraryAPI;
 
 
 //隨機取出

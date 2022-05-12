@@ -123,7 +123,7 @@ function renderHotel(data, num) {
 }
 
 //行程規劃按鈕
-function getSchedule() {
+function getItinerary() {
     //取得飯店資料
     let selectHotel = document.querySelectorAll('.hotel-select'); 
     let selectHotelOption = document.querySelectorAll('.hotel-select > option'); 
@@ -164,7 +164,7 @@ function getSchedule() {
     }else if(selectPreference === null) {
         warningText.textContent = '請選擇行程安排偏好';
     }else if(placeId === '') {
-        fetch('api/schedule', {
+        fetch('api/itinerary', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -183,10 +183,10 @@ function getSchedule() {
           }).then((response) => {
             return response.json()
           }).then((result) => {
-            result.ok ? location.href = '/schedule' : warningText.textContent = '伺服器發生錯誤';
+            result.ok ? location.href = '/itinerary' : warningText.textContent = '伺服器發生錯誤';
           })
     }else {
-        fetch('api/schedule', {
+        fetch('api/itinerary', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
@@ -210,7 +210,7 @@ function getSchedule() {
           }).then((response) => {
             return response.json()
           }).then((result) => {
-            result.ok ? location.href = '/schedule' : warningText.textContent = '伺服器發生錯誤';
+            result.ok ? location.href = '/itinerary' : warningText.textContent = '伺服器發生錯誤';
           })
     }
 }

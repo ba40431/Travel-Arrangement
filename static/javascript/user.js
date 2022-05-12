@@ -14,7 +14,7 @@ const signInContent = document.querySelector('.sign-in-content');
 const userApi = '/api/user';
 const signInDisplay = document.querySelector('.sign-in-display');
 const signOutDisplay = document.querySelector('.sign-out-display');
-const signUpDisplay = document.querySelector('.schedule-display');
+const signUpDisplay = document.querySelector('.itinerary-display');
 signInEmail.addEventListener('input', emailInput);
 signInPassword.addEventListener('input', passwordInput);
 signUpName.addEventListener('input', input);
@@ -133,13 +133,13 @@ function signOut() {
       window.location.replace(location.href);
     });
 }
-function getSchedule() {
+function getItinerary() {
   getLogin(userApi).then((data) => {
     if (data.data) {
       signInDisplay.style.display = 'none';
       signOutDisplay.style.display = 'block';
       signUpDisplay.style.display = 'block';
-      location.href = '/my-schedule';
+      location.href = '/my-itinerary';
     } else if (data.data == null) {
       signInDisplay.style.display = 'block';
       signOutDisplay.style.display = 'none';
