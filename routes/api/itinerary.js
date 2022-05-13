@@ -3,7 +3,7 @@ const express = require('express');
 require('dotenv').config({path:'./.env'});
 
 const itineraryAPI = express.Router();
-const { getHotelData, searchAttraction } = require('../../model/itinerary');
+const { getHotelData, searchAttraction, insertItinerary } = require('../../model/itinerary');
 
 
 itineraryAPI.post('/itinerary', (req, res) => {
@@ -16,13 +16,16 @@ itineraryAPI.post('/itinerary', (req, res) => {
   let transportData = req.body.travelRequireData.transportList;
   let preference = req.body.travelRequireData.preference;
 
+  //行程編號
+  let itineraryId = Date.now().toString(); //數字轉字串
+
   //取得縣市
-  let cities = []
+  let cities = ''
   for(let i = 0; i < cityData.length; i++){
     if(cityData[i].city === undefined) {
       break
     }
-    cities.push(cityData[i].city);
+    cities = `${cities},${cityData[i].city}`
   }
 
   //後端驗證
@@ -78,6 +81,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
             })
           }
           let hotelDataList = result
+          let itinerary = [] //取得景點資料列表
+          let itineraryList = [] //將景點資料列表分成N天
 
           //確認使用的交通工具
           if(transportData[0] === '開車') {
@@ -92,54 +97,36 @@ itineraryAPI.post('/itinerary', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               if(preference === '悠遊輕旅行') {
-                let itinerary = []
-                for(let i = 0; i < attractionDataList.length; i++) {
-                  if(i === (attractionDataList.length - 1)) {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 8))
-                  }else {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 4))
-                  }
-                }
-                let itineraryList = []
-                let hotelName = hotelData
-                let dailyItinerary = itinerary
-                for(let i = 0; i < itinerary.length + 1; i++) {
-                  if(hotelData[i] === undefined) {
-                    dailyItinerary = itinerary[i-1].slice(4,8);
-                    itineraryList.push({dailyItinerary})
-                  }else {
-                    hotelName = hotelData[i]
-                    dailyItinerary = itinerary[i].slice(0,4)
-                    itineraryList.push({hotelName,dailyItinerary})
-                  }
-                }
-                res.status(200).json({
-                  'ok': true
+                checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
+                insertItinerary(itineraryId, itineraryList,
+                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                    if(err) {
+                      console.log(err)
+                      return res.status(500).json({
+                        'error': true,
+                        'message': '伺服器發生錯誤'
+                      })
+                    }
+                    res.status(200).json({
+                      // 'ok': true
+                      result
+                    })
                 })
               }else {
-                let itinerary = []
-                for(let i = 0; i < attractionDataList.length; i++) {
-                  if(i === (attractionDataList.length - 1)) {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 12))
-                  }else {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 6))
-                  }
-                }
-                let itineraryList = []
-                let hotelName = hotelData
-                let dailyItinerary = itinerary
-                for(let i = 0; i < itinerary.length + 1; i++) {
-                  if(hotelData[i] === undefined) {
-                    dailyItinerary = itinerary[i-1].slice(6,12);
-                    itineraryList.push({dailyItinerary})
-                  }else {
-                    hotelName = hotelData[i]
-                    dailyItinerary = itinerary[i].slice(0,6)
-                    itineraryList.push({hotelName,dailyItinerary})
-                  }
-                }
-                res.status(200).json({
-                  'ok': true
+                checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
+                insertItinerary(itineraryId, itineraryList,
+                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                    if(err) {
+                      console.log(err)
+                      return res.status(500).json({
+                        'error': true,
+                        'message': '伺服器發生錯誤'
+                      })
+                    }
+                    res.status(200).json({
+                      // 'ok': true
+                      result
+                    })
                 })
               }
 
@@ -157,54 +144,36 @@ itineraryAPI.post('/itinerary', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               if(preference === '悠遊輕旅行') {
-                let itinerary = []
-                for(let i = 0; i < attractionDataList.length; i++) {
-                  if(i === (attractionDataList.length - 1)) {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 8))
-                  }else {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 4))
-                  }
-                }
-                let itineraryList = []
-                let hotelName = hotelData
-                let dailyItinerary = itinerary
-                for(let i = 0; i < itinerary.length + 1; i++) {
-                  if(hotelData[i] === undefined) {
-                    dailyItinerary = itinerary[i-1].slice(4,8);
-                    itineraryList.push({dailyItinerary})
-                  }else {
-                    hotelName = hotelData[i]
-                    dailyItinerary = itinerary[i].slice(0,4)
-                    itineraryList.push({hotelName,dailyItinerary})
-                  }
-                }
-                res.status(200).json({
-                  'ok': true
+                checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
+                insertItinerary(itineraryId, itineraryList,
+                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                    if(err) {
+                      console.log(err)
+                      return res.status(500).json({
+                        'error': true,
+                        'message': '伺服器發生錯誤'
+                      })
+                    }
+                    res.status(200).json({
+                      // 'ok': true
+                      result
+                    })
                 })
               }else {
-                let itinerary = []
-                for(let i = 0; i < attractionDataList.length; i++) {
-                  if(i === (attractionDataList.length - 1)) {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 12))
-                  }else {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 6))
-                  } 
-                }
-                let itineraryList = []
-                let hotelName = hotelData
-                let dailyItinerary = itinerary
-                for(let i = 0; i < itinerary.length + 1; i++) {
-                  if(hotelData[i] === undefined) {
-                    dailyItinerary = itinerary[i-1].slice(6,12);
-                    itineraryList.push({dailyItinerary})
-                  }else {
-                    hotelName = hotelData[i]
-                    dailyItinerary = itinerary[i].slice(0,6)
-                    itineraryList.push({hotelName,dailyItinerary})
-                  }
-                }
-                res.status(200).json({
-                  'ok': true
+                checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
+                insertItinerary(itineraryId, itineraryList,
+                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                    if(err) {
+                      console.log(err)
+                      return res.status(500).json({
+                        'error': true,
+                        'message': '伺服器發生錯誤'
+                      })
+                    }
+                    res.status(200).json({
+                      // 'ok': true
+                      result
+                    })
                 })
               }
             })
@@ -221,64 +190,50 @@ itineraryAPI.post('/itinerary', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               if(preference === '悠遊輕旅行') {
-                let itinerary = []
-                for(let i = 0; i < attractionDataList.length; i++) {
-                  if(i === (attractionDataList.length - 1)) {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 8))
-                  }else {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 4))
-                  }
-                }
-                let itineraryList = []
-                let hotelName = hotelData
-                let dailyItinerary = itinerary
-                for(let i = 0; i < itinerary.length + 1; i++) {
-                  if(hotelData[i] === undefined) {
-                    dailyItinerary = itinerary[i-1].slice(4,8);
-                    itineraryList.push({dailyItinerary})
-                  }else {
-                    hotelName = hotelData[i]
-                    dailyItinerary = itinerary[i].slice(0,4)
-                    itineraryList.push({hotelName,dailyItinerary})
-                  }
-                }
-                res.status(200).json({
-                  'ok': true
+                checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
+
+
+                insertItinerary(itineraryId, itineraryList,
+                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                    if(err) {
+                      console.log(err)
+                      return res.status(500).json({
+                        'error': true,
+                        'message': '伺服器發生錯誤'
+                      })
+                    }
+                    res.status(200).json({
+                      // 'ok': true
+                      result
+                    })
                 })
               }else {
-                let itinerary = []
-                for(let i = 0; i < attractionDataList.length; i++) {
-                  if(i === (attractionDataList.length - 1)) {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 12))
-                  }else {
-                    itinerary.push(getRandomArrayElements(attractionDataList[i], 6))
-                  }
-                };
-                let itineraryList = []
-                let hotelName = hotelData
-                let dailyItinerary = itinerary
-                for(let i = 0; i < itinerary.length + 1; i++) {
-                  if(hotelData[i] === undefined) {
-                    dailyItinerary = itinerary[i-1].slice(6,12);
-                    itineraryList.push({dailyItinerary})
-                  }else {
-                    hotelName = hotelData[i]
-                    dailyItinerary = itinerary[i].slice(0,6)
-                    itineraryList.push({hotelName,dailyItinerary})
-                  }
-                }
-                // res.status(200).json({
-                //   'ok': true
-                // })
-                res.status(200).json({
-                  'travelDate': {
-                    'departureDate': departureDate,
-                    'returnDate': returnDate,
-                    'tripLength': tripLength,
-                    'cities': cities,
-                  },
-                  'itinerary': itineraryList
+                checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
+
+                insertItinerary(itineraryId, itineraryList,
+                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                    if(err) {
+                      console.log(err)
+                      return res.status(500).json({
+                        'error': true,
+                        'message': '伺服器發生錯誤'
+                      })
+                    }
+                    res.status(200).json({
+                      // 'ok': true
+                      result
+                    })
                 })
+                             
+                // res.status(200).json({
+                //   'travelDate': {
+                //     'departureDate': departureDate,
+                //     'returnDate': returnDate,
+                //     'tripLength': tripLength,
+                //     'cities': cities.slice(1,),
+                //   },
+                //   'itinerary': itineraryList
+                // })
               }
 
             })
@@ -292,6 +247,29 @@ itineraryAPI.post('/itinerary', (req, res) => {
 
 module.exports = itineraryAPI;
 
+
+//確認偏好
+function checkPreference(data, itinerary, itineraryList, hotelData, num) {
+  for(let i = 0; i < data.length; i++) {
+    if(i === (data.length - 1)) {
+      itinerary.push(getRandomArrayElements(data[i], 2*num))
+    }else {
+      itinerary.push(getRandomArrayElements(data[i], num))
+    }
+  }
+  let hotelName = hotelData
+  let dailyItinerary = itinerary
+  for(let i = 0; i < itinerary.length + 1; i++) {
+    if(hotelData[i] === undefined) {
+      dailyItinerary = itinerary[i-1].slice(num,2*num);
+      itineraryList.push({dailyItinerary})
+    }else {
+      hotelName = hotelData[i]
+      dailyItinerary = itinerary[i].slice(0,num)
+      itineraryList.push({hotelName,dailyItinerary})
+    }
+  }
+}
 
 //隨機取出
 function getRandomArrayElements(arr, count) {
