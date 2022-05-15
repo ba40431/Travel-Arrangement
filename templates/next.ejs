@@ -3,10 +3,10 @@
 
     <head>
         <%- include('head'); %>
-        <link rel = 'stylesheet' type = 'text/css' href = 'css/next.css'>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <link rel="stylesheet" type="text/css" href="css/map.css" />
-        <script type="module" src="javascript/map.js"></script>
+        <link rel = 'stylesheet' type = 'text/css' href = '/css/next.css'>
+        <script src = 'https://polyfill.io/v3/polyfill.min.js?features=default'></script>
+        <link rel = 'stylesheet' type = 'text/css' href = '/css/map.css' />
+        <script type = 'module' src = 'javascript/map.js'></script>
     </head>
 <body>
     <%- include('header'); %>
@@ -90,9 +90,9 @@
     </main>
     
     <%- include('footer'); %>
-    <script type = 'text/javascript' src = 'javascript/next.js'></script>
+    <script type = 'text/javascript' src = '/javascript/next.js'></script>
     <script
-    src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=places&v=weekly"
+    src = 'https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=places&v=weekly'
     async defer
   ></script> 
 </body>

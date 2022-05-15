@@ -25,7 +25,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
     if(cityData[i].city === undefined) {
       break
     }
-    cities = `${cities},${cityData[i].city}`
+    cities = `${cities} , ${cityData[i].city}`
   }
 
   //後端驗證
@@ -99,7 +99,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               if(preference === '悠遊輕旅行') {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(1,), preference, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -108,14 +108,14 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       })
                     }
                     res.status(200).json({
-                      // 'ok': true
-                      result
+                      'ok': true,
+                      'itineraryId': itineraryId
                     })
                 })
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -124,8 +124,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       })
                     }
                     res.status(200).json({
-                      // 'ok': true
-                      result
+                      'ok': true,
+                      'itineraryId': itineraryId
                     })
                 })
               }
@@ -146,7 +146,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               if(preference === '悠遊輕旅行') {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -155,14 +155,14 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       })
                     }
                     res.status(200).json({
-                      // 'ok': true
-                      result
+                      'ok': true,
+                      'itineraryId': itineraryId
                     })
                 })
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -171,8 +171,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       })
                     }
                     res.status(200).json({
-                      // 'ok': true
-                      result
+                      'ok': true,
+                      'itineraryId': itineraryId
                     })
                 })
               }
@@ -194,7 +194,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
 
 
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -203,15 +203,15 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       })
                     }
                     res.status(200).json({
-                      // 'ok': true
-                      result
+                      'ok': true,
+                      'itineraryId': itineraryId
                     })
                 })
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
 
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -220,8 +220,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       })
                     }
                     res.status(200).json({
-                      // 'ok': true
-                      result
+                      'ok': true,
+                      'itineraryId': itineraryId
                     })
                 })
                              

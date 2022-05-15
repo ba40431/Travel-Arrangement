@@ -183,7 +183,8 @@ function getItinerary() {
           }).then((response) => {
             return response.json()
           }).then((result) => {
-            result.ok ? location.href = '/itinerary' : warningText.textContent = '伺服器發生錯誤';
+            console.log(result.itineraryId)
+            result.ok ? location.href = `/itinerary/${result.itineraryId}` : warningText.textContent = '伺服器發生錯誤';
           })
     }else {
         fetch('api/itinerary', {
@@ -210,7 +211,8 @@ function getItinerary() {
           }).then((response) => {
             return response.json()
           }).then((result) => {
-            result.ok ? location.href = '/itinerary' : warningText.textContent = '伺服器發生錯誤';
+              console.log(result.itineraryId)
+            result.ok ? location.href = `/itinerary/${result.itineraryId}` : warningText.textContent = '伺服器發生錯誤';
           })
     }
 }

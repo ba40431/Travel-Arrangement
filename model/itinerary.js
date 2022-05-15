@@ -27,7 +27,7 @@ module.exports = {
             connection.release();
         });
     },
-    searchAttraction: (hotels, distance,  cb) => {
+    searchAttraction: (hotels, distance, cb) => {
         pool.getConnection((error, connection) => { 
             if (error) {
                 return cb(error.message);
@@ -66,7 +66,7 @@ module.exports = {
             connection.release();
         });
     },
-    insertItinerary: (itineraryId, itineraryList, departureDate, returnDate, tripLength, cities, cb) => {
+    insertItinerary: (itineraryId, itineraryList, departureDate, returnDate, tripLength, cities, prefer, cb) => {
         pool.getConnection((error, connection) => { 
             if (error) {
                 return cb(error.message);
@@ -121,9 +121,9 @@ module.exports = {
                 }}  
             }
             connection.query(
-                'INSERT INTO `itinerary` (itinerary_id, departure_date, return_date, trip_length, cities)\
-                        VALUES (?, ?, ?, ?, ?);',
-                    [itineraryId, departureDate, returnDate, (tripLength+1), cities],
+                'INSERT INTO `itinerary` (itinerary_id, departure_date, return_date, trip_length, cities, prefer)\
+                        VALUES (?, ?, ?, ?, ?, ?);',
+                    [itineraryId, departureDate, returnDate, (tripLength+1), cities, prefer],
                 (error, result) => {
                     if (error) {
                         return cb(error);

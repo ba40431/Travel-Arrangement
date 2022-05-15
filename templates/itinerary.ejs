@@ -4,7 +4,7 @@
 
     <head>
         <%- include('head'); %>
-        <link rel = 'stylesheet' type = 'text/css' href = 'css/itinerary.css'>
+        <link rel = 'stylesheet' type = 'text/css' href = '/css/itinerary.css'>
     </head>
 <body>
     <%- include('header'); %>
@@ -12,9 +12,9 @@
         <div class = 'itinerary-container'>
             <div class = 'title'>行程安排</div>
             <div class = 'itinerary-content'>
-                <div class = 'itinerary-info'>
+                <!-- <div class = 'itinerary-info'>
                     <div class = 'itinerary-date'>旅遊日期 ：<span>5/15 - 5/17</span></div>
-                    <div>旅遊地點 ：<span>台北市</span></div>
+                    <div class = 'itinerary-location'>旅遊地點 ：<span>台北市</span></div>
                 </div>
                 <div class = 'daily-container'>
                     <div class = 'daily'>
@@ -39,7 +39,7 @@
                         <div>行程四 ：<span>士林夜市</span></div>
                         <div class = 'hotel'>住宿飯店 ：<span>W HOTEL</span></div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
         <hr/>
@@ -51,11 +51,10 @@
                 <button class = 'button'>我的行程</button>
             </a>
         </div>
-
+        <%- include('user'); %>
     </main>
 
-    <%- include('user'); %>
     <%- include('footer'); %>
-    <script type = 'text/javascript' src = 'javascript/itinerary.js'></script>
+    <script type = 'text/javascript' src = '/javascript/itinerary.js'></script>
 </body>
 </html>

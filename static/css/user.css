@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Srisakdi:wght@400;700&display=swap');
 
 body {
     margin: 0;
@@ -48,17 +49,16 @@ header {
     display: grid;
     margin-left: auto;
     margin-right: auto;
-    grid-template-columns: 300px auto;
-    font-family: 'Comic Sans MS';
+    grid-template-columns: 350px auto;
+    font-family: 'Srisakdi', cursive;
 }
 .left {
     font-weight: 700;
-    font-size: 30px;
+    font-size: 36px;
     color: #ffffff;
     margin-top: auto;
     margin-bottom: auto;
     text-decoration: none;
-    /* font-family: 'Comic Sans MS'; */
     cursor: pointer;
 }
 .right {
@@ -69,8 +69,8 @@ header {
     margin-bottom: auto;
 }
 .menu {
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 700;
+    font-size: 24px;
     color: #ffffff;
     margin-right: 10px;
     margin-left: 10px;
@@ -288,11 +288,11 @@ footer {
 	bottom : 0; */
 }
 .footer-text {
-    font-family: 'Noto Sans TC';
     font-weight: 700;
     color: #ffffff;
     text-align: center;
     font-size: 16px;
+    /* font-family: 'Srisakdi', cursive; */
     font-family: 'Comic Sans MS';
 }
 @media (max-width: 1200px) {
