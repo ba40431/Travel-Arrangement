@@ -21,11 +21,13 @@ itineraryAPI.post('/itinerary', (req, res) => {
 
   //取得縣市
   let cities = ''
+  let citiesList = []
   for(let i = 0; i < cityData.length; i++){
     if(cityData[i].city === undefined) {
       break
     }
     cities = `${cities} , ${cityData[i].city}`
+    citiesList.push(cityData[i].city)
   }
 
   //後端驗證
@@ -50,27 +52,68 @@ itineraryAPI.post('/itinerary', (req, res) => {
       'message': '請選擇行程安排偏好'
     })
   }else{
+    let mustToGoPlace = null;
+    let placeName = null;
+    let placeId = null;
+    let placeAddress = null;
     //如果有必去景點資料
     if(req.body.travelRequireData.mustToGoPlace) {
-      let mustToGoPlace = req.body.travelRequireData.mustToGoPlace;
-      let placeName = req.body.travelRequireData.mustToGoPlace.placeName;
-      let placeId = req.body.travelRequireData.mustToGoPlace. placeId;
-      let placeAddress = req.body.travelRequireData.mustToGoPlace.placeAddress;
+      mustToGoPlace = req.body.travelRequireData.mustToGoPlace;
+      placeName = req.body.travelRequireData.mustToGoPlace.placeName;
+      placeId = req.body.travelRequireData.mustToGoPlace. placeId;
+      placeAddress = req.body.travelRequireData.mustToGoPlace.placeAddress;
+      let count = null;
+      let placeRegion = null;
+
+      if(placeAddress.indexOf('市') !== -1) {
+        count = placeAddress.indexOf('市')
+        placeRegion = placeAddress.slice(count-2, count+1)
+        if(placeRegion.indexOf('台')) {
+          placeRegion.replace('台', '臺');
+          if(citiesList.indexOf(placeRegion) === -1) {
+            return res.status(400).json({
+              'error': true,
+              'message': '必去景點可能不在所選縣市的範圍'
+            })
+          }
+        }
+      }else if(placeAddress.indexOf('縣') !== -1) {
+        count = placeAddress.indexOf('縣')
+        placeRegion = placeAddress.slice(count-2, count+1)
+        if(placeRegion.indexOf('台')) {
+          placeRegion.replace('台', '臺');
+          if(citiesList.indexOf(placeRegion) === -1) {
+            return res.status(400).json({
+              'error': true,
+              'message': '必去景點可能不在所選縣市的範圍'
+            })
+          }
+        }
+      }else {
+        return res.status(400).json({
+          'error': true,
+          'message': '必去景點可能不在所選縣市的範圍'
+        })
+      }
       // let detailsAPI = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&language=zh-TW&key=${process.env.GOOGLE_API_KEY}`;
-      axios.get(detailsAPI)
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      })
-      // .then(( ) => {
-      //   // always executed
-      // });
-      res.status(200).json({
-        'ok': true,
-      })
+      // axios.get(detailsAPI)
+      // .then((response) => {
+      //   placeData = response
+      //   console.log(placeData.data.result.adr_address)
+      // })
+      // .catch((error) => {
+      //   console.log(error);
+      //   res.status(500).json({
+      //     'error': true,
+      //     'message': '伺服器發生錯誤'
+      //   })
+      // })
+
     }else{
+      placeId = '';
+      placeName = '';
+    }
+
       //如果沒有必去景點資料
       getHotelData(hotelData, async (err, result) => {
           if(err) {
@@ -99,7 +142,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               if(preference === '悠遊輕旅行') {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(1,), preference, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -115,7 +158,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -146,7 +189,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               if(preference === '悠遊輕旅行') {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -162,7 +205,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -194,7 +237,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
 
 
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -211,7 +254,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
 
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -224,24 +267,12 @@ itineraryAPI.post('/itinerary', (req, res) => {
                       'itineraryId': itineraryId
                     })
                 })
-                             
-                // res.status(200).json({
-                //   'travelDate': {
-                //     'departureDate': departureDate,
-                //     'returnDate': returnDate,
-                //     'tripLength': tripLength,
-                //     'cities': cities.slice(1,),
-                //   },
-                //   'itinerary': itineraryList
-                // })
               }
-
             })
 
           }
 
       })
-    }
   }
 });
 
@@ -261,12 +292,12 @@ function checkPreference(data, itinerary, itineraryList, hotelData, num) {
   let dailyItinerary = itinerary
   for(let i = 0; i < itinerary.length + 1; i++) {
     if(hotelData[i] === undefined) {
-      dailyItinerary = itinerary[i-1].slice(num,2*num);
+      dailyItinerary = itinerary[i-1].slice(num, 2*num);
       itineraryList.push({dailyItinerary})
     }else {
       hotelName = hotelData[i]
-      dailyItinerary = itinerary[i].slice(0,num)
-      itineraryList.push({hotelName,dailyItinerary})
+      dailyItinerary = itinerary[i].slice(0, num)
+      itineraryList.push({hotelName, dailyItinerary})
     }
   }
 }

@@ -67,6 +67,18 @@ function renderItinerary(data) {
     let locationSpan = document.createElement('span')
     locationSpan.textContent = data.result[0][0].cities
     locationDiv.appendChild(locationSpan)
+    let mustToGoDiv = document.createElement('div')
+    mustToGoDiv.textContent = '必去景點 ： '
+    mustToGoDiv.setAttribute('class', 'must-to-go-place')
+    itineraryInfo.appendChild(mustToGoDiv)
+    let mustToGoPlace = document.querySelector('.must-to-go-place')
+    let mustToGoSpan = document.createElement('span')
+    if(data.result[0][0].must_to_go_place_name === '') {
+        mustToGoPlace.style.display = 'none'
+    }
+    mustToGoSpan.textContent = data.result[0][0].must_to_go_place_name
+    mustToGoDiv.setAttribute('id', `place-id-${data.result[0][0].must_to_go_place_id}`)
+    mustToGoPlace.appendChild(mustToGoSpan)
 
     //daily-container
     let dailyContainerDiv = document.createElement('div')
@@ -91,19 +103,22 @@ function renderItinerary(data) {
             span.setAttribute('id', `attractionId-${itineraryList[i][j].attraction_id}`)
             attraction.appendChild(span)
         }
-        if(itineraryList[i][0].hotel_name !== '') {
-            let hotelDiv = document.createElement('div')
-            hotelDiv.textContent = '住宿飯店 ： '
-            hotelDiv.setAttribute('class', 'hotel')
-            hotelDiv.setAttribute('id', `hotelId-${itineraryList[i][0].id}`)
-            dailyItinerary.appendChild(hotelDiv)
-            let hotelSpan = document.createElement('span')
-            let hotel = document.querySelector(`#hotelId-${itineraryList[i][0].id}`)
-            hotelSpan.textContent = itineraryList[i][0].hotel_name
-            hotelSpan.setAttribute('class', 'hotel-text')
-            hotel.appendChild(hotelSpan)
-        }else {
-            continue
+
+        if(itineraryList[i][0] !== undefined) {
+            if(itineraryList[i][0].hotel_name !== '') {
+                let hotelDiv = document.createElement('div')
+                hotelDiv.textContent = '住宿飯店 ： '
+                hotelDiv.setAttribute('class', 'hotel')
+                hotelDiv.setAttribute('id', `hotelId-${itineraryList[i][0].id}`)
+                dailyItinerary.appendChild(hotelDiv)
+                let hotelSpan = document.createElement('span')
+                let hotel = document.querySelector(`#hotelId-${itineraryList[i][0].id}`)
+                hotelSpan.textContent = itineraryList[i][0].hotel_name
+                hotelSpan.setAttribute('class', 'hotel-text')
+                hotel.appendChild(hotelSpan)
+            }else {
+                continue
+            }
         }
     }
 

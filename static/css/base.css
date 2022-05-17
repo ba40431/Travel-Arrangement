@@ -6,6 +6,7 @@ body {
     padding: 0; /*左右不留白*/
     box-sizing: border-box;
     font-family: 'Noto Sans TC';
+    background-color: #fafafc;
 }
 body::-webkit-scrollbar {
     /*調整滾動條的寬度*/
@@ -81,7 +82,7 @@ header {
 /* .sign-in-display , .sign-out-display , .itinerary-display {
 	display : none;
 } */
-.sign-in {
+/* .sign-in {
     height: 275px;
     width: 100%;
     z-index: 15;
@@ -93,7 +94,7 @@ header {
     display: none;
 }
 .sign-in-container {
-    width: 340px;
+    width: 34z0px;
     height: 275px;
     margin-left: auto;
     margin-right: auto;
@@ -276,7 +277,7 @@ input.invalid {
     opacity: 0.25;
     z-index: 10;
     display: none;
-}
+} */
 footer {
     display: grid;
     background-color: #ffbc7d;
@@ -292,7 +293,6 @@ footer {
     color: #ffffff;
     text-align: center;
     font-size: 16px;
-    /* font-family: 'Srisakdi', cursive; */
     font-family: 'Comic Sans MS';
 }
 @media (max-width: 1200px) {

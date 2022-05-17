@@ -66,7 +66,8 @@ module.exports = {
             connection.release();
         });
     },
-    insertItinerary: (itineraryId, itineraryList, departureDate, returnDate, tripLength, cities, prefer, cb) => {
+    insertItinerary: (itineraryId, itineraryList, departureDate, returnDate, tripLength, cities, prefer,
+        placeId, placeName,  cb) => {
         pool.getConnection((error, connection) => { 
             if (error) {
                 return cb(error.message);
@@ -121,9 +122,10 @@ module.exports = {
                 }}  
             }
             connection.query(
-                'INSERT INTO `itinerary` (itinerary_id, departure_date, return_date, trip_length, cities, prefer)\
-                        VALUES (?, ?, ?, ?, ?, ?);',
-                    [itineraryId, departureDate, returnDate, (tripLength+1), cities, prefer],
+                'INSERT INTO `itinerary` (itinerary_id, departure_date, return_date, trip_length, cities, prefer,\
+                    `must_to_go_place_id`, `must_to_go_place_name`)\
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?);',
+                    [itineraryId, departureDate, returnDate, (tripLength+1), cities, prefer, placeId, placeName],
                 (error, result) => {
                     if (error) {
                         return cb(error);

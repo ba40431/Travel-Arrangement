@@ -183,8 +183,14 @@ function getItinerary() {
           }).then((response) => {
             return response.json()
           }).then((result) => {
-            console.log(result.itineraryId)
-            result.ok ? location.href = `/itinerary/${result.itineraryId}` : warningText.textContent = '伺服器發生錯誤';
+            if(result.ok) {
+                location.href = `/itinerary/${result.itineraryId}`
+            }else if(result.message === '必去景點可能不在所選縣市的範圍') {
+                warningText.textContent = '必去景點可能不在所選縣市的範圍';
+            }else {
+                warningText.textContent = '伺服器發生錯誤';
+            }
+
           })
     }else {
         fetch('api/itinerary', {
@@ -211,8 +217,13 @@ function getItinerary() {
           }).then((response) => {
             return response.json()
           }).then((result) => {
-              console.log(result.itineraryId)
-            result.ok ? location.href = `/itinerary/${result.itineraryId}` : warningText.textContent = '伺服器發生錯誤';
+            if(result.ok) {
+                location.href = `/itinerary/${result.itineraryId}`
+            }else if(result.message === '必去景點可能不在所選縣市的範圍') {
+                warningText.textContent = '必去景點可能不在所選縣市的範圍';
+            }else {
+                warningText.textContent = '伺服器發生錯誤';
+            }
           })
     }
 }
