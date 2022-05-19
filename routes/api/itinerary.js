@@ -15,6 +15,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
   let hotelData = req.body.travelRequireData.hotelList;
   let transportData = req.body.travelRequireData.transportList;
   let preference = req.body.travelRequireData.preference;
+  let userId = req.body.travelDate.userId;
+  let userEmail = req.body.travelDate.userEmail;
 
   //行程編號
   let itineraryId = Date.now().toString(); //數字轉字串
@@ -142,7 +144,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
               if(preference === '悠遊輕旅行') {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+                   async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -158,7 +161,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+                   async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -189,7 +193,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
               if(preference === '悠遊輕旅行') {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+                   async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -205,7 +210,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
               }else {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+                   async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -237,7 +243,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
 
 
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+                   async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({
@@ -254,7 +261,8 @@ itineraryAPI.post('/itinerary', (req, res) => {
                 checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
 
                 insertItinerary(itineraryId, itineraryList,
-                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, async (err, result) => {
+                  departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+                   async (err, result) => {
                     if(err) {
                       console.log(err)
                       return res.status(500).json({

@@ -3,16 +3,30 @@ let string = url.pathname;
 let itineraryId = string.replace('/itinerary/','');
 
 let itineraryData = null;
+let userData = null;
 
+document.body.style.display = 'none';
 window.onload = () => {
     init();
 }
 
 async function init() {
-    document.body.style.display = 'none';
-    itineraryData = await initData();
-    renderItinerary(itineraryData)
-    document.body.style.display = 'block';
+    userData = await getUserData();
+    if(userData.data === null) {
+        location.href = '/sign-in'
+    }else {
+        itineraryData = await initData();
+        renderItinerary(itineraryData)
+        document.body.style.display = 'block';
+    }
+}
+
+function getUserData() {
+    return fetch('/api/user').then((response) => {
+        return response.json();
+    }).then((result) => {
+        return result;
+    })
 }
 
 function initData() {
@@ -126,7 +140,7 @@ function renderItinerary(data) {
     if(data.result[0][0].prefer === '排好排滿') {
         let dailyCss = document.querySelectorAll('.daily')
         for(let j = 0; j < dailyCss.length; j++) {
-            dailyCss[j].style.height = '250px'
+            dailyCss[j].style.height = '255px'
         }
     }
 

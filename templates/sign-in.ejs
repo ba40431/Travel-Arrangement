@@ -20,7 +20,7 @@
                     <div id = 'sign-in-failed' class = 'sign-in-failed'></div>
                     <div class = 'oauth-block'>
                         <span class = 'oauth-text'>其他登入方式 : </span>
-                        <span class = 'google-icon' onclick = oauth()><img src = 'pic/google.png'/></span>
+                        <span class = 'google-icon' onclick = oauth()><a href = 'api//auth/google'><img src = 'pic/google.png'/></a></span>
                     </div>
                     <div class = 'sign-in-text'>還沒有帳戶？
                         <a onclick = signUp()>點此註冊</a>
@@ -33,7 +33,7 @@
                     <input type = 'text' id = 'sign-up-name' class = 'sign-up-name' placeholder = '輸入姓名'>
                     <input type = 'email' id = 'sign-up-email' class = 'sign-up-email' placeholder = '輸入電子信箱'>
                     <input type = 'password' id = 'sign-up-password' class = 'sign-up-password' placeholder = '輸入密碼'>
-                    <button class = 'sign-up-button' onclick = checkSignUp()>登入帳戶</button>
+                    <button class = 'sign-up-button' onclick = checkSignUp()>註冊帳戶</button>
                     <div id = 'sign-up-failed' class = 'sign-up-failed'></div>
                     <div class = 'sign-up-text'>已經有帳戶了？
                         <a onclick = signIn()>點此登入</a>

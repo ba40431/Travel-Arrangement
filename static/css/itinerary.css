@@ -34,7 +34,7 @@
     grid-row-gap: 10px;
 }
 .daily {
-    height: 200px;
+    height: 215px;
     width: 200px;
     margin-right: 20px;
     border: 1px #e8e8e8 solid;
@@ -75,8 +75,8 @@ hr {
     width: 100px;
     height: 36px;
     float: right;
-    background-color: #ff9b9d;
-    border: 0px solid #ff9b9d;
+    background-color: #ff9a9b;
+    border: 0px solid #ff9a9b;
     border-radius: 5px;
     font-weight: 700;
     font-size: 19px;
@@ -85,8 +85,8 @@ hr {
     margin-left: 20px;
 }
 .button:hover {
-    background-color: #eb9091;
-    border: 0px solid #eb9091;
+    background-color: #ff8e90;
+    border: 0px solid #ff8e90;
 }
 footer {
     margin-top: 230px;

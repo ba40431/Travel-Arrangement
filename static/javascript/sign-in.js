@@ -37,11 +37,10 @@ function checkSignIn() {
       .then((result) => {
         resData = result;
         if (resData.error === true) {
-          console.log(oauthBlock)
           oauthBlock.style.marginTop = '30px';
           signInFailed.textContent = resData.message;
         } else {
-          // window.location.replace(location.href); // 不可以通過「後退」退回到原頁面
+          location.href = '/'
         }
       });
   } else {
@@ -77,7 +76,8 @@ function checkSignUp() {
           signUpFailed.textContent = resData.message;
         } else {
           signUpText.style.marginTop = '20px';
-          signUpFailed.textContent = '註冊成功';
+          signUpFailed.textContent = '註冊成功，將於 2 秒後返回登入畫面';
+          setTimeout(() => {window.location.replace(location.href);}, 2000)
         }
       });
   } else if (

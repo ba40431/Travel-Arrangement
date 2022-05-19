@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const bodyParser = require('body-parser')
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser')
@@ -12,17 +13,57 @@ const saltRounds = 10;
 userAPI.use(bodyParser.json())
 userAPI.use(cookieParser())
 
-userAPI.get('/user', (req, res) => {
-// const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-// console.log(decoded.payload.userId)
-  if(JSON.stringify(req.body.data===null)) {throw 'error'};
-  let data = {
-    // 'id':
-    // 'name': 
-    // 'email':
-  };
-  res.status(200).json(data)
-  // res.send(JSON.stringify(data));
+
+//middleware
+function ensureAuthenticated(req, res, next) {
+  // console.log(req.session.passport.user)
+  // 若使用者已通過驗證，則觸發 next()
+  if (req.session.passport || req.cookies.token) { return next() }
+  // 若使用者尚未通過驗證，則將使用者導向登入頁面
+  return res.status(403).json({
+    'error': true,
+    'message': '未登入會員，拒絕存取'
+  })
+}
+
+userAPI.get('/user', ensureAuthenticated, (req, res) => {
+  let token = req.cookies.token
+  if(token) {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+    checkUser(decoded.payload.userEmail, (err, result) => {
+      if(err) {
+        console.log(err)
+        return res.status(500).json({
+          'error': true,
+          'message': '伺服器發生錯誤'
+        })
+      }else if(result[0] === undefined) {
+        return res.status(200).json({
+          'data': null
+        })
+      }else {
+        return res.status(200).json({
+          'data': {
+            'id': result[0].id,
+            'name': result[0].name,
+            'email': result[0].email
+          }
+        })
+      }
+    })
+  }
+  else if(req.session.passport) {
+    return res.status(200).json({
+      'data': {
+        'name': req.session.passport.user.displayName,
+        'email': req.session.passport.user.emails[0].value
+      }
+    })
+  }else {
+    return res.status(200).json({
+      'data': null
+    })
+  }
 });
 
 userAPI.patch('/user', (req, res) => {
@@ -64,7 +105,7 @@ userAPI.patch('/user', (req, res) => {
               userEmail: userData[0].email
             };
             const token = jwt.sign({ payload, exp: Math.floor(Date.now() / 1000) + (60 * 15) }, process.env.JWT_SECRET_KEY); //exp 15分鐘
-            res.cookie('token', token)
+            res.cookie('token', token, { maxAge: 900000, httpOnly: true })
             return res.status(200).json({
               'ok': true,
             })
@@ -122,7 +163,8 @@ userAPI.post('/user', (req, res) => {
             }
             let hashedPassword = hash
             // Store hash in your password DB.
-            insertUser(userData.name, userData.email, hashedPassword, (err, result) => {
+            let userPicture = null
+            insertUser(userData.name, userData.email, hashedPassword, userPicture, (err, result) => {
               if(err) {
                 console.log(err)
                 return res.status(500).json({
@@ -140,5 +182,24 @@ userAPI.post('/user', (req, res) => {
     });
   }
 })
+
+userAPI.delete('/user', (req, res) => {
+  let token = req.cookies.token
+  if(token) {
+    res.cookie('token', '', { maxAge: 0, httpOnly: true })
+    return res.status(200).json({
+      'ok': true
+    })
+  }else if(req.session.passport) {
+    req.session.passport.user = null
+    return res.status(200).json({
+      'ok': true
+    })
+  }else {
+    return res.status(200).json({
+      'ok': true
+    })
+  }
+});
 
 module.exports = userAPI;
