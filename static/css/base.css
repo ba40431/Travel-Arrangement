@@ -36,12 +36,12 @@ body::-webkit-scrollbar-track {
     box-shadow: transparent;
 }
 header {
-    background-color: #ff9a9b;
+    background-color: #ff8e90;
     width: 100%;
     position: fixed;
     top: 0;
-    border-bottom: 1px solid #ff9a9b;
-    opacity: 0.9;
+    border-bottom: 1px solid #ff8e90;
+    opacity: 0.95;
     border-radius: 0 0 10px 10px;
     z-index: 5; /*z-index的數字愈大，代表愈上層*/
 }
@@ -66,7 +66,7 @@ header {
 .right {
     display: grid;
     justify-content: flex-end;
-    grid-template-columns: auto auto;
+    grid-template-columns: 130px 15px 110px 15px 130px;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -79,6 +79,12 @@ header {
     margin-top: auto;
     margin-bottom: auto;
     cursor: pointer;
+    text-decoration: none;
+}
+.line {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
 }
 /* .sign-in-display , .sign-out-display , .itinerary-display {
 	display : none;

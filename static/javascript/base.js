@@ -1,3 +1,4 @@
+let userData = null
 
 function signOut() {
   const headers = {
@@ -14,4 +15,23 @@ function signOut() {
             location.href = '/sign-in'
         }
     });
+}
+
+async function getItinerary() {
+  userData = await getUserData();
+  if(userData.data === null) {
+    location.href = '/sign-in'
+  }else if(userData.error) {
+    location.href = '/sign-in'
+  }else {
+    location.href = `/my-itinerary/${userData.data}`
+  }
+}
+
+function getUserData() {
+  return fetch('api/user').then((response) => {
+      return response.json();
+  }).then((result) => {
+      return result;
+  })
 }

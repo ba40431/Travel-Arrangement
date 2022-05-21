@@ -3,7 +3,7 @@ let string = url.pathname;
 let itineraryId = string.replace('/itinerary/','');
 
 let itineraryData = null;
-let userData = null;
+// let userData = null;
 
 document.body.style.display = 'none';
 window.onload = () => {
@@ -14,8 +14,13 @@ async function init() {
     userData = await getUserData();
     if(userData.data === null) {
         location.href = '/sign-in'
+    }else if(userData.error) {
+        location.href = '/sign-in'
     }else {
         itineraryData = await initData();
+        if(itineraryData.error) {
+            location.href = '/'
+        }
         renderItinerary(itineraryData)
         document.body.style.display = 'block';
     }

@@ -2,20 +2,24 @@ const warningText = document.querySelector('.warning-text');
 let requireData = null;
 let hotelData = null;
 let tripLength = null;
-let userData = null;
+// let userData = null;
 
 document.body.style.display = 'none';
 window.onload = () => {
     init();
 }
 
-
 async function init() {
     userData = await getUserData();
     if(userData.data === null) {
         location.href = '/sign-in'
+    }else if(userData.error) {
+        location.href = '/sign-in'
     }else {
         requireData = await initData();
+        if(requireData.error) {
+            location.href = '/'
+        }
         renderCityInput(requireData);
         selectTowns()
         document.body.style.display = 'block';
@@ -195,52 +199,81 @@ function getItinerary() {
                     'preference': selectPreference.id,
                 }
             })
-          }).then((response) => {
+        }).then((response) => {
             return response.json()
-          }).then((result) => {
+        }).then((result) => {
             if(result.ok) {
                 location.href = `/itinerary/${result.itineraryId}`
-            }else if(result.message === '必去景點可能不在所選縣市的範圍') {
-                warningText.textContent = result.message;
             }else {
                 warningText.textContent = '伺服器發生錯誤';
             }
 
-          })
+        })
     }else {
-        fetch('api/itinerary', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                'travelDate':{
-                    'departureDate': requireData.departureDate,
-                    'returnDate': requireData.returnDate,
-                    'tripLength': requireData.tripLength,
-                    'userId': userData.data.id,
-                    'userEmail': userData.data.email
-                },
-                'travelRequireData':{
-                    'cities': requireData.checkedCities,
-                    'hotelList': selectHotelList,
-                    'transportList': selectTransportList,
-                    'preference': selectPreference.id,
-                    'mustToGoPlace':{
-                        'placeName': placeName,
-                        'placeId': placeId,
-                        'placeAddress': placeAddress
-                    }
-                }
-            })
-          }).then((response) => {
-            return response.json()
-          }).then((result) => {
-            if(result.ok) {
-                location.href = `/itinerary/${result.itineraryId}`
-            }else if(result.message === '必去景點可能不在所選縣市的範圍') {
-                warningText.textContent = result.message;
+        if(placeAddress.indexOf('市') !== -1 || placeAddress.indexOf('縣') !== -1) {
+            let count = null
+            let index = null
+            let placeRegion = null
+            if(placeAddress.indexOf('市') !== -1) {
+                index =  placeAddress.indexOf('市')
+                placeRegion = placeAddress.slice(index-2, index+1)
             }else {
-                warningText.textContent = '伺服器發生錯誤';
+                index =  placeAddress.indexOf('縣')
+                placeRegion = placeAddress.slice(index-2, index+1)
             }
-          })
+
+            if(placeRegion.indexOf('台') !== -1) {
+                placeRegion = placeRegion.replace('台', '臺');
+            }
+            
+            for(let i = 0; i < requireData.checkedCities.length; i++) {
+                if( placeRegion === requireData.checkedCities[i].city) {
+                    count = i
+                    break
+                }
+            }
+
+            if(count === null) {
+                warningText.textContent = '必去景點可能不在所選縣市的範圍';
+            }else {
+                fetch('api/itinerary', {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({
+                        'travelDate':{
+                            'departureDate': requireData.departureDate,
+                            'returnDate': requireData.returnDate,
+                            'tripLength': requireData.tripLength,
+                            'userId': userData.data.id,
+                            'userEmail': userData.data.email
+                        },
+                        'travelRequireData':{
+                            'cities': requireData.checkedCities,
+                            'hotelList': selectHotelList,
+                            'transportList': selectTransportList,
+                            'preference': selectPreference.id,
+                            'mustToGoPlace':{
+                                'placeName': placeName,
+                                'placeId': placeId,
+                                'placeRegion': placeRegion,
+                                'placeAddress': placeAddress
+                            }
+                        }
+                    })
+                }).then((response) => {
+                    return response.json()
+                }).then((result) => {
+                    if(result.ok) {
+                        location.href = `/itinerary/${result.itineraryId}`
+                    }else if(result.message === '必去景點可能不在所選縣市的範圍') {
+                        warningText.textContent = result.message;
+                    }else {
+                        warningText.textContent = '伺服器發生錯誤';
+                    }
+                })
+            }
+        }else {
+            warningText.textContent = '必去景點可能不在所選縣市的範圍';
+        }
     }
 }

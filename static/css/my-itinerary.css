@@ -1,7 +1,6 @@
 .itinerary-container {
     width: 1100px;
-    margin-top: 120px;
-    margin-bottom: 20px;
+    margin-top: 180px;
     margin-left: auto;
     margin-right: auto;
     color: #666666;
@@ -11,6 +10,7 @@
     font-size: 19px;
 }
 .itinerary-content {
+    margin-bottom: 60px;
     width: 1100px;
     margin-left: 100px;
     margin-right: auto;
@@ -30,21 +30,30 @@
 }
 .daily-container {
     margin-top: 10px;
-    display: flex;
+    display: grid;
+    grid-template-columns: 230px 230px 230px;
+    grid-row-gap: 10px;
 }
 .daily {
-    height: 200px;
+    height: 215px;
+    width: 200px;
     margin-right: 20px;
     border: 1px #e8e8e8 solid;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     position: relative;
 }
 .hotel {
     float: inline-end;
+    width: inherit;
     margin-top: 40px;
+    padding-top: 5px;
     position: absolute;
     bottom: 10px;
+    border-top: 1px #e8e8e8 solid;
+}
+.hotel-text {
+    color: #ff9b9d;
 }
 hr {
     width: 1100px;
@@ -52,8 +61,8 @@ hr {
     margin-right: auto;
     border: 0;
     padding: 3px;
-    background: linear-gradient(135deg, red, orange,green, blue, purple);
-    --mask-image: repeating-linear-gradient(135deg, #000 0px, #000 1px, transparent 1px, transparent 6px);
+    background: linear-gradient(54deg, #adbed2, #ff8e90, #ffbc7d,#adbed2);
+    --mask-image: repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 6px);
     -webkit-mask-image: var(--mask-image);
     mask-image: var(--mask-image);
 }

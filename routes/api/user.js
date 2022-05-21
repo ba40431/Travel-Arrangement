@@ -30,35 +30,71 @@ userAPI.get('/user', ensureAuthenticated, (req, res) => {
   let token = req.cookies.token
   if(token) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
-    checkUser(decoded.payload.userEmail, (err, result) => {
-      if(err) {
-        console.log(err)
-        return res.status(500).json({
-          'error': true,
-          'message': '伺服器發生錯誤'
-        })
-      }else if(result[0] === undefined) {
-        return res.status(200).json({
-          'data': null
-        })
-      }else {
-        return res.status(200).json({
-          'data': {
-            'id': result[0].id,
-            'name': result[0].name,
-            'email': result[0].email
-          }
-        })
-      }
-    })
+    try{
+      checkUser(decoded.payload.userEmail, (err, result) => {
+        if(err) {
+          console.log(err)
+          return res.status(500).json({
+            'error': true,
+            'message': '伺服器發生錯誤'
+          })
+        }else if(result[0] === undefined) {
+          return res.status(200).json({
+            'data': null
+          })
+        }else {
+          return res.status(200).json({
+            'data': {
+              'id': result[0].id,
+              'name': result[0].name,
+              'email': result[0].email
+            }
+          })
+        }
+      })
+    }catch {
+      return res.status(500).json({
+        'error': true,
+        'message': '伺服器發生錯誤'
+      })
+    }
+
   }
-  else if(req.session.passport) {
-    return res.status(200).json({
-      'data': {
-        'name': req.session.passport.user.displayName,
-        'email': req.session.passport.user.emails[0].value
-      }
-    })
+  else if(req.session.passport.user !== null) {
+    try {
+      checkUser(req.session.passport.user.emails[0].value, (err, result) => {
+        if(err) {
+          console.log(err)
+          return res.status(500).json({
+            'error': true,
+            'message': '伺服器發生錯誤'
+          })
+        }else if(result[0] === undefined) {
+          return res.status(200).json({
+            'data': null
+          })
+        }else {
+          return res.status(200).json({
+            'data': {
+              'id': result[0].id,
+              'name': result[0].name,
+              'email': result[0].email
+            }
+          })
+        }
+      })
+    }catch {
+      return res.status(500).json({
+        'error': true,
+        'message': '伺服器發生錯誤'
+      })
+    }
+    // return res.status(200).json({
+    //   'data': {
+    //     'name': req.session.passport.user.displayName,
+    //     'email': req.session.passport.user.emails[0].value
+    //   }
+    // })
   }else {
     return res.status(200).json({
       'data': null

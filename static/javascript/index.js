@@ -1,6 +1,6 @@
 let citiesCount = 0;
 let citiesName = null;
-let userData = null;
+// let userData = null;
 
 document.body.style.display = 'none';
 window.onload = () => {
