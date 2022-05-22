@@ -140,7 +140,7 @@ function renderHotel(data, num) {
 }
 
 //行程規劃按鈕
-function getItinerary() {
+function getItineraryData() {
     //取得飯店資料
     let selectHotel = document.querySelectorAll('.hotel-select'); 
     let selectHotelOption = document.querySelectorAll('.hotel-select > option'); 
@@ -236,6 +236,10 @@ function getItinerary() {
             if(count === null) {
                 warningText.textContent = '必去景點可能不在所選縣市的範圍';
             }else {
+                let cover = document.querySelector('.cover')
+                let window = document.querySelector('.window')
+                cover.style.display = 'block'
+                window.style.display = 'block'
                 fetch('api/itinerary', {
                     method: 'POST',
                     headers: {'Content-Type': 'application/json'},
@@ -266,8 +270,12 @@ function getItinerary() {
                     if(result.ok) {
                         location.href = `/itinerary/${result.itineraryId}`
                     }else if(result.message === '必去景點可能不在所選縣市的範圍') {
+                        cover.style.display = 'none'
+                        window.style.display = 'none'
                         warningText.textContent = result.message;
                     }else {
+                        cover.style.display = 'none'
+                        window.style.display = 'none'
                         warningText.textContent = '伺服器發生錯誤';
                     }
                 })

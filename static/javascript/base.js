@@ -24,7 +24,18 @@ async function getItinerary() {
   }else if(userData.error) {
     location.href = '/sign-in'
   }else {
-    location.href = `/my-itinerary/${userData.data}`
+    location.href = '/my-itinerary'
+  }
+}
+
+async function getDashboard() {
+  userData = await getUserData();
+  if(userData.data === null) {
+    location.href = '/sign-in'
+  }else if(userData.error) {
+    location.href = '/sign-in'
+  }else {
+    location.href = '/dashboard'
   }
 }
 

@@ -80,9 +80,22 @@
         </div>
         <div class = 'button-container'>
             <div class = 'warning-text'></div>
-            <button class = 'finish-button' onclick = getItinerary()>行程安排</button>
+            <button class = 'finish-button' onclick = getItineraryData()>行程安排</button>
         </div>
     </main>
+
+    <!-- 遮罩層 -->
+    <div class = 'cover'></div> 
+
+    <div class = 'window'>
+        <div  class = 'window-container'>
+          <div class = 'window-background'></div>
+          <div class = 'window-content'>
+            <div class = 'window-title'>行程規劃中請稍後...</div>
+          </div>
+        </div>
+    </div>
+
     
     <%- include('footer'); %>
     <script type = 'text/javascript' src = '/javascript/next.js'></script>

@@ -44,19 +44,23 @@ module.exports = {
                         return cb(error);
                     };
                     let userItinerary = result
-                    for(let i = 0; i < userItinerary.length; i++) {
-                        connection.query(
-                            'select * from `dailyItinerary` where `itinerary_id`= ? ', [userItinerary[i].itinerary_id],
-                            (error, result) => {
-                                if (error) {
-                                    return cb(error);
-                                };
-                                userItineraryList.push(result)
-                                if(i === (userItinerary.length-1)) {
-                                    return cb(null, userItineraryList)
+                    if(userItinerary.length === 0) {
+                        return cb(null, userItineraryList)
+                    }else {
+                        for(let i = 0; i < userItinerary.length; i++) {
+                            connection.query(
+                                'select * from `dailyItinerary` where `itinerary_id`= ? ', [userItinerary[i].itinerary_id],
+                                (error, result) => {
+                                    if (error) {
+                                        return cb(error);
+                                    };
+                                    userItineraryList.push([userItinerary[i],result])
+                                    if(i === (userItinerary.length-1)) {
+                                        return cb(null, userItineraryList)
+                                    }
                                 }
-                            }
-                        )
+                            )
+                        }
                     }
                 }
             )

@@ -3,6 +3,8 @@ const session = require('express-session');
 const passport = require('passport')
 const path = require('path');
 const app = express();
+
+require('dotenv').config()
 const {PORT = 3000} = process.env
 
 
@@ -10,7 +12,7 @@ app.set('views','templates');
 app.set('view engine', 'ejs');
 
 app.use(session({
-  secret : 'secret',
+  secret : process.env.SESSION,
   resave :false,
   saveUninitialized: true,     
 }));

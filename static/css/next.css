@@ -258,6 +258,63 @@ hr {
     background-color: #ff8e90;
     border: 0px solid #ff8e90;
 }
+.cover{
+	position:fixed;
+	padding:0;
+	margin:0;
+	top:0;
+	left:0;
+	width: 100%;
+	height: 100%;
+	background:#000000;
+	opacity: 0.25;
+	z-index:10;
+	display: none;
+}
+.window{
+	height: 275px;
+	width:100%;
+	z-index:15;
+	position: fixed;
+	top:80px;
+	animation: windows 0.3s linear;
+	right:auto;
+	left:auto;
+	text-align:center;
+	display: none;
+}
+@keyframes windows{
+	0%{opacity:0}
+	100%{opacity:1}
+}
+.window-container{
+	width: 340px;
+	height: 275px;
+	margin-left: auto;
+	margin-right: auto;
+}
+.window-background{
+	background-image:linear-gradient(270deg, #ffb773 0%, #ffbc7d 100%);
+	width: 340px;
+	height: 10px;
+	border-radius: 6px 6px 0 0;
+}
+.window-content{
+	background-color: #FFFFFF;
+	width: 340px;
+    height: 100px;
+	border-radius:0 0 6px 6px;
+	padding-top:60px;
+	text-align: center;
+}
+.window-title{
+	font-weight:700;
+	font-size:24px;
+	color: #666666;
+	margin-bottom: 5px;
+}
+
+
 footer {
     margin-top: 340px;
 }

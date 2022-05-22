@@ -51,7 +51,6 @@ myItineraryAPI.get('/my-itinerary', (req, res) => {
             'message': '伺服器發生錯誤'
         })
         }
-        // console.log(result[0])
         return res.status(200).json({
             result
         })
