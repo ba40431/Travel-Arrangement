@@ -1,5 +1,4 @@
 const warningText = document.querySelector('.warning-text');
-const date = document.querySelector('.date > input');
 let requireData = null;
 let hotelData = null;
 let tripLength = null;
@@ -23,7 +22,6 @@ async function init() {
         }
         renderCityInput(requireData);
         selectTowns()
-        getDate(requireData)
         document.body.style.display = 'block';
     }
 }
@@ -141,17 +139,6 @@ function renderHotel(data, num) {
     }
 }
 
-function getDate(data) {
-    let departureDate = new Date(data.departureDate);
-    let returnDate = new Date(data.returnDate);
-    let minDate = departureDate .setDate(departureDate .getDate());
-    let maxDate = returnDate.setDate(returnDate.getDate());
-    minDate = new Date(minDate);
-    maxDate = new Date(maxDate);
-    date.setAttribute('min', minDate.toISOString().split('T')[0]);
-    date.setAttribute('max', maxDate.toISOString().split('T')[0]);
-}
-
 //行程規劃按鈕
 function getItineraryData() {
     //取得飯店資料
@@ -187,18 +174,13 @@ function getItineraryData() {
     let placeId = document.querySelector('#place-id').innerHTML;
     let placeAddress = document.querySelector('#place-address').innerHTML;
 
-
     if(selectHotelList.length !==  tripLength) {
         warningText.textContent = '請選擇住宿飯店';
     }else if(selectTransportList.length === 0) {
         warningText.textContent = '請選擇交通工具';
     }else if(selectPreference === null) {
         warningText.textContent = '請選擇行程安排偏好';
-    }else if(placeId === '' && date.value === '') {
-        let cover = document.querySelector('.cover')
-        let window = document.querySelector('.window')
-        cover.style.display = 'block'
-        window.style.display = 'block'
+    }else if(placeId === '') {
         fetch('api/itinerary', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -223,13 +205,10 @@ function getItineraryData() {
             if(result.ok) {
                 location.href = `/itinerary/${result.itineraryId}`
             }else {
-                cover.style.display = 'none'
-                window.style.display = 'none'
                 warningText.textContent = '伺服器發生錯誤';
             }
+
         })
-    }else if (placeId === '' || date.value === '') {
-        warningText.textContent = '請選擇必去景點和前往日期';
     }else {
         if(placeAddress.indexOf('市') !== -1 || placeAddress.indexOf('縣') !== -1) {
             let count = null
@@ -278,7 +257,6 @@ function getItineraryData() {
                             'transportList': selectTransportList,
                             'preference': selectPreference.id,
                             'mustToGoPlace':{
-                                'date': date.value,
                                 'placeName': placeName,
                                 'placeId': placeId,
                                 'placeRegion': placeRegion,

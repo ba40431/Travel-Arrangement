@@ -168,6 +168,7 @@ hr {
     top: -2px;
     left: -1px;
     position: relative;
+    /* background-color: #ffffff; */
     content: '';
     display: inline-block;
     visibility: visible;
@@ -192,17 +193,24 @@ hr {
     margin-left: 10px;
     cursor: pointer;
 }
-.date {
-    margin-top: 60px;
+.must-to-go-block {
+    margin-bottom: 60px;
+    margin-top: 80px;
     margin-left: 180px;
     color: #666666;
-    font-size: 16px;
+    /* display: grid;
+    grid-template-columns: auto auto; */
 }
-.date > input {
-    width: 160px;
-    height: 30px;
+.input-block {
+    display: flex;
+}
+.input-block > input {
+    width: 240px;
+    height: 24px;
     padding-right: 4px;
-    padding-left: 2px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 10px;
     margin-left: 10px;
     margin-bottom: 10px;
     font-size: 16px;
@@ -210,9 +218,22 @@ hr {
     cursor: pointer;
     border-radius: 5px;
     border: 1px solid #e8e8e8;
-    text-align: center;
-    color: #666666;
-    background-color: #fafafc;
+}
+.plus-button {
+    width: 33px;
+    height: 33px;
+    border-radius: 5px;
+    background-color: #adbed2;
+    border: 0px solid #adbed2;
+    margin-left: 5px;
+    position: relative;
+    cursor: pointer;
+}
+.plus-button > img {
+    width: 22px;
+    position: absolute;
+    top: 6px;
+    left: 6px;
 }
 .warning-text {
     position: absolute;

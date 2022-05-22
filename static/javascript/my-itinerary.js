@@ -47,12 +47,11 @@ function renderItinerary(data) {
     let departureDate = `${data.result[i][0].departure_date.slice(5,7)}/${data.result[i][0].departure_date.slice(8,)}`
     let returnDate = `${data.result[i][0].return_date.slice(5,7)}/${data.result[i][0].return_date.slice(8,)}`
     let itineraryContainer = document.querySelector('.itinerary-container')
-    let contentA = document.createElement('a')
+    let contentDiv = document.createElement('div')
     let hr = document.createElement('hr')
-    contentA.setAttribute('class', 'itinerary-content')
-    contentA.setAttribute('id', `itinerary-${data.result[i][0].itinerary_id}`)
-    contentA.href = `/itinerary/${data.result[i][0].itinerary_id}`
-    itineraryContainer.appendChild(contentA)
+    contentDiv.setAttribute('class', 'itinerary-content')
+    contentDiv.setAttribute('id', `itinerary-${data.result[i][0].itinerary_id}`)
+    itineraryContainer.appendChild(contentDiv)
     itineraryContainer.appendChild(hr)
     let infoDiv = document.createElement('div')
     infoDiv.setAttribute('class', 'itinerary-info')

@@ -10,16 +10,15 @@
     font-size: 19px;
 }
 .itinerary-content {
+    margin-bottom: 40px;
     width: 1100px;
+    margin-left: 100px;
     margin-right: auto;
     color: #666666;
-    text-decoration: none;
 }
 .itinerary-info {
     display: flex;
     margin-top: 30px;
-    margin-left: 100px;
-    margin-bottom: 40px;
 }
 .itinerary-info > div {
     margin-left: 10px;
