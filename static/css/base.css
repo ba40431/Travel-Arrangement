@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Srisakdi:wght@400;700&display=swap');
 
 body {
     margin: 0;
     padding: 0; /*左右不留白*/
     box-sizing: border-box;
     font-family: 'Noto Sans TC';
+    background-color: #fafafc;
 }
 body::-webkit-scrollbar {
     /*調整滾動條的寬度*/
@@ -34,12 +36,13 @@ body::-webkit-scrollbar-track {
     box-shadow: transparent;
 }
 header {
-    background-color: #eb9091;
+    background-color: #ff8e90;
     width: 100%;
     position: fixed;
     top: 0;
-    border-bottom: 1px solid #eb9091;
-    opacity: 0.9;
+    border-bottom: 1px solid #ff8e90;
+    opacity: 0.95;
+    border-radius: 0 0 10px 10px;
     z-index: 5; /*z-index的數字愈大，代表愈上層*/
 }
 .header-menu {
@@ -48,40 +51,45 @@ header {
     display: grid;
     margin-left: auto;
     margin-right: auto;
-    grid-template-columns: 300px auto;
-    font-family: 'Comic Sans MS';
+    grid-template-columns: 350px auto;
+    font-family: 'Srisakdi', cursive;
 }
 .left {
     font-weight: 700;
-    font-size: 30px;
+    font-size: 36px;
     color: #ffffff;
     margin-top: auto;
     margin-bottom: auto;
     text-decoration: none;
-    /* font-family: 'Comic Sans MS'; */
     cursor: pointer;
 }
 .right {
     display: grid;
     justify-content: flex-end;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 130px 15px 110px 15px 130px;
     margin-top: auto;
     margin-bottom: auto;
 }
 .menu {
-    font-weight: 400;
-    font-size: 20px;
+    font-weight: 700;
+    font-size: 24px;
     color: #ffffff;
     margin-right: 10px;
     margin-left: 10px;
     margin-top: auto;
     margin-bottom: auto;
     cursor: pointer;
+    text-decoration: none;
 }
-/* .sign-in-display , .sign-out-display , .schedule-display {
+.line {
+    font-weight: 700;
+    font-size: 24px;
+    color: #ffffff;
+}
+/* .sign-in-display , .sign-out-display , .itinerary-display {
 	display : none;
 } */
-.sign-in {
+/* .sign-in {
     height: 275px;
     width: 100%;
     z-index: 15;
@@ -93,7 +101,7 @@ header {
     display: none;
 }
 .sign-in-container {
-    width: 340px;
+    width: 34z0px;
     height: 275px;
     margin-left: auto;
     margin-right: auto;
@@ -276,19 +284,19 @@ input.invalid {
     opacity: 0.25;
     z-index: 10;
     display: none;
-}
+} */
 footer {
     display: grid;
     background-color: #ffbc7d;
     height: 104px;
     justify-content: center;
     align-items: center;
+    border-radius: 10px 10px 0 0;
     /* width : 100%;
 	position : absolute;
 	bottom : 0; */
 }
 .footer-text {
-    font-family: 'Noto Sans TC';
     font-weight: 700;
     color: #ffffff;
     text-align: center;

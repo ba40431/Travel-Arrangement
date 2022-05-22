@@ -3,10 +3,9 @@
 
     <head>
         <%- include('head'); %>
-        <link rel = 'stylesheet' type = 'text/css' href = 'css/next.css'>
-        <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-        <link rel="stylesheet" type="text/css" href="css/map.css" />
-        <script type="module" src="javascript/map.js"></script>
+        <link rel = 'stylesheet' type = 'text/css' href = '/css/next.css'>
+        <script src = 'https://polyfill.io/v3/polyfill.min.js?features=default'></script>
+        <link rel = 'stylesheet' type = 'text/css' href = '/css/map.css' />
     </head>
 <body>
     <%- include('header'); %>
@@ -80,20 +79,29 @@
             </div>
         </div>
         <div class = 'button-container'>
-            <!-- <a href = '/schedule'>  -->
-                <div class = 'warning-text'></div>
-                <button class = 'finish-button' onclick = getSchedule()>行程安排</button>
-            <!-- </a> -->
+            <div class = 'warning-text'></div>
+            <button class = 'finish-button' onclick = getItineraryData()>行程安排</button>
         </div>
-
-        <%- include('user'); %>
     </main>
+
+    <!-- 遮罩層 -->
+    <div class = 'cover'></div> 
+
+    <div class = 'window'>
+        <div  class = 'window-container'>
+          <div class = 'window-background'></div>
+          <div class = 'window-content'>
+            <div class = 'window-title'>行程規劃中請稍後...</div>
+          </div>
+        </div>
+    </div>
+
     
     <%- include('footer'); %>
-    <script type = 'text/javascript' src = 'javascript/next.js'></script>
-    <script
-    src="https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=places&v=weekly"
-    async defer
+    <script type = 'text/javascript' src = '/javascript/next.js'></script>
+    <script type = 'module' src = 'javascript/map.js'></script>
+    <script defer
+    src = 'https://maps.googleapis.com/maps/api/js?key=key&callback=initMap&libraries=places&v=weekly'
   ></script> 
 </body>
 </html>

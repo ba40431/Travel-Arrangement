@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+
+    <head>
+        <%- include('head'); %>
+        <link rel = 'stylesheet' type = 'text/css' href = '/css/itinerary.css'>
+    </head>
+<body>
+    <%- include('header'); %>
+    <main>
+        <div class = 'itinerary-container'>
+            <div class = 'title'>行程安排</div>
+            <div class = 'itinerary-content'></div>
+        </div>
+        <hr/>
+        <div class = 'button-container'>
+            <a href = '/'>
+                <button class = 'button'>重新安排</button>
+            </a>
+            <a href = '/my-itinerary'>
+                <button class = 'button'>我的行程</button>
+            </a>
+        </div>
+    </main>
+
+    <%- include('footer'); %>
+    <script type = 'text/javascript' src = '/javascript/itinerary.js'></script>
+</body>
+</html>

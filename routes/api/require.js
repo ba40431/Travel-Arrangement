@@ -36,52 +36,59 @@ requireAPI.post('/require', (req, res) => {
 
 //GET router
 requireAPI.get('/require', async (req, res) => {
-  checkTown(checkedCities[0], checkedCities[1], checkedCities[2], async (err, result) => {
-    if(err) {
-      console.log(err)
-      return res.status(500).json({
-        'error': true,
-        'message': '伺服器發生錯誤'
-      })
-    }
-
-    //取得縣市區域
-    cityData = result;
-    let regionList1 = [];
-    let regionList2 = [];
-    let regionList3 = [];
-    for(let i = 0; i < cityData.length; i++) {
-      if(checkedCities[0] !== undefined && checkedCities[0] === cityData[i].region) {
-        let town = `${cityData[i].town}`;
-        regionList1.push(town);
-      }else if(checkedCities[1] !== undefined && checkedCities[1] === cityData[i].region) {
-        let town = `${cityData[i].town}`;
-        regionList2.push(town);
-      }else if(checkedCities[2] !== undefined && checkedCities[2] === cityData[i].region) {
-        let town = `${cityData[i].town}`;
-        regionList3.push(town)
-      }else {
-        return
+  try {
+    checkTown(checkedCities[0], checkedCities[1], checkedCities[2], async (err, result) => {
+      if(err) {
+        console.log(err)
+        return res.status(500).json({
+          'error': true,
+          'message': '伺服器發生錯誤'
+        })
       }
-    }
-    let data = [{
-        'city': checkedCities[0],
-        'region': regionList1
-      },{
-        'city': checkedCities[1],
-        'region': regionList2
-      },{
-        'city': checkedCities[2],
-        'region': regionList3
-      }]
-
-    res.status(200).json({
-      'departureDate':departureDate,
-      'returnDate': returnDate,
-      'tripLength': Math.abs(new Date(returnDate)-new Date(departureDate))/(1000 * 3600 * 24), 
-      'checkedCities': data
+  
+      //取得縣市區域
+      cityData = result;
+      let regionList1 = [];
+      let regionList2 = [];
+      let regionList3 = [];
+      for(let i = 0; i < cityData.length; i++) {
+        if(checkedCities[0] !== undefined && checkedCities[0] === cityData[i].region) {
+          let town = `${cityData[i].town}`;
+          regionList1.push(town);
+        }else if(checkedCities[1] !== undefined && checkedCities[1] === cityData[i].region) {
+          let town = `${cityData[i].town}`;
+          regionList2.push(town);
+        }else if(checkedCities[2] !== undefined && checkedCities[2] === cityData[i].region) {
+          let town = `${cityData[i].town}`;
+          regionList3.push(town)
+        }else {
+          return
+        }
+      }
+      let data = [{
+          'city': checkedCities[0],
+          'region': regionList1
+        },{
+          'city': checkedCities[1],
+          'region': regionList2
+        },{
+          'city': checkedCities[2],
+          'region': regionList3
+        }]
+  
+      res.status(200).json({
+        'departureDate':departureDate,
+        'returnDate': returnDate,
+        'tripLength': Math.abs(new Date(returnDate)-new Date(departureDate))/(1000 * 3600 * 24), 
+        'checkedCities': data
+      })
+    });
+  }catch {
+    return res.status(500).json({
+      'error': true,
+      'message': '伺服器發生錯誤'
     })
-  });
+  }
 })
 
 //POST Hotels router
