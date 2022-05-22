@@ -50,6 +50,8 @@ function renderItinerary(data) {
     let day5 = []
     let departureDate = `${data.result[0][0].departure_date.slice(5,7)}/${data.result[0][0].departure_date.slice(8,)}`
     let returnDate = `${data.result[0][0].return_date.slice(5,7)}/${data.result[0][0].return_date.slice(8,)}`
+    let placeDate = data.result[0][0].must_to_go_place_date
+    let date = ((new Date(placeDate) - new Date(data.result[0][0].departure_date)) / 86400000) + 1
     for(let i = 0; i < data.result[1].length; i++) {
         if(data.result[1][i].days === 1){
             day1.push(data.result[1][i])
@@ -86,18 +88,6 @@ function renderItinerary(data) {
     let locationSpan = document.createElement('span')
     locationSpan.textContent = data.result[0][0].cities
     locationDiv.appendChild(locationSpan)
-    let mustToGoDiv = document.createElement('div')
-    mustToGoDiv.textContent = '必去景點 ： '
-    mustToGoDiv.setAttribute('class', 'must-to-go-place')
-    itineraryInfo.appendChild(mustToGoDiv)
-    let mustToGoPlace = document.querySelector('.must-to-go-place')
-    let mustToGoSpan = document.createElement('span')
-    if(data.result[0][0].must_to_go_place_name === '') {
-        mustToGoPlace.style.display = 'none'
-    }
-    mustToGoSpan.textContent = data.result[0][0].must_to_go_place_name
-    mustToGoDiv.setAttribute('id', `place-id-${data.result[0][0].must_to_go_place_id}`)
-    mustToGoPlace.appendChild(mustToGoSpan)
 
     //daily-container
     let dailyContainerDiv = document.createElement('div')
@@ -140,6 +130,21 @@ function renderItinerary(data) {
             }
         }
     }
+
+    //必去景點
+    if(data.result[0][0].must_to_go_place_name !== '') {
+        let mustToGoDiv = document.createElement('div')
+        let mustToGoDate = document.querySelector(`#itinerary-${date}`)
+        mustToGoDiv.textContent = '必去景點 ： '
+        mustToGoDiv.setAttribute('class', 'must-to-go-place')
+        mustToGoDate.appendChild(mustToGoDiv)
+        let mustToGoSpan = document.createElement('span')
+        let mustToGoPlace = document.querySelector('.must-to-go-place')
+        mustToGoSpan.textContent = data.result[0][0].must_to_go_place_name
+        mustToGoDiv.setAttribute('id', `place-id-${data.result[0][0].must_to_go_place_id}`)
+        mustToGoPlace.appendChild(mustToGoSpan)
+    }
+
 
 
     if(data.result[0][0].prefer === '排好排滿') {

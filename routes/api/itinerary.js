@@ -19,7 +19,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
   let userEmail = req.body.travelDate.userEmail;
 
   //行程編號
-  let itineraryId = Date.now().toString(); //數字轉字串
+  let itineraryId = `${Date.now().toString()}-${userId}`; //數字轉字串
 
   //取得縣市
   let cities = ''
@@ -56,10 +56,12 @@ itineraryAPI.post('/itinerary', (req, res) => {
   }else{
     let placeName = null;
     let placeId = null;
+    let placeDate = null;
     //如果有必去景點資料
     if(req.body.travelRequireData.mustToGoPlace) {
       placeName = req.body.travelRequireData.mustToGoPlace.placeName;
-      placeId = req.body.travelRequireData.mustToGoPlace. placeId;
+      placeId = req.body.travelRequireData.mustToGoPlace.placeId;
+      placeDate = req.body.travelRequireData.mustToGoPlace.date;
       
       // let detailsAPI = `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&language=zh-TW&key=${process.env.GOOGLE_API_KEY}`;
       // axios.get(detailsAPI)
@@ -78,6 +80,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
     }else{
       placeId = '';
       placeName = '';
+      placeDate = '';
     }
 
       //如果沒有必去景點資料
@@ -106,7 +109,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               getResponse(attractionDataList, itinerary, itineraryList, hotelData, itineraryId, departureDate, returnDate,
-                tripLength, cities, preference, placeId, placeName, userId, userEmail ,res)
+                tripLength, cities, preference, placeDate, placeId, placeName, userId, userEmail ,res)
 
             })
 
@@ -122,7 +125,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               getResponse(attractionDataList, itinerary, itineraryList, hotelData, itineraryId, departureDate, returnDate,
-                tripLength, cities, preference, placeId, placeName, userId, userEmail ,res)
+                tripLength, cities, preference, placeDate, placeId, placeName, userId, userEmail ,res)
             })
 
           }else {
@@ -137,7 +140,7 @@ itineraryAPI.post('/itinerary', (req, res) => {
               let attractionDataList = result
               //確認偏好 
               getResponse(attractionDataList, itinerary, itineraryList, hotelData, itineraryId, departureDate, returnDate,
-                tripLength, cities, preference, placeId, placeName, userId, userEmail ,res)
+                tripLength, cities, preference, placeDate, placeId, placeName, userId, userEmail ,res)
             })
 
           }
@@ -191,12 +194,12 @@ function getRandomArrayElements(arr, count) {
 
 //回應結果
 function getResponse(attractionDataList, itinerary, itineraryList, hotelData, itineraryId, departureDate, returnDate,
-  tripLength, cities, preference, placeId, placeName, userId, userEmail ,res) {
+  tripLength, cities, preference, placeDate, placeId, placeName, userId, userEmail ,res) {
 
   if(preference === '悠遊輕旅行') {
     checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 4)
     insertItinerary(itineraryId, itineraryList,
-      departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+      departureDate, returnDate, tripLength, cities.slice(2,), preference, placeDate, placeId, placeName, userId, userEmail,
        async (err, result) => {
         if(err) {
           console.log(err)
@@ -213,7 +216,7 @@ function getResponse(attractionDataList, itinerary, itineraryList, hotelData, it
   }else {
     checkPreference(attractionDataList, itinerary, itineraryList, hotelData, 6)
     insertItinerary(itineraryId, itineraryList,
-      departureDate, returnDate, tripLength, cities.slice(2,), preference, placeId, placeName, userId, userEmail,
+      departureDate, returnDate, tripLength, cities.slice(2,), preference, placeDate, placeId, placeName, userId, userEmail,
        async (err, result) => {
         if(err) {
           console.log(err)
