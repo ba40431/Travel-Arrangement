@@ -42,6 +42,15 @@
     padding: 10px;
     position: relative;
 }
+/* .must-to-go-place {
+    color: #fbb471;
+    font-weight: 700;
+}
+*/
+.must-to-go-place > span {
+    color: #fbb471;
+    /* font-weight: 700; */
+} 
 .hotel {
     float: inline-end;
     width: inherit;
