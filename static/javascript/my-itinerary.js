@@ -1,6 +1,8 @@
 // let userData = null
 let itineraryData = null
-
+let cover = document.querySelector('.cover')
+let alarmWindow = document.querySelector('.alarm-window')
+let alarmItineraryId = null
 
 document.body.style.display = 'none';
 window.onload = () => {
@@ -47,12 +49,11 @@ function renderItinerary(data) {
     let departureDate = `${data.result[i][0].departure_date.slice(5,7)}/${data.result[i][0].departure_date.slice(8,)}`
     let returnDate = `${data.result[i][0].return_date.slice(5,7)}/${data.result[i][0].return_date.slice(8,)}`
     let itineraryContainer = document.querySelector('.itinerary-container')
-    let contentA = document.createElement('a')
+    let contentDiv = document.createElement('div')
     let hr = document.createElement('hr')
-    contentA.setAttribute('class', 'itinerary-content')
-    contentA.setAttribute('id', `itinerary-${data.result[i][0].itinerary_id}`)
-    contentA.href = `/itinerary/${data.result[i][0].itinerary_id}`
-    itineraryContainer.appendChild(contentA)
+    contentDiv.setAttribute('class', 'itinerary-content')
+    contentDiv.setAttribute('id', `itinerary-${data.result[i][0].itinerary_id}`)
+    itineraryContainer.appendChild(contentDiv)
     itineraryContainer.appendChild(hr)
     let infoDiv = document.createElement('div')
     infoDiv.setAttribute('class', 'itinerary-info')
@@ -86,6 +87,56 @@ function renderItinerary(data) {
     mustToGoSpan.textContent = data.result[i][0].must_to_go_place_name
     mustToGoDiv.setAttribute('id', `place-id-${data.result[i][0].must_to_go_place_id}`)
     mustToGoPlace.appendChild(mustToGoSpan)
+    let imgA = document.createElement('a')
+    imgA.href = `/itinerary/${data.result[i][0].itinerary_id}`
+    imgA.setAttribute('id', `getItinerary-${data.result[i][0].itinerary_id}`)
+    imgA.setAttribute('class', 'more-button')
+    itineraryInfo.appendChild(imgA)
+    let moreImg = document.createElement('img')
+    moreImg.src = 'pic/icons8-double-right-48.png'
+    let moreButton = document.querySelector(`#getItinerary-${data.result[i][0].itinerary_id}`)
+    moreButton.appendChild(moreImg)
+    let alarmSpan = document.createElement('span')
+    alarmSpan.setAttribute('id', `alarm-${data.result[i][0].itinerary_id}`)
+    alarmSpan.setAttribute('class', 'alarm-button')
+    alarmSpan.setAttribute('onclick', 'openAlarm(this)')
+    itineraryInfo.appendChild(alarmSpan)
+    let alarmButton = document.querySelector(`#alarm-${data.result[i][0].itinerary_id}`)
+    let alarmImg = document.createElement('img')
+    alarmImg.src = 'pic/icons8-alarm-64.png'
+    alarmButton.appendChild(alarmImg)
+    let deleteSpan = document.createElement('span')
+    deleteSpan.setAttribute('id', `delete-${data.result[i][0].itinerary_id}`)
+    deleteSpan.setAttribute('class', 'delete-button')
+    deleteSpan.setAttribute('onclick', 'deleteItinerary(this)')
+    itineraryInfo.appendChild(deleteSpan)
+    let deleteButton = document.querySelector(`#delete-${data.result[i][0].itinerary_id}`)
+    let deleteImg = document.createElement('img')
+    deleteImg.src = 'pic/icons8-trash-64.png'
+    deleteButton.appendChild(deleteImg)
   }
+}
 
+function deleteItinerary(e) {
+  fetch(`api/itinerary/${e.id.slice(7,)}`, {
+    method: 'DELETE',
+    headers: {'Content-Type': 'application/json'},
+  }).then((response) => {
+      return response.json();
+  }).then((result) => {
+      console.log(result)
+      if(result.ok) {
+        window.location.replace(location.href)
+      }
+  })
+}
+
+function openAlarm(e) {
+  cover.style.display = 'block'
+  alarmWindow.style.display = 'block'
+  alarmItineraryId = e.id
+}
+function closeWindow() {
+  cover.style.display = 'none'
+  alarmWindow.style.display = 'none'
 }

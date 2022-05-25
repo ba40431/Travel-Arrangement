@@ -110,6 +110,8 @@ function renderItinerary(data) {
             let span = document.createElement('span')
             span.textContent = itineraryList[i][j].attraction_name
             span.setAttribute('id', `attractionId-${itineraryList[i][j].attraction_id}`)
+            span.setAttribute('class', 'attraction-span')
+            span.setAttribute('onclick', 'getLocation(this)')
             attraction.appendChild(span)
         }
 
@@ -118,10 +120,11 @@ function renderItinerary(data) {
                 let hotelDiv = document.createElement('div')
                 hotelDiv.textContent = '住宿飯店 ： '
                 hotelDiv.setAttribute('class', 'hotel')
-                hotelDiv.setAttribute('id', `hotelId-${itineraryList[i][0].id}`)
+                hotelDiv.setAttribute('id', `hotelId-${itineraryList[i][0].hotel_id}`)
+                hotelDiv.setAttribute('onclick', 'getHotel(this)')
                 dailyItinerary.appendChild(hotelDiv)
                 let hotelSpan = document.createElement('span')
-                let hotel = document.querySelector(`#hotelId-${itineraryList[i][0].id}`)
+                let hotel = document.querySelector(`#hotelId-${itineraryList[i][0].hotel_id}`)
                 hotelSpan.textContent = itineraryList[i][0].hotel_name
                 hotelSpan.setAttribute('class', 'hotel-text')
                 hotel.appendChild(hotelSpan)

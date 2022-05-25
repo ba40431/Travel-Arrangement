@@ -19,10 +19,26 @@
                 <button class = 'button'>會員中心</button>
             </a>
         </div>
+
+        <!-- 遮罩層 -->
+        <div class = 'cover'></div> 
+
+        <div class = 'alarm-window'>
+            <div  class = 'window-container'>
+            <div class = 'window-background'></div>
+            <div class = 'window-content'>
+                <div class = 'window-title'>Reminder<a class = 'window-close' onclick = 'closeWindow()'><img src = '/pic/icon_close.png'></a></div>
+                <input type = 'date' class = 'alarm-date'/>
+                <input type = 'time' class = 'alarm-time'/>
+                <button class = 'window-button' onclick = 'alarmItinerary(this)'>確定</button>
+            </div>
+            </div>
+        </div>
+
     </main>
     
     <%- include('footer'); %>
     <script type = 'text/javascript' src = '/javascript/my-itinerary.js'></script>
-    
+    <script type = 'text/javascript' src = '/javascript/send-push.js'></script>
 </body>
 </html>

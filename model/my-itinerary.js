@@ -67,5 +67,31 @@ module.exports = {
 
             connection.release();
         });
-    }
+    },
+
+    deleteItinerary: (itineraryId, cb) => {
+        pool.getConnection((error, connection) => { 
+            if (error) {
+                return cb(error.message);
+            }
+            connection.query(
+                'delete from `itinerary` where `itinerary_id`= ? ', [itineraryId],
+                (error, result) => {
+                    if (error) {
+                        return cb(error);
+                    };
+                }
+            )
+            connection.query(
+                'delete from `dailyItinerary` where `itinerary_id`= ? ', [itineraryId],
+                (error, result) => {
+                    if (error) {
+                        return cb(error);
+                    };
+                    return cb(null, result)
+                }
+            )
+            connection.release();
+        });
+    },
 }

@@ -1,7 +1,7 @@
 const express = require('express');
 const jwt = require('jsonwebtoken');
 const myItineraryAPI = express.Router();
-const { searchItinerary, searchAllItinerary } = require('../../model/my-itinerary');
+const { searchItinerary, searchAllItinerary, deleteItinerary } = require('../../model/my-itinerary');
 
 require('dotenv').config({path:'./.env'})
 
@@ -53,6 +53,22 @@ myItineraryAPI.get('/my-itinerary', (req, res) => {
         }
         return res.status(200).json({
             result
+        })
+    })
+});
+
+myItineraryAPI.delete('/itinerary/:itineraryId', (req, res) => {
+    const itineraryId = req.params.itineraryId
+    deleteItinerary(itineraryId, async (err, result) => {
+        if(err) {
+        console.log(err)
+        return res.status(500).json({
+            'error': true,
+            'message': '伺服器發生錯誤'
+        })
+        }
+        res.status(200).json({
+            'ok': true
         })
     })
 });
