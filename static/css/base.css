@@ -7,10 +7,14 @@ body {
     box-sizing: border-box;
     font-family: 'Noto Sans TC';
     background-color: #fafafc;
+    /* background-image: url('/pic/22712858.png'); */
+    /* background-size: cover; */
+    /* opacity: 0.3; */
 }
 body::-webkit-scrollbar {
     /*調整滾動條的寬度*/
     width: 8px;
+    height: 8px;
 }
 body::-webkit-scrollbar-button {
     /*調整滾動條和視窗上下間距的樣式*/
@@ -66,7 +70,7 @@ header {
 .right {
     display: grid;
     justify-content: flex-end;
-    grid-template-columns: 130px 15px 110px 15px 130px;
+    grid-template-columns: 65px 130px;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -81,10 +85,23 @@ header {
     cursor: pointer;
     text-decoration: none;
 }
+.profile-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #e8e8e8;
+    overflow: hidden;
+    cursor: pointer;
+}
+.profile-photo > img {
+    width: 60px;
+}
 .line {
     font-weight: 700;
     font-size: 24px;
     color: #ffffff;
+    margin-top: auto;
+    margin-bottom: auto;
 }
 /* .sign-in-display , .sign-out-display , .itinerary-display {
 	display : none;

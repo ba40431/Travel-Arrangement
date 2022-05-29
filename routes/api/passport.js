@@ -11,7 +11,10 @@ passportAPI.use(cookieParser())
 
 passportAPI.get(
     '/auth/google', 
-    passport.authenticate('google', {scope: ['profile', 'email']})
+    passport.authenticate('google', {
+        scope: ['profile', 'email'],
+        prompt: 'select_account'
+    })
 );
 
 passportAPI.get(

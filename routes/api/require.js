@@ -1,17 +1,30 @@
 const express = require('express');
+const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
 const { checkTown, searchHotel } = require('../../model/require');
+require('dotenv').config({path:'./.env'})
+
 const requireAPI = express.Router();
 
-let departureDate = null;
-let returnDate = null;
+// let departureDate = null;
+// let returnDate = null;
 let checkedCities = null;
 let cityData = null
 
+requireAPI.use(cookieParser())
+
 //POST router
 requireAPI.post('/require', (req, res) => {
-  departureDate = req.body.departureDate;
-  returnDate = req.body.returnDate;
+  let departureDate = req.body.departureDate;
+  let returnDate = req.body.returnDate;
   checkedCities = req.body.checkedCities;
+  const payload = {
+    departureDate: departureDate,
+    returnDate: returnDate,
+    // checkedCities: checkedCities
+  };
+  // console.log(payload)
+  const token = jwt.sign({ payload, exp: Math.floor(Date.now() / 1000) + (60 * 10) }, process.env.JWT_SECRET_KEY); //exp 10分鐘
   if(departureDate === '' || returnDate === '') {
     res.status(400).json({
       'error': true,
@@ -28,6 +41,7 @@ requireAPI.post('/require', (req, res) => {
       'message': '回程日期須大於出發日期'
     })
   }else {
+    res.cookie('require', token, { maxAge: 900000, httpOnly: true })
     res.status(200).json({
       'ok': true,
     })
@@ -36,6 +50,21 @@ requireAPI.post('/require', (req, res) => {
 
 //GET router
 requireAPI.get('/require', async (req, res) => {
+  let token = req.cookies.require
+  let departureDate = null
+  let returnDate = null
+  if(token) {
+    try {
+      const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
+      departureDate = decoded.payload.departureDate;
+      returnDate = decoded.payload.returnDate
+    }catch {
+      return res.status(500).json({
+        'error': true,
+        'message': '伺服器發生錯誤'
+      })
+    }
+  }
   try {
     checkTown(checkedCities[0], checkedCities[1], checkedCities[2], async (err, result) => {
       if(err) {

@@ -7,8 +7,8 @@ module.exports = {
                 return cb(error.message);
             }
             connection.query(
-                'select * from attraction JOIN dailyItinerary\
-                     ON  `attraction`.`id` = `dailyItinerary`.`attraction_id`  \
+                'select * from attraction JOIN `arrangement`\
+                     ON  `attraction`.`id` = `arrangement`.`attraction_id`  \
                      where `attraction`.`id`= ? ', [attractionId],
                 (error, result) => {
                     if (error) {

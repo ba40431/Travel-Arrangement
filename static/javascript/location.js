@@ -5,7 +5,7 @@ function getLocation(e) {
           return response.json();
         }).then((result) => {
           for(let i = 0 ; i < result.result.length; i++) {
-            if(result.result[0].itinerary_id === itineraryId) {
+            if(result.result[i].itinerary_id === itineraryId) {
               renderAttraction(result)
               break
             }
@@ -40,6 +40,9 @@ function renderAttraction(data) {
     attractionContent.appendChild(attractionDiv);
     let img = document.createElement('img');
     img.src = data.result[0].picture;
+    if(data.result[0].picture === '') {
+      img.src = '/pic/AdobeStock_299429587.jpeg'
+    }
     let attractionImage = document.querySelector('.attraction-image');
     attractionImage.appendChild(img);
     let attractionBlock = document.querySelector('.attraction-block');
@@ -119,6 +122,9 @@ function renderHotel(data) {
   hotelContent.appendChild(hotelDiv);
   let img = document.createElement('img');
   img.src = data.result[0].picture;
+  if(data.result[0].picture === '') {
+    img.src = '/pic/AdobeStock_269968323.jpeg'
+  }
   let hotelImage = document.querySelector('.hotel-image');
   hotelImage.appendChild(img);
   let hotelBlock = document.querySelector('.hotel-block');

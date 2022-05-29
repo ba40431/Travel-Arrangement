@@ -47,7 +47,8 @@ userAPI.get('/user', ensureAuthenticated, (req, res) => {
             'data': {
               'id': result[0].id,
               'name': result[0].name,
-              'email': result[0].email
+              'email': result[0].email,
+              'profile': result[0].profile
             }
           })
         }
@@ -78,7 +79,8 @@ userAPI.get('/user', ensureAuthenticated, (req, res) => {
             'data': {
               'id': result[0].id,
               'name': result[0].name,
-              'email': result[0].email
+              'email': result[0].email,
+              'profile': result[0].profile,
             }
           })
         }
@@ -223,11 +225,13 @@ userAPI.delete('/user', (req, res) => {
   let token = req.cookies.token
   if(token) {
     res.cookie('token', '', { maxAge: 0, httpOnly: true })
+    res.cookie('require', '', { maxAge: 0, httpOnly: true })
     return res.status(200).json({
       'ok': true
     })
   }else if(req.session.passport) {
-    req.session.passport.user = null
+    req.session.passport.user = null;
+    res.cookie('require', '', { maxAge: 0, httpOnly: true })
     return res.status(200).json({
       'ok': true
     })

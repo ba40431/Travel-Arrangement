@@ -58,8 +58,9 @@ myItineraryAPI.get('/my-itinerary', (req, res) => {
 });
 
 myItineraryAPI.delete('/itinerary/:itineraryId', (req, res) => {
+    // console.log(req.body)
     const itineraryId = req.params.itineraryId
-    deleteItinerary(itineraryId, async (err, result) => {
+    deleteItinerary(req.body.userEmail, itineraryId, async (err, result) => {
         if(err) {
         console.log(err)
         return res.status(500).json({

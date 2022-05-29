@@ -1,6 +1,10 @@
 const url = new URL(window.location.href)
 let string = url.pathname;
 let itineraryId = string.replace('/itinerary/','');
+let shareImg = document.querySelector('.share-img');
+let shareContainer = document.querySelector('.share-container');
+let titleText = document.querySelector('.text');
+let itineraryContent = document.querySelector('.itinerary-content');
 
 let itineraryData = null;
 // let userData = null;
@@ -24,6 +28,10 @@ async function init() {
         renderItinerary(itineraryData)
         document.body.style.display = 'block';
     }
+    if(userData.data.profile !== null) {
+        let profilePhoto = document.querySelector('.profile-photo > img')
+        profilePhoto.src = userData.data.profile
+      }
 }
 
 function getUserData() {
@@ -100,6 +108,10 @@ function renderItinerary(data) {
         dailyDiv.setAttribute('id', `itinerary-${(i+1)}`)
         dailyContainerDiv.appendChild(dailyDiv)
         let dailyItinerary = document.querySelector(`#itinerary-${(i+1)}`)
+        let dayDiv = document.createElement('div')
+        dayDiv.textContent = `Day ${(i+1)}`
+        dayDiv.setAttribute('class', 'day-text')
+        dailyItinerary.appendChild(dayDiv)
 
         for(let j = 0; j < itineraryList[i].length; j++) {
             let div = document.createElement('div')
@@ -153,9 +165,46 @@ function renderItinerary(data) {
     if(data.result[0][0].prefer === '排好排滿') {
         let dailyCss = document.querySelectorAll('.daily')
         for(let j = 0; j < dailyCss.length; j++) {
-            dailyCss[j].style.height = '255px'
+            dailyCss[j].style.height = '270px'
         }
     }
 
 
+}
+
+function showInput() {
+    shareImg.style.display = 'none';
+    shareContainer.style.display = 'block';
+    titleText.style.marginTop = '1px';
+    itineraryContent.style.marginTop = '31px';
+}
+function closeInput() {
+    shareImg.style.display = 'block';
+    shareContainer.style.display = 'none';
+    titleText.style.marginTop = '10px';
+    itineraryContent.style.marginTop = '30px';
+}
+function shareFriend() {
+    let shareInput = document.querySelector('.share-input');
+    let shareText = document.querySelector('.share-text');
+    if(shareInput.value === '') {
+        shareText.textContent = '請輸入會員電子信箱'
+    }else {
+        console.log(shareInput.value, itineraryId)
+        fetch('/api/share', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({
+                'shareEmail': shareInput.value,
+                'itineraryId': itineraryId
+            })
+        }).then((response) => {
+              return response.json();
+        }).then((result) => {
+              console.log(result)
+            //   if(result.ok) {
+            //     window.location.replace(location.href)
+            //   }
+        })
+    }
 }

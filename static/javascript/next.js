@@ -26,6 +26,10 @@ async function init() {
         getDate(requireData)
         document.body.style.display = 'block';
     }
+    if(userData.data.profile !== null) {
+        let profilePhoto = document.querySelector('.profile-photo > img')
+        profilePhoto.src = userData.data.profile
+      }
 }
 
 function getUserData() {

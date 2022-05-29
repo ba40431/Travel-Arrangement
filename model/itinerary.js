@@ -82,14 +82,14 @@ module.exports = {
 
               for(let j = 0; j < itineraryList[i].dailyItinerary.length; j++) {
                 if(itineraryList[i].hotelName === undefined) {
-                  hotelId = '';
+                  hotelId = 99999;
                   hotelName = '';
                   attractionId = itineraryList[i].dailyItinerary[j].id;
                   attractionName = itineraryList[i].dailyItinerary[j].name;
                   attractionDistance = itineraryList[i].dailyItinerary[j].distance;
 
                   connection.query(
-                    'INSERT INTO `dailyItinerary` (itinerary_id, days, attraction_id,\
+                    'INSERT INTO `arrangement` (itinerary_id, days, attraction_id,\
                         attraction_name, attraction_distance, hotel_id, hotel_name)\
                         VALUES (?, ?, ?, ?, ?, ?, ?);',
                         [itineraryId, (i+1), attractionId, attractionName, attractionDistance, hotelId, hotelName],
@@ -109,7 +109,7 @@ module.exports = {
                   attractionDistance = itineraryList[i].dailyItinerary[j].distance;
                   
                   connection.query(
-                    'INSERT INTO `dailyItinerary` (itinerary_id, days, attraction_id,\
+                    'INSERT INTO `arrangement` (itinerary_id, days, attraction_id,\
                         attraction_name, attraction_distance, hotel_id, hotel_name)\
                         VALUES (?, ?, ?, ?, ?, ?, ?);',
                         [itineraryId, (i+1), attractionId, attractionName, attractionDistance, hotelId, hotelName],
@@ -126,6 +126,16 @@ module.exports = {
                     must_to_go_place_date, must_to_go_place_id, must_to_go_place_name, user_id, user_email)\
                         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);',
                     [itineraryId, departureDate, returnDate, (tripLength+1), cities, prefer, placeDate, placeId, placeName, userId, userEmail],
+                (error, result) => {
+                    if (error) {
+                        return cb(error);
+                    };
+                }
+            )
+            connection.query(
+                'INSERT INTO `userRight` (user_id, user_email, itinerary_id)\
+                        VALUES (?, ?, ?);',
+                    [userId, userEmail, itineraryId],
                 (error, result) => {
                     if (error) {
                         return cb(error);
