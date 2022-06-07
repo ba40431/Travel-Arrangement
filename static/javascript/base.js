@@ -29,14 +29,15 @@ async function getItinerary() {
 }
 
 async function getDashboard() {
-  userData = await getUserData();
-  if(userData.data === null) {
-    location.href = '/sign-in'
-  }else if(userData.error) {
-    location.href = '/sign-in'
-  }else {
-    location.href = '/dashboard'
-  }
+  // userData = await getUserData();
+  // if(userData.data === null) {
+  //   location.href = '/sign-in'
+  // }else if(userData.error) {
+  //   location.href = '/sign-in'
+  // }else {
+  //   location.href = '/dashboard'
+  // }
+  location.href = '/dashboard'
 }
 
 function getUserData() {

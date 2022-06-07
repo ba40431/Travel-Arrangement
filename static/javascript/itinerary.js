@@ -24,9 +24,13 @@ async function init() {
         itineraryData = await initData();
         if(itineraryData.error) {
             location.href = '/'
+        }else if(itineraryData.data === null) {
+            location.href = '/dashboard'
+        }else {
+            renderItinerary(itineraryData)
+            renderFriend(itineraryData)
+            document.body.style.display = 'block';
         }
-        renderItinerary(itineraryData)
-        document.body.style.display = 'block';
     }
     if(userData.data.profile !== null) {
         let profilePhoto = document.querySelector('.profile-photo > img')
@@ -62,15 +66,35 @@ function renderItinerary(data) {
     let date = ((new Date(placeDate) - new Date(data.result[0][0].departure_date)) / 86400000) + 1
     for(let i = 0; i < data.result[1].length; i++) {
         if(data.result[1][i].days === 1){
-            day1.push(data.result[1][i])
+            if(data.result[1][i].attraction_name.indexOf('夜市') !== -1) {
+                day1.push(data.result[1][i])
+            }else {
+                day1.unshift(data.result[1][i])
+            }
         }else if(data.result[1][i].days === 2) {
-            day2.push(data.result[1][i])
+            if(data.result[1][i].attraction_name.indexOf('夜市') !== -1) {
+                day2.push(data.result[1][i])
+            }else {
+                day2.unshift(data.result[1][i])
+            }
         }else if(data.result[1][i].days === 3) {
-            day3.push(data.result[1][i])
+            if(data.result[1][i].attraction_name.indexOf('夜市') !== -1) {
+                day3.push(data.result[1][i])
+            }else {
+                day3.unshift(data.result[1][i])
+            }
         }else if( data.result[1][i].days === 4) {
-            day4.push(data.result[1][i])
+            if(data.result[1][i].attraction_name.indexOf('夜市') !== -1) {
+                day4.push(data.result[1][i])
+            }else {
+                day4.unshift(data.result[1][i])
+            }
         }else {
-            day5.push(data.result[1][i])
+            if(data.result[1][i].attraction_name.indexOf('夜市') !== -1) {
+                day5.push(data.result[1][i])
+            }else {
+                day5.unshift(data.result[1][i])
+            }
         }
     }
     let itineraryList = [day1, day2, day3, day4, day5]
@@ -190,7 +214,7 @@ function shareFriend() {
     if(shareInput.value === '') {
         shareText.textContent = '請輸入會員電子信箱'
     }else {
-        console.log(shareInput.value, itineraryId)
+        // console.log(shareInput.value, itineraryId)
         fetch('/api/share', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
@@ -201,10 +225,44 @@ function shareFriend() {
         }).then((response) => {
               return response.json();
         }).then((result) => {
-              console.log(result)
-            //   if(result.ok) {
-            //     window.location.replace(location.href)
-            //   }
+            //   console.log(result)
+              if(result.ok) {
+                shareText.textContent = '分享成功';
+                let friendPhoto = document.querySelector('.friend-photo')
+                let photoDiv = document.createElement('div')
+                photoDiv.setAttribute('class', 'friend')
+                photoDiv.setAttribute('id', `friendId-${result.user.id}`)
+                photoDiv.setAttribute('data-tooltip', `${result.user.name}`)
+                friendPhoto.appendChild(photoDiv)
+                let friend = document.querySelector(`#friendId-${result.user.id}`)
+                let img = document.createElement('img')
+                img.src = result.user.profile
+                if(result.user.profile === null) {
+                    img.src = '/pic/profile.jpg'
+                }
+                friend.appendChild(img)
+              }else {
+                shareText.textContent = result.message
+              }
         })
     }
 }
+
+function renderFriend(data) {
+    for(let i = 0; i < data.result[0].length; i++) {
+        let friendPhoto = document.querySelector('.friend-photo')
+        let photoDiv = document.createElement('div')
+        photoDiv.setAttribute('class', 'friend')
+        photoDiv.setAttribute('id', `friend-${i}`)
+        photoDiv.setAttribute('data-tooltip', `${data.result[0][i].name}`)
+        friendPhoto.appendChild(photoDiv)
+        let friend = document.querySelector(`#friend-${i}`)
+        let img = document.createElement('img')
+        img.src = data.result[0][i].profile
+        if(data.result[0][i].profile === null) {
+            img.src = '/pic/profile.jpg'
+        }
+        friend.appendChild(img)
+    }
+}
+

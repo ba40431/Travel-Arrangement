@@ -8,7 +8,10 @@ module.exports = {
             }
             let itineraryList = []
             connection.query(
-                'select * from `itinerary` where `itinerary_id`= ? ', [itineraryId],
+                'SELECT `itinerary`.*, `user`.`name`, `user`.`profile`\
+                FROM `itinerary`\
+                JOIN `userRight` ON `itinerary`.`itinerary_id`= `userRight`.`itinerary_id`\
+                JOIN `user` ON `userRight`.`user_id`=`user`.`id` WHERE `itinerary`.`itinerary_id`= ?;', [itineraryId],
                 (error, result) => {
                     if (error) {
                         return cb(error);
@@ -35,7 +38,6 @@ module.exports = {
             if (error) {
                 return cb(error.message);
             }
-            // let userItinerary = null
             let userItineraryList = []
             connection.query(
                 'select * from `userRight` join `user` ON `userRight`.`user_email`=`user`.`email` \
@@ -50,7 +52,9 @@ module.exports = {
                         for(let i = 0; i < result.length; i++) {
                             let allItinerary = result
                             connection.query(
-                                'select * from `itinerary` where `itinerary_id`= ? ', [allItinerary[i].itinerary_id],
+                                'select `itinerary`.*, `user`.`name`\
+                                from `itinerary` JOIN `user` ON  `itinerary`.`user_id` = `user`.`id` \
+                                where `itinerary_id`= ? ', [allItinerary[i].itinerary_id],
                                 (error, result) => {
                                     if (error) {
                                         return cb(error);
@@ -66,7 +70,7 @@ module.exports = {
                                                     if (error) {
                                                         return cb(error);
                                                     };
-                                                    userItineraryList.push([userItinerary[j],result])
+                                                    userItineraryList.push(userItinerary[j])
                                                     if(i === (allItinerary.length-1)) {
                                                         return cb(null, userItineraryList)
                                                     }

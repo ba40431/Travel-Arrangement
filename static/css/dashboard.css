@@ -100,17 +100,52 @@
 .itinerary-block {
     display: grid;
     grid-template-columns: 320px 320px 320px;
+    margin-left: 100px;
 }
 .title {
     font-weight: 700;
     font-size: 19px;
 }
+.loader-content{
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    height: 10px;
+    width: 250px;
+    border: 6px solid #ffe6ce;
+    border-radius: 15px;
+}
+.loader-content .loader{
+    position: absolute;
+    background-color: #fbb471;
+    width: 0px;
+    height: 10px;
+    border-radius: 15px;
+    animation: loaders 3s infinite linear;    
+}
+@keyframes loaders{
+    0%{
+      width: 0%;
+    }
+    25%{
+        width: 50%;
+    }
+    50%{
+        width: 75%;
+    }
+    75%{
+        width: 85%;
+    }
+    100%{
+        width: 100%;
+    }
+};
 .itinerary-content {
     /* width: 1100px; */
     margin-right: auto;
     color: #666666;
     text-decoration: none;
-    margin-left: 100px;
 }
 .itinerary-info {
     /* display: flex; */
@@ -171,6 +206,12 @@ hr {
     --mask-image: repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 6px);
     -webkit-mask-image: var(--mask-image);
     mask-image: var(--mask-image);
+}
+.owner-text {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    color: #cecdcd;
 }
 .more-button > img {
     height: 28px;

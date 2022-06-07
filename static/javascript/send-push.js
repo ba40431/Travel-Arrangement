@@ -2,7 +2,7 @@ const publicVapidKey = 'BPz-1dnM0gloQaa21grgCAL0kPL7eJNkdQ6AvIX-CvzvfI4vXD4BFPIn
 
 addEventListener('load', async () => {
   let serviceWorker = await navigator.serviceWorker.register('/javascript/service-worker.js');
-  console.log(serviceWorker)
+  // console.log(serviceWorker)
 })
 if('serviceWorker' in navigator){
   navigator.serviceWorker
@@ -42,17 +42,18 @@ function urlBase64ToUint8Array(base64String) {
 } 
 
 async function notificationItinerary(e) {
+  console.log(itineraryData.result)
   let infoDate = null
   let infoCity = null
   let notificationDate = document.querySelector('.notification-date')
   let notificationTime = document.querySelector('.notification-time')
   if(notificationDate.value && notificationTime.value) {
     for(let i = 0; i < itineraryData.result.length; i++) {
-      if(notificationItineraryId.slice(13,) === itineraryData.result[i][0].itinerary_id) {
-        console.log(itineraryData.result[i][0].itinerary_id)
-        notificationItineraryId = itineraryData.result[i][0].itinerary_id
-        infoDate = `${itineraryData.result[i][0].departure_date.slice(5,7)} / ${itineraryData.result[i][0].departure_date.slice(8,)}`
-        infoCity = itineraryData.result[i][0].cities
+      if(notificationItineraryId.slice(13,) === itineraryData.result[i].itinerary_id) {
+        // console.log(itineraryData.result[i][0].itinerary_id)
+        notificationItineraryId = itineraryData.result[i].itinerary_id
+        infoDate = `${itineraryData.result[i].departure_date.slice(5,7)} / ${itineraryData.result[i].departure_date.slice(8,)}`
+        infoCity = itineraryData.result[i].cities
         break
       }
     }
@@ -70,11 +71,20 @@ async function notificationItinerary(e) {
       //public vapid key
       applicationServerKey: urlBase64ToUint8Array(publicVapidKey)
   });
-  const notification = {
-    date: notificationDate.value,
-    time: notificationTime.value
-  }
 
+  let subDate = new Date(`${notificationDate.value} ${notificationTime.value}:00`)
+  const notification = {
+    date: subDate.toISOString().slice(0,10),
+    time: subDate.toISOString().slice(11,16),
+    itineraryId: notificationItineraryId
+  }
+  // const notification = {
+  //   date: notificationDate.value,
+  //   time: notificationTime.value,
+  //   itineraryId: notificationItineraryId
+  // }
+  // console.log(subDate.toISOString().slice(0,10))
+  // console.log(subDate.toISOString().slice(11,16))
  
   //Send push notification
   await fetch('api/subscribe', {

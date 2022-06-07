@@ -14,11 +14,11 @@ async function init() {
   }else if(userData.error) {
     location.href = '/sign-in'
   }else {
+    if(userData.data.profile !== null) {
+      let profilePhoto = document.querySelector('.profile-photo > img')
+      profilePhoto.src = userData.data.profile
+    }
     document.body.style.display = 'block';
-  }
-  if(userData.data.profile !== null) {
-    let profilePhoto = document.querySelector('.profile-photo > img')
-    profilePhoto.src = userData.data.profile
   }
 }
 

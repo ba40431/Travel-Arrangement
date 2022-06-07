@@ -188,6 +188,45 @@ hr {
 .text {
     margin-top: 10px;
     margin-left: 5px;
+    display: flex;
+}
+.friend-photo {
+    display: flex;
+    margin-left: 30px;
+}
+.friend {
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    background-color: #e8e8e8;
+    /* overflow: hidden; */
+    margin-left: 5px;
+    position: relative;
+}
+.friend::before,
+.friend::after {
+    --scale: 0;
+    position: absolute;
+    left: 0;
+    top: -29px;
+    transform: translateX(-10%) scale(var(--scale));
+    font-size: 10px;
+}
+.friend::before {
+    content:  attr(data-tooltip);
+    padding: 3px;
+    width: max-content;
+    border-radius: 3px;
+    text-align: center;
+    background-color: #ff9b9d;
+    color: #ffffff;
+}
+.friend:hover::before {
+    --scale: 1;
+}
+.friend > img {
+    width: 30px;
+    border-radius: 15px;
 }
 .attraction-image, .hotel-image {
     height: 350px;

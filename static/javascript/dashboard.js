@@ -3,6 +3,7 @@ let itineraryData = null
 let cover = document.querySelector('.cover')
 let notificationWindow = document.querySelector('.notification-window')
 let notificationItineraryId = null
+let loaderContent = document.querySelector('.loader-content')
 
 document.body.style.display = 'none';
 window.onload = () => {
@@ -16,20 +17,21 @@ async function init() {
     }else if(userData.error) {
       location.href = '/sign-in'
     }else {
+      if(userData.data.profile !== null) {
+        let profilePhoto = document.querySelector('.profile-photo > img')
+        profilePhoto.src = userData.data.profile
+      }
+      renderUserData(userData)
+      document.body.style.display = 'block';
       itineraryData = await getItineraryData()
-      if(itineraryData.length === 0) {
+      // if(itineraryData.length === 0) {
         // let footer = document.querySelector('footer')
         // footer.style.width = '100%'
         // footer.style.position = 'absolute'
         // footer.style.bottom = '0'
-      }
+      // }
       renderItinerary(itineraryData)
-      renderUserData(userData)
-      document.body.style.display = 'block';
-    }
-    if(userData.data.profile !== null) {
-      let profilePhoto = document.querySelector('.profile-photo > img')
-      profilePhoto.src = userData.data.profile
+      loaderContent.style.display = 'none'
     }
 }
   
@@ -50,27 +52,28 @@ function getItineraryData() {
 }
 
 function renderItinerary(data) {
+  // console.log(data)
   for(let i = 0; i < data.result.length; i++) {
-    let departureDate = `${data.result[i][0].departure_date.slice(5,7)}/${data.result[i][0].departure_date.slice(8,)}`
-    let returnDate = `${data.result[i][0].return_date.slice(5,7)}/${data.result[i][0].return_date.slice(8,)}`
+    let departureDate = `${data.result[i].departure_date.slice(5,7)}/${data.result[i].departure_date.slice(8,)}`
+    let returnDate = `${data.result[i].return_date.slice(5,7)}/${data.result[i].return_date.slice(8,)}`
     let itineraryBlock = document.querySelector('.itinerary-block')
     let contentDiv = document.createElement('div')
     // let hr = document.createElement('hr')
     contentDiv.setAttribute('class', 'itinerary-content')
-    contentDiv.setAttribute('id', `itinerary-${data.result[i][0].itinerary_id}`)
+    contentDiv.setAttribute('id', `itinerary-${data.result[i].itinerary_id}`)
     itineraryBlock.appendChild(contentDiv)
     // itineraryBlock.appendChild(hr)
     let infoDiv = document.createElement('div')
     infoDiv.setAttribute('class', 'itinerary-info')
-    let itineraryContent = document.querySelector(`#itinerary-${data.result[i][0].itinerary_id}`)
+    let itineraryContent = document.querySelector(`#itinerary-${data.result[i].itinerary_id}`)
     itineraryContent.appendChild(infoDiv)
-    let itineraryInfo = document.querySelector(`#itinerary-${data.result[i][0].itinerary_id} > .itinerary-info`)
+    let itineraryInfo = document.querySelector(`#itinerary-${data.result[i].itinerary_id} > .itinerary-info`)
     let dateDiv = document.createElement('div')
     dateDiv.textContent = '旅遊日期 ： '
     dateDiv.setAttribute('class', 'itinerary-date')
     itineraryInfo.appendChild(dateDiv)
     let dateSpan = document.createElement('span')
-    let itineraryDate = document.querySelector(`#itinerary-${data.result[i][0].itinerary_id} > .itinerary-info >.itinerary-date`)
+    let itineraryDate = document.querySelector(`#itinerary-${data.result[i].itinerary_id} > .itinerary-info >.itinerary-date`)
     dateSpan.textContent = `${departureDate} - ${returnDate}`
     itineraryDate.appendChild(dateSpan)
     let locationDiv = document.createElement('div')
@@ -78,44 +81,48 @@ function renderItinerary(data) {
     locationDiv.setAttribute('class', 'itinerary-location')
     itineraryInfo.appendChild(locationDiv)
     let locationSpan = document.createElement('span')
-    locationSpan.textContent = data.result[i][0].cities
+    locationSpan.textContent = data.result[i].cities
     locationDiv.appendChild(locationSpan)
     let mustToGoDiv = document.createElement('div')
     mustToGoDiv.textContent = '必去景點 ： '
     mustToGoDiv.setAttribute('class', 'must-to-go-place')
     itineraryInfo.appendChild(mustToGoDiv)
-    let mustToGoPlace = document.querySelector(`#itinerary-${data.result[i][0].itinerary_id} > .itinerary-info > .must-to-go-place`)
+    let mustToGoPlace = document.querySelector(`#itinerary-${data.result[i].itinerary_id} > .itinerary-info > .must-to-go-place`)
     let mustToGoSpan = document.createElement('span')
-    if(data.result[i][0].must_to_go_place_name === '') {
+    if(data.result[i].must_to_go_place_name === '') {
         mustToGoPlace.style.display = 'none'
     }
-    mustToGoSpan.textContent = data.result[i][0].must_to_go_place_name
-    mustToGoDiv.setAttribute('id', `place-id-${data.result[i][0].must_to_go_place_id}`)
+    mustToGoSpan.textContent = data.result[i].must_to_go_place_name
+    mustToGoDiv.setAttribute('id', `place-id-${data.result[i].must_to_go_place_id}`)
     mustToGoPlace.appendChild(mustToGoSpan)
+    let ownerDiv = document.createElement('div')
+    ownerDiv.setAttribute('class', 'owner-text')
+    ownerDiv.textContent = `${data.result[i].name}`
+    itineraryInfo.appendChild(ownerDiv)
     let imgA = document.createElement('a')
-    imgA.href = `/itinerary/${data.result[i][0].itinerary_id}`
-    imgA.setAttribute('id', `getItinerary-${data.result[i][0].itinerary_id}`)
+    imgA.href = `/itinerary/${data.result[i].itinerary_id}`
+    imgA.setAttribute('id', `getItinerary-${data.result[i].itinerary_id}`)
     imgA.setAttribute('class', 'more-button')
     itineraryInfo.appendChild(imgA)
     let moreImg = document.createElement('img')
     moreImg.src = 'pic/icons8-double-right-48.png'
-    let moreButton = document.querySelector(`#getItinerary-${data.result[i][0].itinerary_id}`)
+    let moreButton = document.querySelector(`#getItinerary-${data.result[i].itinerary_id}`)
     moreButton.appendChild(moreImg)
     let notificationSpan = document.createElement('span')
-    notificationSpan.setAttribute('id', `notification-${data.result[i][0].itinerary_id}`)
+    notificationSpan.setAttribute('id', `notification-${data.result[i].itinerary_id}`)
     notificationSpan.setAttribute('class', 'notification-button')
     notificationSpan.setAttribute('onclick', 'openNotification(this)')
     itineraryInfo.appendChild(notificationSpan)
-    let notificationButton = document.querySelector(`#notification-${data.result[i][0].itinerary_id}`)
+    let notificationButton = document.querySelector(`#notification-${data.result[i].itinerary_id}`)
     let notificationImg = document.createElement('img')
     notificationImg.src = 'pic/icons8-alarm-64.png'
     notificationButton.appendChild(notificationImg)
     let deleteSpan = document.createElement('span')
-    deleteSpan.setAttribute('id', `delete-${data.result[i][0].itinerary_id}`)
+    deleteSpan.setAttribute('id', `delete-${data.result[i].itinerary_id}`)
     deleteSpan.setAttribute('class', 'delete-button')
     deleteSpan.setAttribute('onclick', 'deleteItinerary(this)')
     itineraryInfo.appendChild(deleteSpan)
-    let deleteButton = document.querySelector(`#delete-${data.result[i][0].itinerary_id}`)
+    let deleteButton = document.querySelector(`#delete-${data.result[i].itinerary_id}`)
     let deleteImg = document.createElement('img')
     deleteImg.src = 'pic/icons8-trash-64.png'
     deleteButton.appendChild(deleteImg)
@@ -133,7 +140,7 @@ function deleteItinerary(e) {
   }).then((response) => {
       return response.json();
   }).then((result) => {
-      console.log(result)
+      // console.log(result)
       if(result.ok) {
         window.location.replace(location.href)
       }
@@ -167,7 +174,7 @@ let update = document.querySelector('#update-photo').addEventListener('change', 
   }).then((response) => {
       return response.json();
   }).then((result) => {
-      console.log(result)
+      // console.log(result)
       if(result.ok) {
         window.location.replace(location.href)
       }

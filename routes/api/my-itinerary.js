@@ -2,21 +2,62 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const myItineraryAPI = express.Router();
 const { searchItinerary, searchAllItinerary, deleteItinerary } = require('../../model/my-itinerary');
+const redis = require('redis');
+
 
 require('dotenv').config({path:'./.env'})
 
 myItineraryAPI.get('/itinerary/:itineraryId', (req, res) => {
     const itineraryId = req.params.itineraryId
-    searchItinerary(itineraryId, async (err, result) => {
-        if(err) {
-        console.log(err)
+
+    // 連接redis
+    const client = redis.createClient({
+        // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`
+        url: 'redis://127.0.0.1:6379'
+    })
+    client.on('error', (err) => {
+        console.log(err);
         return res.status(500).json({
             'error': true,
             'message': '伺服器發生錯誤'
         })
+    })
+    client.connect()
+    const key = itineraryId
+    const expire = 60 * 15;
+    const value = client.get(key, redis.print)
+    value.then((data) => {
+        if(data) {
+            console.log('Use Redis')
+            const result = JSON.parse(data);
+            return res.status(200).json({
+                result
+            })
         }
-        res.status(200).json({
-            result
+        searchItinerary(itineraryId, async (err, result) => {
+            console.log('Use Database')
+            if(err) {
+                console.log(err)
+                return res.status(500).json({
+                    'error': true,
+                    'message': '伺服器發生錯誤'
+                })
+            }
+            if(result[0].length === 0) {
+                return res.status(200).json({
+                    'data':null
+                })
+            }else {
+                client.set(key, JSON.stringify(result), err => {
+                    if (err) {
+                        console.log(err)
+                    }
+                });
+                client.expire(key, expire);
+                return res.status(200).json({
+                    result
+                })
+            }
         })
     })
 });
@@ -68,8 +109,32 @@ myItineraryAPI.delete('/itinerary/:itineraryId', (req, res) => {
             'message': '伺服器發生錯誤'
         })
         }
-        res.status(200).json({
-            'ok': true
+        // 連接redis
+        const client = redis.createClient({
+            url: 'redis://127.0.0.1:6379'
+            // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`
+        })
+        client.on('error', (err) => {
+            console.log(err);
+            return res.status(500).json({
+                'error': true,
+                'message': '伺服器發生錯誤'
+            })
+        })
+        client.connect()
+        const key = itineraryId
+        const value = client.del(key)
+        value.then((data) => {
+            console.log(data)
+            if(data) {
+                console.log('Deleted Successfully!')
+                return res.status(200).json({
+                    'ok': true,
+                })
+            }
+            return res.status(200).json({
+                'ok': true
+            })
         })
     })
 });
