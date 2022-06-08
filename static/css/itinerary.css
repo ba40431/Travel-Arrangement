@@ -1,138 +1,139 @@
 .itinerary-container {
-    width: 1100px;
-    margin-top: 180px;
-    margin-bottom: 20px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #666666;
-    overflow-x: scroll;
-    padding-bottom: 20px;
+  width: 1100px;
+  margin-top: 180px;
+  margin-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #666666;
+  overflow-x: scroll;
+  padding-bottom: 20px;
 }
 .itinerary-container::-webkit-scrollbar {
-    /*調整滾動條的寬度*/
-    height: 8px;
+  /*調整滾動條的寬度*/
+  height: 8px;
 }
 .itinerary-container::-webkit-scrollbar-button {
-    /*調整滾動條和視窗上下間距的樣式*/
-    background: transparent;
-    border-radius: 4px;
+  /*調整滾動條和視窗上下間距的樣式*/
+  background: transparent;
+  border-radius: 4px;
 }
 .itinerary-container::-webkit-scrollbar-track-piece {
-    /*調整滾動條背後區塊的樣式，如果要讓它看不見使用background: transparent*/
-    background: transparent;
+  /*調整滾動條背後區塊的樣式，如果要讓它看不見使用background: transparent*/
+  background: transparent;
 }
 .itinerary-container::-webkit-scrollbar-thumb {
-    /*調整滾動條滑塊的樣式*/
-    border-radius: 4px;
-    background-color: #e8e8e8;
-    border: 1px solid #e8e8e8;
+  /*調整滾動條滑塊的樣式*/
+  border-radius: 4px;
+  background-color: #e8e8e8;
+  border: 1px solid #e8e8e8;
 }
 .itinerary-container::-webkit-scrollbar-thumb:hover {
-    background-color: #cccccc;
-    border: 1px solid #cccccc;
+  background-color: #cccccc;
+  border: 1px solid #cccccc;
 }
 .itinerary-container::-webkit-scrollbar-track {
-    /*調整滾動條軌道的樣式*/
-    box-shadow: transparent;
+  /*調整滾動條軌道的樣式*/
+  box-shadow: transparent;
 }
 .title {
-    font-weight: 700;
-    font-size: 19px;
-    display: flex;
+  font-weight: 700;
+  font-size: 19px;
+  display: flex;
 }
 .share-img > img {
-    width: 30px;
-    margin-left: 20px;
-    cursor: pointer;
+  width: 30px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 .share-input {
-    width: 220px;
-    height: 30px;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #e8e8e8;
-    color: #666666;
-    background-color: #fafafc;
+  width: 220px;
+  height: 30px;
+  padding-right: 10px;
+  padding-left: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  color: #666666;
+  background-color: #fafafc;
 }
-.share-button, .close-button {
-    width: 75px;
-    height: 36px;
-    float: right;
-    background-color: #ffbc7d;
-    border: 0px solid #ffbc7d;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 19px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-left: 15px;
+.share-button,
+.close-button {
+  width: 75px;
+  height: 36px;
+  float: right;
+  background-color: #ffbc7d;
+  border: 0px solid #ffbc7d;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 19px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 15px;
 }
 .share-container {
-    display: none;
+  display: none;
 }
 .share-content {
-    display: flex;
-    padding: auto;
+  display: flex;
+  padding: auto;
 }
 .share-text {
-    font-weight: 400;
-    color: #ff9b9d;
-    font-size: 18px;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 15px;
+  font-weight: 400;
+  color: #ff9b9d;
+  font-size: 18px;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
 }
 .itinerary-content {
-    width: 1100px;
-    margin-left: 100px;
-    color: #666666;
-    margin-top: 30px;
+  width: 1100px;
+  margin-left: 100px;
+  color: #666666;
+  margin-top: 30px;
 }
 .itinerary-info {
-    display: flex;
-    margin-bottom: 10px;
+  display: flex;
+  margin-bottom: 10px;
 }
 .itinerary-info > div {
-    margin-left: 10px;
-    margin-right: 20px;
+  margin-left: 10px;
+  margin-right: 20px;
 }
 .itinerary-info > div > span {
-    color: #fbb471;
-    font-weight: 700;
+  color: #fbb471;
+  font-weight: 700;
 }
 .daily-container {
-    display: grid;
-    grid-template-columns: 250px 250px 250px 250px 250px;
-    grid-row-gap: 10px;
+  display: grid;
+  grid-template-columns: 250px 250px 250px 250px 250px;
+  grid-row-gap: 10px;
 }
 .daily {
-    height: 230px;
-    width: 220px;
-    margin-right: 20px;
-    border: 1px #e8e8e8 solid;
-    border-radius: 10px;
-    padding: 10px;
-    position: relative;
+  height: 230px;
+  width: 220px;
+  margin-right: 20px;
+  border: 1px #e8e8e8 solid;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
 }
 .day-text {
-    font-family: 'Comic Sans MS';
-    text-align: center;
-    border-bottom: 1px #e8e8e8 solid;
-    padding-bottom: 3px;
-    margin-bottom: 5px;
-    font-size: 18px;
+  font-family: 'Comic Sans MS';
+  text-align: center;
+  border-bottom: 1px #e8e8e8 solid;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  font-size: 18px;
 }
 .attraction-span {
-    cursor: pointer;
+  cursor: pointer;
 }
 .attraction-span:hover {
-    color: #8d99a8
+  color: #8d99a8;
 }
 /* .must-to-go-place {
     color: #fbb471;
@@ -140,146 +141,158 @@
 }
 */
 .must-to-go-place > span {
-    color: #fbb471;
-    /* font-weight: 700; */
-} 
+  color: #fbb471;
+  /* font-weight: 700; */
+}
 .hotel {
-    float: inline-end;
-    width: inherit;
-    margin-top: 40px;
-    padding-top: 5px;
-    position: absolute;
-    bottom: 10px;
-    border-top: 1px #e8e8e8 solid;
+  float: inline-end;
+  width: inherit;
+  margin-top: 40px;
+  padding-top: 5px;
+  position: absolute;
+  bottom: 10px;
+  border-top: 1px #e8e8e8 solid;
 }
 .hotel-text {
-    color: #ff9b9d;
-    cursor: pointer;
+  color: #ff9b9d;
+  cursor: pointer;
 }
 .hotel-text:hover {
-    font-weight: 700;
+  font-weight: 700;
 }
 hr {
-    width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 0;
-    padding: 3px;
-    background: linear-gradient(54deg, #adbed2, #ff8e90, #ffbc7d,#adbed2);
-    --mask-image: repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 6px);
-    -webkit-mask-image: var(--mask-image);
-    mask-image: var(--mask-image);
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  padding: 3px;
+  background: linear-gradient(54deg, #adbed2, #ff8e90, #ffbc7d, #adbed2);
+  --mask-image: repeating-linear-gradient(
+    135deg,
+    #ffffff 0px,
+    #ffffff 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
 }
 .attraction-container {
-    width: 1100px;
-    margin-top: 40px;
-    margin-bottom: 60px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #666666;
+  width: 1100px;
+  margin-top: 40px;
+  margin-bottom: 60px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #666666;
 }
-.attraction-content, .hotel-content {
-    display: grid;
-    grid-template-columns: 480px auto;
-    margin-top: 60px;
-    margin-left: 100px;
-    position: relative;
+.attraction-content,
+.hotel-content {
+  display: grid;
+  grid-template-columns: 480px auto;
+  margin-top: 60px;
+  margin-left: 100px;
+  position: relative;
 }
 .text {
-    margin-top: 10px;
-    margin-left: 5px;
-    display: flex;
+  margin-top: 10px;
+  margin-left: 5px;
+  display: flex;
 }
 .friend-photo {
-    display: flex;
-    margin-left: 30px;
+  display: flex;
+  margin-left: 30px;
 }
 .friend {
-    width: 30px;
-    height: 30px;
-    border-radius: 15px;
-    background-color: #e8e8e8;
-    /* overflow: hidden; */
-    margin-left: 5px;
-    position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 15px;
+  background-color: #e8e8e8;
+  /* overflow: hidden; */
+  margin-left: 5px;
+  position: relative;
 }
 .friend::before,
 .friend::after {
-    --scale: 0;
-    position: absolute;
-    left: 0;
-    top: -29px;
-    transform: translateX(-10%) scale(var(--scale));
-    font-size: 10px;
+  --scale: 0;
+  position: absolute;
+  left: 0;
+  top: -29px;
+  transform: translateX(-10%) scale(var(--scale));
+  font-size: 10px;
 }
 .friend::before {
-    content:  attr(data-tooltip);
-    padding: 3px;
-    width: max-content;
-    border-radius: 3px;
-    text-align: center;
-    background-color: #ff9b9d;
-    color: #ffffff;
+  content: attr(data-tooltip);
+  padding: 3px;
+  width: max-content;
+  border-radius: 3px;
+  text-align: center;
+  background-color: #ff9b9d;
+  color: #ffffff;
 }
 .friend:hover::before {
-    --scale: 1;
+  --scale: 1;
 }
 .friend > img {
-    width: 30px;
-    border-radius: 15px;
+  width: 30px;
+  border-radius: 15px;
 }
-.attraction-image, .hotel-image {
-    height: 350px;
-    width: 480px;
-    border-radius: 5px;
-    border: #adbed2 1px solid;
+.attraction-image,
+.hotel-image {
+  height: 350px;
+  width: 480px;
+  border-radius: 5px;
+  border: #adbed2 1px solid;
 }
-.attraction-image > img, .hotel-image > img{
-    height: 100%;
-    width: 480px;
-    overflow: hidden;
-    border-radius: 5px;
+.attraction-image > img,
+.hotel-image > img {
+  height: 100%;
+  width: 480px;
+  overflow: hidden;
+  border-radius: 5px;
 }
-.attraction-block, .hotel-block {
-    margin-left: 20px;
-    margin-top: 15px;
-    margin-right: 100px;
-    width: 400px;
-    /* background: #f6fbff; */
-    padding: 15px;
-    border-radius: 5px;
+.attraction-block,
+.hotel-block {
+  margin-left: 20px;
+  margin-top: 15px;
+  margin-right: 100px;
+  width: 400px;
+  /* background: #f6fbff; */
+  padding: 15px;
+  border-radius: 5px;
 }
-.attraction-block > div, .hotel-block > div {
-    font-weight: 400;
-    color: #666666;
+.attraction-block > div,
+.hotel-block > div {
+  font-weight: 400;
+  color: #666666;
 }
-.attraction-block > div > span, .hotel-block > div > span {
-    font-weight: 400;
-    color: #8d99a8;
+.attraction-block > div > span,
+.hotel-block > div > span {
+  font-weight: 400;
+  color: #8d99a8;
 }
 .button-container {
-    width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 150px;
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 150px;
 }
 .button {
-    width: 100px;
-    height: 36px;
-    float: right;
-    background-color: #ff9a9b;
-    border: 0px solid #ff9a9b;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 19px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-left: 20px;
+  width: 100px;
+  height: 36px;
+  float: right;
+  background-color: #ff9a9b;
+  border: 0px solid #ff9a9b;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 19px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 20px;
 }
 .button:hover {
-    background-color: #ff8e90;
-    border: 0px solid #ff8e90;
+  background-color: #ff8e90;
+  border: 0px solid #ff8e90;
 }
 footer {
-    margin-top: 300px;
+  margin-top: 300px;
 }

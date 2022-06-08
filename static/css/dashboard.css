@@ -1,357 +1,370 @@
 .profile-container {
-    background-color: #fafafc;
-    margin-top:160px;
-    display: grid;
-    grid-template-columns: 350px 100px auto;
-    width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    /* padding-left: 50px; */
-    color: #666666;
+  background-color: #fafafc;
+  margin-top: 160px;
+  display: grid;
+  grid-template-columns: 350px 100px auto;
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  /* padding-left: 50px; */
+  color: #666666;
 }
 .user-title {
-    font-weight: 700;
-    font-size: 19px;
+  font-weight: 700;
+  font-size: 19px;
 }
 .user-photo {
-    width: 140px;
-    height: 140px;
-    background-color: #e8e8e8;   
-    border-radius: 70px;
-    flex: none;
-    margin-top: 40px;
-    margin-left: 30px;
-    margin-bottom: 60px;
-    color: #FFFFFF;
-    font-size: 50px;
-    font-weight: 700;
-    text-align: center;
-    line-height: 100px;  /*設定行高，扣掉內容高後，再平均分配剩餘值*/
-    overflow: hidden;
-    position: relative;
+  width: 140px;
+  height: 140px;
+  background-color: #e8e8e8;
+  border-radius: 70px;
+  flex: none;
+  margin-top: 40px;
+  margin-left: 30px;
+  margin-bottom: 60px;
+  color: #ffffff;
+  font-size: 50px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 100px; /*設定行高，扣掉內容高後，再平均分配剩餘值*/
+  overflow: hidden;
+  position: relative;
 }
 .update-content {
-    position: absolute;
-    right: -100px;
-    top: 50px;
+  position: absolute;
+  right: -100px;
+  top: 50px;
 }
 .update-label {
-    cursor: pointer;
+  cursor: pointer;
 }
 .update-input {
-    visibility: hidden;
+  visibility: hidden;
 }
 .update-label > img {
-    width: 30px;
+  width: 30px;
 }
 .user-photo > img {
-    width: 140px;
+  width: 140px;
 }
 .user-content {
-    flex: auto;
-    margin-top: 60px;
-    margin-left: 100px;
-    margin-bottom: 40px;
-    color: #666666;
-    font-weight: 700;
-    font-size: 16px;
+  flex: auto;
+  margin-top: 60px;
+  margin-left: 100px;
+  margin-bottom: 40px;
+  color: #666666;
+  font-weight: 700;
+  font-size: 16px;
 }
-.user-name, .user-email, .user-password {
-    padding-left: 2px;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: 400;
+.user-name,
+.user-email,
+.user-password {
+  padding-left: 2px;
+  margin-top: 10px;
+  font-size: 16px;
+  font-weight: 400;
 }
 .user-false {
-    margin-top: 10px;
-    color: #E64217;
-    padding-left: 85px;
-    font-weight: 400;
+  margin-top: 10px;
+  color: #e64217;
+  padding-left: 85px;
+  font-weight: 400;
 }
 .user-password {
-    display: none;
+  display: none;
 }
 .password-button {
-    width: 100px;
-    height: 36px;
-    float: right;
-    background-color: #ff9a9b;
-    border: 0px solid #ff9a9b;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 19px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-top: 30px;
-    margin-left: 20px;
+  width: 100px;
+  height: 36px;
+  float: right;
+  background-color: #ff9a9b;
+  border: 0px solid #ff9a9b;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 19px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-top: 30px;
+  margin-left: 20px;
 }
 .password-button:hover {
-    background-color: #ff8e90;
-    border: 0px solid #ff8e90;
+  background-color: #ff8e90;
+  border: 0px solid #ff8e90;
 }
 .itinerary-container {
-    background-color: #fafafc;
-    width: 1100px;
-    margin-top: 80px;
-    margin-left: auto;
-    margin-right: auto;
-    color: #666666;
+  background-color: #fafafc;
+  width: 1100px;
+  margin-top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #666666;
 }
 .itinerary-block {
-    display: grid;
-    grid-template-columns: 320px 320px 320px;
-    margin-left: 100px;
+  display: grid;
+  grid-template-columns: 320px 320px 320px;
+  margin-left: 100px;
 }
 .title {
-    font-weight: 700;
-    font-size: 19px;
+  font-weight: 700;
+  font-size: 19px;
 }
-.loader-content{
-    margin-top: 50px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
-    height: 10px;
-    width: 250px;
-    border: 6px solid #ffe6ce;
-    border-radius: 15px;
+.loader-content {
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  height: 10px;
+  width: 250px;
+  border: 6px solid #ffe6ce;
+  border-radius: 15px;
 }
-.loader-content .loader{
-    position: absolute;
-    background-color: #fbb471;
-    width: 0px;
-    height: 10px;
-    border-radius: 15px;
-    animation: loaders 3s infinite linear;    
+.loader-content .loader {
+  position: absolute;
+  background-color: #fbb471;
+  width: 0px;
+  height: 10px;
+  border-radius: 15px;
+  animation: loaders 3s infinite linear;
 }
-@keyframes loaders{
-    0%{
-      width: 0%;
-    }
-    25%{
-        width: 50%;
-    }
-    50%{
-        width: 75%;
-    }
-    75%{
-        width: 85%;
-    }
-    100%{
-        width: 100%;
-    }
-};
+@keyframes loaders {
+  0% {
+    width: 0%;
+  }
+  25% {
+    width: 50%;
+  }
+  50% {
+    width: 75%;
+  }
+  75% {
+    width: 85%;
+  }
+  100% {
+    width: 100%;
+  }
+}
 .itinerary-content {
-    /* width: 1100px; */
-    margin-right: auto;
-    color: #666666;
-    text-decoration: none;
+  /* width: 1100px; */
+  margin-right: auto;
+  color: #666666;
+  text-decoration: none;
 }
 .itinerary-info {
-    /* display: flex; */
-    margin-top: 30px;
-    margin-left: 20px;
-    margin-bottom: 40px;
-    position: relative;
-    width: 300px;
-    height: 180px;
-    border-radius: 5px;
-    border:#e8e8e8 1px solid
+  /* display: flex; */
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-bottom: 40px;
+  position: relative;
+  width: 300px;
+  height: 180px;
+  border-radius: 5px;
+  border: #e8e8e8 1px solid;
 }
 .itinerary-info:hover {
-    border: 1px #fbb471 solid;
-    background-color: #fff7f0;
+  border: 1px #fbb471 solid;
+  background-color: #fff7f0;
 }
 .itinerary-info > div {
-    margin: 10px;
+  margin: 10px;
 }
 .itinerary-info > div > span {
-    color: #fbb471;
-    font-weight: 700;
+  color: #fbb471;
+  font-weight: 700;
 }
 .daily-container {
-    margin-top: 10px;
-    display: grid;
-    grid-template-columns: 230px 230px 230px;
-    grid-row-gap: 10px;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 230px 230px 230px;
+  grid-row-gap: 10px;
 }
 .daily {
-    height: 215px;
-    width: 190px;
-    margin-right: 20px;
-    border: 1px #e8e8e8 solid;
-    border-radius: 10px;
-    padding: 10px;
-    position: relative;
+  height: 215px;
+  width: 190px;
+  margin-right: 20px;
+  border: 1px #e8e8e8 solid;
+  border-radius: 10px;
+  padding: 10px;
+  position: relative;
 }
 .hotel {
-    float: inline-end;
-    width: inherit;
-    margin-top: 40px;
-    padding-top: 5px;
-    position: absolute;
-    bottom: 10px;
-    border-top: 1px #e8e8e8 solid;
+  float: inline-end;
+  width: inherit;
+  margin-top: 40px;
+  padding-top: 5px;
+  position: absolute;
+  bottom: 10px;
+  border-top: 1px #e8e8e8 solid;
 }
 .hotel-text {
-    color: #ff9b9d;
+  color: #ff9b9d;
 }
 hr {
-    width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    border: 0;
-    padding: 3px;
-    background: linear-gradient(54deg, #adbed2, #ff8e90, #ffbc7d,#adbed2);
-    --mask-image: repeating-linear-gradient(135deg, #ffffff 0px, #ffffff 1px, transparent 1px, transparent 6px);
-    -webkit-mask-image: var(--mask-image);
-    mask-image: var(--mask-image);
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  padding: 3px;
+  background: linear-gradient(54deg, #adbed2, #ff8e90, #ffbc7d, #adbed2);
+  --mask-image: repeating-linear-gradient(
+    135deg,
+    #ffffff 0px,
+    #ffffff 1px,
+    transparent 1px,
+    transparent 6px
+  );
+  -webkit-mask-image: var(--mask-image);
+  mask-image: var(--mask-image);
 }
 .owner-text {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    color: #cecdcd;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  color: #cecdcd;
 }
 .more-button > img {
-    height: 28px;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    top: 148px;
+  height: 28px;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 148px;
 }
 .notification-button {
-    position: absolute;
-    right: 40px;
-    cursor: pointer; 
-    bottom: 0;
+  position: absolute;
+  right: 40px;
+  cursor: pointer;
+  bottom: 0;
 }
-.notification-button >img {
-    height: 30px;
+.notification-button > img {
+  height: 30px;
 }
 .delete-button > img {
-    height: 28px;
+  height: 28px;
 }
 .delete-button {
-    position: absolute;
-    right: 80px;
-    cursor: pointer;
-    bottom: 0;
+  position: absolute;
+  right: 80px;
+  cursor: pointer;
+  bottom: 0;
 }
-.cover{
-	position:fixed;
-	padding:0;
-	margin:0;
-	top:0;
-	left:0;
-	width: 100%;
-	height: 100%;
-	background:#000000;
-	opacity: 0.25;
-	z-index:10;
-	display: none;
+.cover {
+  position: fixed;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000000;
+  opacity: 0.25;
+  z-index: 10;
+  display: none;
 }
-.notification-window{
-	height: 275px;
-	width:100%;
-	z-index:15;
-	position: fixed;
-	top:80px;
-	animation: windows 0.3s linear;
-	right:auto;
-	left:auto;
-	text-align:center;
-	display: none;
+.notification-window {
+  height: 275px;
+  width: 100%;
+  z-index: 15;
+  position: fixed;
+  top: 80px;
+  animation: windows 0.3s linear;
+  right: auto;
+  left: auto;
+  text-align: center;
+  display: none;
 }
-@keyframes windows{
-	0%{opacity:0}
-	100%{opacity:1}
+@keyframes windows {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-.window-container{
-	width: 340px;
-	height: 275px;
-	margin-left: auto;
-	margin-right: auto;
+.window-container {
+  width: 340px;
+  height: 275px;
+  margin-left: auto;
+  margin-right: auto;
 }
-.window-background{
-	background-image:linear-gradient(270deg, #ffb773 0%, #ffbc7d 100%);
-	width: 340px;
-	height: 10px;
-	border-radius: 6px 6px 0 0;
+.window-background {
+  background-image: linear-gradient(270deg, #ffb773 0%, #ffbc7d 100%);
+  width: 340px;
+  height: 10px;
+  border-radius: 6px 6px 0 0;
 }
-.window-content{
-	background-color: #FFFFFF;
-	width: 340px;
-    height: 200px;
-	border-radius:0 0 6px 6px;
-	padding-top:15px;
-	text-align: center;
+.window-content {
+  background-color: #ffffff;
+  width: 340px;
+  height: 200px;
+  border-radius: 0 0 6px 6px;
+  padding-top: 15px;
+  text-align: center;
 }
-.window-title{
-	font-weight:700;
-	font-size:22px;
-	color: #666666;
-	margin-bottom: 5px;
-    font-family: 'Comic Sans MS';
+.window-title {
+  font-weight: 700;
+  font-size: 22px;
+  color: #666666;
+  margin-bottom: 5px;
+  font-family: 'Comic Sans MS';
 }
-.notification-date, .notification-time {
-    width: 200px;
-    height: 30px;
-    padding-right: 4px;
-    padding-left: 2px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-    font-size: 16px;
-    font-weight: 400;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid #e8e8e8;
-    text-align: center;
-    color: #666666;
-    margin-top: 10px;
+.notification-date,
+.notification-time {
+  width: 200px;
+  height: 30px;
+  padding-right: 4px;
+  padding-left: 2px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  text-align: center;
+  color: #666666;
+  margin-top: 10px;
 }
 .window-button {
-    margin-top: 10px;
-    width: 200px;
-    height: 36px;
-    background-color: #ffbc7d;
-    border: 0px solid #ffbc7d;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 19px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-left: 20px;
+  margin-top: 10px;
+  width: 200px;
+  height: 36px;
+  background-color: #ffbc7d;
+  border: 0px solid #ffbc7d;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 19px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 20px;
 }
 .window-close {
-    position:absolute;
-	padding-left:65px;
-	top:17px;
-	cursor: pointer
+  position: absolute;
+  padding-left: 65px;
+  top: 17px;
+  cursor: pointer;
 }
 .button-container {
-    width: 1100px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 90px;
+  width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 90px;
 }
 .button {
-    width: 100px;
-    height: 36px;
-    float: right;
-    background-color: #ff9a9b;
-    border: 0px solid #ff9a9b;
-    border-radius: 5px;
-    font-weight: 700;
-    font-size: 19px;
-    color: #ffffff;
-    cursor: pointer;
-    margin-left: 20px;
+  width: 100px;
+  height: 36px;
+  float: right;
+  background-color: #ff9a9b;
+  border: 0px solid #ff9a9b;
+  border-radius: 5px;
+  font-weight: 700;
+  font-size: 19px;
+  color: #ffffff;
+  cursor: pointer;
+  margin-left: 20px;
 }
 .button:hover {
-    background-color: #ff8e90;
-    border: 0px solid #ff8e90;
+  background-color: #ff8e90;
+  border: 0px solid #ff8e90;
 }
 footer {
-    margin-top: 230px;
+  margin-top: 230px;
 }

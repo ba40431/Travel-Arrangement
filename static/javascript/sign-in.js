@@ -8,8 +8,8 @@ const signUpEmail = document.querySelector('.sign-up-email');
 const signUpPassword = document.querySelector('.sign-up-password');
 const signUpFailed = document.querySelector('.sign-up-failed');
 const signInFailed = document.querySelector('.sign-in-failed');
-const oauthBlock = document.querySelector('.oauth-block')
-const signUpText = document.querySelector('.sign-up-text')
+const oauthBlock = document.querySelector('.oauth-block');
+const signUpText = document.querySelector('.sign-up-text');
 
 function signUp() {
   signInBox.style.display = 'none';
@@ -40,7 +40,7 @@ function checkSignIn() {
           oauthBlock.style.marginTop = '30px';
           signInFailed.textContent = resData.message;
         } else {
-          location.href = '/'
+          location.href = '/';
         }
       });
   } else {
@@ -51,8 +51,8 @@ function checkSignIn() {
 
 function checkSignUp() {
   if (
-    signUpEmail.value.match(/^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/)
-        && signUpPassword.value.match(/^[0-9a-zA-Z_]+$/)
+    signUpEmail.value.match(/^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/) &&
+    signUpPassword.value.match(/^[0-9a-zA-Z_]+$/)
   ) {
     const headers = {
       'Content-Type': 'application/json',
@@ -77,24 +77,24 @@ function checkSignUp() {
         } else {
           signUpText.style.marginTop = '20px';
           signUpFailed.textContent = '註冊成功，將於 2 秒後返回登入畫面';
-          setTimeout(() => {window.location.replace(location.href);}, 2000)
+          setTimeout(() => {
+            window.location.replace(location.href);
+          }, 2000);
         }
       });
   } else if (
-    signUpName.value == ''
-        || signUpEmail.value == ''
-        || signUpPassword.value == ''
+    signUpName.value == '' ||
+    signUpEmail.value == '' ||
+    signUpPassword.value == ''
   ) {
     signUpFailed.textContent = '請輸入姓名、電子郵件和密碼';
-    signUpText.style.marginTop = '20px'
-  } else if (
-    !signUpEmail.value.match(/^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/)
-  ) {
+    signUpText.style.marginTop = '20px';
+  } else if (!signUpEmail.value.match(/^([\w\.\-]){1,64}\@([\w\.\-]){1,64}$/)) {
     signUpFailed.textContent = '電子信箱格式須包含「@」';
-    signUpText.style.marginTop = '20px'
+    signUpText.style.marginTop = '20px';
   } else {
     signUpFailed.textContent = '請勿在密碼輸入特殊符號';
-    signUpText.style.marginTop = '20px'
+    signUpText.style.marginTop = '20px';
   }
 }
 // let data = null;

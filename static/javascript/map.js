@@ -8,7 +8,7 @@
 
 function initMap() {
   const map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 23.69781, lng: 120.960515 },
+    center: { lat: 23.69781, lng: 120.960515 },
     zoom: 7,
   });
   const input = document.getElementById('pac-input');
@@ -53,10 +53,10 @@ function initMap() {
       location: place.geometry.location,
     });
     marker.setVisible(true);
-    infowindowContent.children.namedItem("place-name").textContent = place.name;
-    infowindowContent.children.namedItem("place-id").textContent =
+    infowindowContent.children.namedItem('place-name').textContent = place.name;
+    infowindowContent.children.namedItem('place-id').textContent =
       place.place_id;
-    infowindowContent.children.namedItem("place-address").textContent =
+    infowindowContent.children.namedItem('place-address').textContent =
       place.formatted_address;
     infowindow.open(map, marker);
   });

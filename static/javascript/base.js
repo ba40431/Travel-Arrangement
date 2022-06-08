@@ -1,4 +1,4 @@
-let userData = null
+let userData = null;
 
 function signOut() {
   const headers = {
@@ -11,20 +11,20 @@ function signOut() {
   })
     .then((response) => response.json())
     .then((result) => {
-        if(result.ok) {
-            location.href = '/sign-in'
-        }
+      if (result.ok) {
+        location.href = '/sign-in';
+      }
     });
 }
 
 async function getItinerary() {
   userData = await getUserData();
-  if(userData.data === null) {
-    location.href = '/sign-in'
-  }else if(userData.error) {
-    location.href = '/sign-in'
-  }else {
-    location.href = '/my-itinerary'
+  if (userData.data === null) {
+    location.href = '/sign-in';
+  } else if (userData.error) {
+    location.href = '/sign-in';
+  } else {
+    location.href = '/my-itinerary';
   }
 }
 
@@ -37,13 +37,15 @@ async function getDashboard() {
   // }else {
   //   location.href = '/dashboard'
   // }
-  location.href = '/dashboard'
+  location.href = '/dashboard';
 }
 
 function getUserData() {
-  return fetch('api/user').then((response) => {
+  return fetch('api/user')
+    .then((response) => {
       return response.json();
-  }).then((result) => {
+    })
+    .then((result) => {
       return result;
-  })
+    });
 }
