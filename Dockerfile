@@ -6,7 +6,7 @@ ENV NODE_ENV production
 
 # RUN mkdir /website
 # Node 在容器內的位置
-WORKDIR /app
+WORKDIR /home/ubuntu/travel-project
 
 # ADD ./website /
 
