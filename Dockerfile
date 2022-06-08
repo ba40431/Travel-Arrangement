@@ -8,7 +8,7 @@ RUN mkdir /website
 # Node 在容器內的位置
 # WORKDIR /app
 
-ADD ./website /website
+ADD ./website /
 
 # 複製 package 設定
 COPY ["package.json", "package-lock.json*", "./"]
