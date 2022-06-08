@@ -11,7 +11,9 @@ services:
   #     - 80:80
   website:
     build: .
-    image: ba40431/travel-project:2022-06-04
+    image: ba40431/travel-project:latest
     restart: always
+    env_file:
+      - ./.env
     environment:
       - PORT=3000
