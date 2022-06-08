@@ -20,7 +20,7 @@ RUN npm install --production
 COPY . .
 
 # 開放對外的 port
-EXPOSE 3000
+# EXPOSE 3000
 
 # 執行專案
 CMD [ "node", "app.js" ]
