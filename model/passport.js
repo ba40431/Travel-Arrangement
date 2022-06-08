@@ -6,8 +6,8 @@ require('dotenv').config({path:'./.env'});
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_OAUTH_CLIENT_ID,
     clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET_KEY,
-    callbackURL: '/api/auth/google/callback',
-    // callbackURL: 'https://www.travel-arrangement.website/api/auth/google/callback',
+    // callbackURL: '/api/auth/google/callback',
+    callbackURL: 'https://www.travel-arrangement.website/api/auth/google/callback',
     passReqToCallback: true,
 }, async (req, accessToken, refreshToken, profile, cb) => {
     if (profile) {

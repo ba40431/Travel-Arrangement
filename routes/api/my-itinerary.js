@@ -12,8 +12,8 @@ myItineraryAPI.get('/itinerary/:itineraryId', (req, res) => {
 
     // 連接redis
     const client = redis.createClient({
-        // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`
-        url: 'redis://127.0.0.1:6379'
+        url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`
+        // url: 'redis://127.0.0.1:6379'
     })
     client.on('error', (err) => {
         console.log(err);
@@ -111,8 +111,8 @@ myItineraryAPI.delete('/itinerary/:itineraryId', (req, res) => {
         }
         // 連接redis
         const client = redis.createClient({
-            url: 'redis://127.0.0.1:6379'
-            // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`
+            // url: 'redis://127.0.0.1:6379'
+            url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`
         })
         client.on('error', (err) => {
             console.log(err);
