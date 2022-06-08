@@ -13,7 +13,6 @@ const saltRounds = 10;
 userAPI.use(bodyParser.json())
 userAPI.use(cookieParser())
 
-
 //middleware
 function ensureAuthenticated(req, res, next) {
   // console.log(req.session.passport.user)
