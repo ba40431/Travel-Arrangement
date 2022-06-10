@@ -14,7 +14,7 @@ authAPI.use(bodyParser.urlencoded({ extended: true }))
 const clientId = process.env.GOOGLE_OAUTH_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_OAUTH_CLIENT_SECRET_KEY;
 // const root = 'http://localhost:3000';
-const root = 'https://travel-arrangement.website/';
+const root = 'https://www.travel-arrangement.website';
 const redirectUrl = `${root}/api/auth/google/callback`
 
 authAPI.get('/auth/google', (req, res) => {
