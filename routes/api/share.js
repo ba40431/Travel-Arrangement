@@ -13,14 +13,14 @@ shareAPI.post('/share', (req, res) => {
         message: '伺服器發生錯誤',
       });
     }
-    console.log(result);
+    // console.log(result);
     if (result.length === 0) {
       return res.status(400).json({
         error: true,
         message: '查無此使用者',
       });
     } else {
-      console.log(result);
+      // console.log(result);
       let userId = result[0].id;
       let userName = result[0].name;
       let userEmail = result[0].email;
@@ -44,8 +44,8 @@ shareAPI.post('/share', (req, res) => {
           } else {
             // 連接redis
             const client = redis.createClient({
-              url: 'redis://127.0.0.1:6379'
-              // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`,
+              // url: 'redis://127.0.0.1:6379'
+              url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`,
             });
             client.on('error', (err) => {
               console.log(err);
@@ -58,9 +58,9 @@ shareAPI.post('/share', (req, res) => {
             const key = req.body.itineraryId;
             const value = client.del(key);
             value.then((data) => {
-              console.log(data);
+              // console.log(data);
               if (data) {
-                console.log('Deleted Successfully!');
+                console.log('Deleted Cache');
                 return res.status(200).json({
                   ok: true,
                   user: {

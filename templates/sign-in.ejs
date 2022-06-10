@@ -14,13 +14,13 @@
                 <!-- 登入畫面 -->
                 <div class = 'sign-in-content'>
                     <div class = 'sign-in-title'>SIGN IN</div>
-                    <input type = 'email' id = 'sign-in-email' class = 'sign-in-email' placeholder = '輸入電子信箱'>
-                    <input type = 'password' id = 'sign-in-password' class = 'sign-in-password' placeholder = '輸入密碼'>
+                    <input type = 'email' id = 'sign-in-email' class = 'sign-in-email' placeholder = '輸入電子信箱' value = 'test@test'>
+                    <input type = 'password' id = 'sign-in-password' class = 'sign-in-password' placeholder = '輸入密碼' value = 'test'>
                     <button class = 'sign-in-button' onclick = checkSignIn()>登入帳戶</button>
                     <div id = 'sign-in-failed' class = 'sign-in-failed'></div>
                     <div class = 'oauth-block'>
                         <span class = 'oauth-text'>其他登入方式 : </span>
-                        <span class = 'google-icon' onclick = oauth()><a href = 'api//auth/google'><img src = 'pic/google.png'/></a></span>
+                        <span class = 'google-icon'><a href = '/api/auth/google'><img src = 'pic/google.png'/></a></span> 
                     </div>
                     <div class = 'sign-in-text'>還沒有帳戶？
                         <a onclick = signUp()>點此註冊</a>

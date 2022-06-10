@@ -15,8 +15,8 @@ myItineraryAPI.get('/itinerary/:itineraryId', (req, res) => {
 
   // 連接redis
   const client = redis.createClient({
-    // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`,
-    url: 'redis://127.0.0.1:6379'
+    url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`,
+    // url: 'redis://127.0.0.1:6379'
   });
   client.on('error', (err) => {
     console.log(err);
@@ -67,22 +67,18 @@ myItineraryAPI.get('/itinerary/:itineraryId', (req, res) => {
 
 myItineraryAPI.get('/my-itinerary', (req, res) => {
   let userEmail = null;
-  if (req.session.passport || req.cookies.token) {
-    if (req.cookies.token) {
-      try {
-        const decoded = jwt.verify(
-          req.cookies.token,
-          process.env.JWT_SECRET_KEY
-        );
-        userEmail = decoded.payload.userEmail;
-      } catch {
-        return res.status(403).json({
-          error: true,
-          message: '未登入會員，拒絕存取',
-        });
-      }
-    } else {
-      userEmail = req.session.passport.user.emails[0].value;
+  if (req.cookies.token) {
+    try {
+      const decoded = jwt.verify(
+        req.cookies.token,
+        process.env.JWT_SECRET_KEY
+      );
+      userEmail = decoded.payload.userEmail;
+    } catch {
+      return res.status(403).json({
+        error: true,
+        message: '未登入會員，拒絕存取',
+      });
     }
   } else {
     return res.status(403).json({
@@ -117,8 +113,8 @@ myItineraryAPI.delete('/itinerary/:itineraryId', (req, res) => {
     }
     // 連接redis
     const client = redis.createClient({
-      url: 'redis://127.0.0.1:6379'
-      // url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`,
+      // url: 'redis://127.0.0.1:6379'
+      url: `redis://${process.env.ELASTICACHE_ENDPOINT}:${process.env.ELASTICACHE_PORT}`,
     });
     client.on('error', (err) => {
       console.log(err);
@@ -131,9 +127,9 @@ myItineraryAPI.delete('/itinerary/:itineraryId', (req, res) => {
     const key = itineraryId;
     const value = client.del(key);
     value.then((data) => {
-      console.log(data);
+      // console.log(data);
       if (data) {
-        console.log('Deleted Successfully!');
+        console.log('Deleted Cache!');
         return res.status(200).json({
           ok: true,
         });

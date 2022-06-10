@@ -48,6 +48,5 @@ async function submit() {
     if (result.data == 'ok') {
       window.location.replace(location.href);
     }
-    console.log(result);
   }
 }

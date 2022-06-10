@@ -1,5 +1,4 @@
 const express = require('express');
-// const session = require('cookie-session');
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
@@ -15,9 +14,8 @@ userAPI.use(cookieParser());
 
 //middleware
 function ensureAuthenticated(req, res, next) {
-  // console.log(req.session.passport.user)
   // 若使用者已通過驗證，則觸發 next()
-  if (req.session.passport || req.cookies.token) {
+  if (req.cookies.token) {
     return next();
   }
   // 若使用者尚未通過驗證，則將使用者導向登入頁面
@@ -55,47 +53,10 @@ userAPI.get('/user', ensureAuthenticated, (req, res) => {
         }
       });
     } catch {
-      return res.status(500).json({
-        error: true,
-        message: '伺服器發生錯誤',
+      return res.status(200).json({
+        data: null,
       });
     }
-  } else if (req.session.passport.user !== null) {
-    try {
-      checkUser(req.session.passport.user.emails[0].value, (err, result) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({
-            error: true,
-            message: '伺服器發生錯誤',
-          });
-        } else if (result[0] === undefined) {
-          return res.status(200).json({
-            data: null,
-          });
-        } else {
-          return res.status(200).json({
-            data: {
-              id: result[0].id,
-              name: result[0].name,
-              email: result[0].email,
-              profile: result[0].profile,
-            },
-          });
-        }
-      });
-    } catch {
-      return res.status(500).json({
-        error: true,
-        message: '伺服器發生錯誤',
-      });
-    }
-    // return res.status(200).json({
-    //   'data': {
-    //     'name': req.session.passport.user.displayName,
-    //     'email': req.session.passport.user.emails[0].value
-    //   }
-    // })
   } else {
     return res.status(200).json({
       data: null,
@@ -143,6 +104,7 @@ userAPI.patch('/user', (req, res) => {
                 userId: userData[0].id,
                 userName: userData[0].name,
                 userEmail: userData[0].email,
+                method: 'Local'
               };
               const token = jwt.sign(
                 { payload, exp: Math.floor(Date.now() / 1000) + 60 * 15 },
@@ -240,12 +202,6 @@ userAPI.delete('/user', (req, res) => {
   let token = req.cookies.token;
   if (token) {
     res.cookie('token', '', { maxAge: 0, httpOnly: true });
-    res.cookie('require', '', { maxAge: 0, httpOnly: true });
-    return res.status(200).json({
-      ok: true,
-    });
-  } else if (req.session.passport) {
-    req.session.passport.user = null;
     res.cookie('require', '', { maxAge: 0, httpOnly: true });
     return res.status(200).json({
       ok: true,

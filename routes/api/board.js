@@ -29,7 +29,7 @@ const upload = multer({
     s3: s3,
     bucket: bucketName,
     metadata: function (req, file, cb) {
-      console.log(file);
+      // console.log(file);
       cb(null, { fieldName: file.fieldname, ACL: 'public-read' });
     },
     key: function (req, file, cb) {

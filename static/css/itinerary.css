@@ -210,6 +210,7 @@ hr {
   /* overflow: hidden; */
   margin-left: 5px;
   position: relative;
+  text-align: center;
 }
 .friend::before,
 .friend::after {
@@ -233,8 +234,10 @@ hr {
   --scale: 1;
 }
 .friend > img {
+  height: 30px;
   width: 30px;
   border-radius: 15px;
+  margin: auto;
 }
 .attraction-image,
 .hotel-image {

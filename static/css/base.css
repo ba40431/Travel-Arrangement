@@ -90,11 +90,14 @@ header {
   height: 60px;
   border-radius: 30px;
   background-color: #e8e8e8;
+  flex: none;
   overflow: hidden;
   cursor: pointer;
+  text-align: center;
 }
 .profile-photo > img {
-  width: 60px;
+  height: 60px;
+  margin: auto
 }
 .line {
   font-weight: 700;

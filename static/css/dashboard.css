@@ -45,7 +45,8 @@
   width: 30px;
 }
 .user-photo > img {
-  width: 140px;
+  height: 140px;
+  margin: auto
 }
 .user-content {
   flex: auto;

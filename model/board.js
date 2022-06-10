@@ -13,7 +13,7 @@ module.exports = {
           if (error) {
             return cb(error);
           }
-          console.log('Number of records inserted: ' + result.affectedRows);
+          // console.log('Number of records inserted: ' + result.affectedRows);
           return cb(null, result);
         }
       );
@@ -25,7 +25,7 @@ module.exports = {
       if (error) {
         return cb(error.message);
       }
-      console.log('Connected to the MySQL server.');
+      // console.log('Connected to the MySQL server.');
       connection.query('SELECT * FROM `message`', (error, result) => {
         if (error) {
           return cb(error);
