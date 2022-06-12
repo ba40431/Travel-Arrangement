@@ -1,3 +1,8 @@
+const notificationDate = document.querySelector('.notification-date');
+const notificationTime = document.querySelector('.notification-time');
+const today = new Date(+new Date() + 8 * 3600 * 1000); // 加入相差八小時
+notificationDate.setAttribute('min', today.toISOString().split('T')[0]); 
+
 const publicVapidKey =
   'BPz-1dnM0gloQaa21grgCAL0kPL7eJNkdQ6AvIX-CvzvfI4vXD4BFPInTtznFPexX40NZW_spBVBQved5gBLPx0';
 
@@ -28,6 +33,10 @@ function openNotification(e) {
 function closeWindow() {
   cover.style.display = 'none';
   notificationWindow.style.display = 'none';
+  // let notificationDate = document.querySelector('.notification-date');
+  // let notificationTime = document.querySelector('.notification-time');
+  notificationDate.value = '';
+  notificationTime.value = ''
 }
 
 function urlBase64ToUint8Array(base64String) {
@@ -46,11 +55,11 @@ function urlBase64ToUint8Array(base64String) {
 }
 
 async function notificationItinerary(e) {
-  console.log(itineraryData.result);
+  // console.log(itineraryData.result);
   let infoDate = null;
   let infoCity = null;
-  let notificationDate = document.querySelector('.notification-date');
-  let notificationTime = document.querySelector('.notification-time');
+  // let notificationDate = document.querySelector('.notification-date');
+  // let notificationTime = document.querySelector('.notification-time');
   if (notificationDate.value && notificationTime.value) {
     for (let i = 0; i < itineraryData.result.length; i++) {
       if (
@@ -116,4 +125,6 @@ async function notificationItinerary(e) {
 
   cover.style.display = 'none';
   notificationWindow.style.display = 'none';
+  notificationDate.value = '';
+  notificationTime.value = ''
 }

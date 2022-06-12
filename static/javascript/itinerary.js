@@ -1,10 +1,12 @@
 const url = new URL(window.location.href);
-let string = url.pathname;
-let itineraryId = string.replace('/itinerary/', '');
-let shareImg = document.querySelector('.share-img');
-let shareContainer = document.querySelector('.share-container');
-let titleText = document.querySelector('.text');
-let itineraryContent = document.querySelector('.itinerary-content');
+const string = url.pathname;
+const itineraryId = string.replace('/itinerary/', '');
+const shareImg = document.querySelector('.share-img');
+const shareContainer = document.querySelector('.share-container');
+const titleText = document.querySelector('.text');
+const itineraryContent = document.querySelector('.itinerary-content');
+const shareInput = document.querySelector('.share-input');
+const shareText = document.querySelector('.share-text');
 
 let itineraryData = null;
 // let userData = null;
@@ -233,10 +235,10 @@ function closeInput() {
   shareContainer.style.display = 'none';
   titleText.style.marginTop = '10px';
   itineraryContent.style.marginTop = '30px';
+  shareText.innerHTML = '';
+  shareInput.value = '';
 }
 function shareFriend() {
-  let shareInput = document.querySelector('.share-input');
-  let shareText = document.querySelector('.share-text');
   if (shareInput.value === '') {
     shareText.textContent = '請輸入會員電子信箱';
   } else {

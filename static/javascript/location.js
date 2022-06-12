@@ -83,7 +83,7 @@ function renderAttraction(data) {
   let webSpan = document.createElement('span');
   let descriptionSpan = document.createElement('span');
   nameSpan.textContent = data.result[0].name;
-  distanceSpan.textContent = `${data.result[0].attraction_distance} KM`;
+  distanceSpan.textContent = `${data.result[0].attraction_distance.toString().slice(0, 3)} KM`;
   phoneSpan.textContent = data.result[0].phone;
   addressSpan.textContent = data.result[0].address;
   opentimeSpan.textContent = data.result[0].opentime;
