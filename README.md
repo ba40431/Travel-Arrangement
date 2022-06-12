@@ -8,17 +8,17 @@ Test password : test
 
 ## Catalog
 * [Architecture](#Architecture)
-* [Database Schema](#DatabaseSchema)
-* [Use Skills](#UseSkills)
-* [Main Features](#MainFeatures)
-* [Side Features](#SideFeatures)
+* [Database Schema](#Database-Schema)
+* [Use Skills](#Use-Skills)
+* [Main Features](#Main-Features)
+* [Side Features](#Side-Features)
 * [Contact](#Contact)
 
 ## Architecture
 
 ![Imgur](https://i.imgur.com/dZfsT0k.png)
 
-## Database Schema
+## Database Schema (MySQL)
 
 ![Imgur](https://i.imgur.com/mSwU0dW.png)
 
@@ -35,28 +35,27 @@ Test password : test
 ## Main Features
 * Arrange a travel itinerary<br/>
 Use Haversine formula in SQL Queries to search attractions.<br/>
-<img src = 'https://i.imgur.com/PNNRaK5.gif'/>
+![Imgur](https://i.imgur.com/PNNRaK5.gif)
 
 * Administration authority<br/>
 Share itinerary to user's friend.<br/>
-<img src = 'https://i.imgur.com/EgSNjLX.gif'/>
-
-* Web Notification<br/>
-Set reminder by using service worker to remind user about the itinerary will be comming. <br/>
-<img src = 'https://i.imgur.com/ZB6YclS.gif'/>
-<img src = 'https://i.imgur.com/TKl2suS.png'/>
+![Imgur](https://i.imgur.com/EgSNjLX.gif)
+* Use service worker<br/>
+Set reminder to remind user about the itinerary will be comming. <br/>
+![Imgur](https://i.imgur.com/ZB6YclS.gif)
+![Imgur](https://i.imgur.com/TKl2suS.png)
 
 ## Side Features
 * Check attractions & hotels information<br/>
-<img src = 'https://i.imgur.com/CqU670e.gif'/>
+![Imgur](https://i.imgur.com/CqU670e.gif)
 
 * Check user's itineraries<br/>
-<img src = 'https://i.imgur.com/a493km5.gif'/>
+![Imgur](https://i.imgur.com/a493km5.gif)
 
 * Login / Register<br/>
-<img src = 'https://i.imgur.com/FgbkdzB.gif'/>
+![Imgur](https://i.imgur.com/FgbkdzB.gif)
 * Easily change user's profile picture<br/>
-<img src = 'https://i.imgur.com/VbP741x.gif'/>
+![Imgur](https://i.imgur.com/VbP741x.gif)
 
 ## Contact
 Abby Ho <br/>
