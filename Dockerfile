@@ -13,10 +13,8 @@ WORKDIR /home/ubuntu/travel-project
 # 複製 package 設定
 COPY ["package.json", "package-lock.json*", "./"]
 
-# 安裝必要的套件並移動到專案的 node_modules 底下
-RUN npm install --production
+RUN npm install --omit=dev
 
-# 第一個 . 是我們本地位置，第二個是 docker 裡面專案的位置，就是將我們專案的程式碼全部複製進去
 COPY . .
 
 # 開放對外的 port
