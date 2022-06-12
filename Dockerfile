@@ -13,11 +13,10 @@ WORKDIR /home/ubuntu/travel-project
 # 複製 package 設定
 COPY ["package.json", "package-lock.json*", "./"]
 
-RUN npm install --omit=dev
+RUN npm install --production
 
 COPY . .
 
-# 開放對外的 port
 # EXPOSE 3000
 
 # 執行專案
