@@ -16,11 +16,11 @@ Test password : test
 
 ## Architecture
 
-![Imgur](https://i.imgur.com/dZfsT0k.png)
+![demo-8.png](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-8.png?raw=true)
 
-## Database Schema (MySQL)
+## Database Schema
 
-![Imgur](https://i.imgur.com/mSwU0dW.png)
+![demo-9.png](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-9.png?raw=true)
 
 ## Use Skills
 
@@ -35,27 +35,27 @@ Test password : test
 ## Main Features
 * Arrange a travel itinerary<br/>
 Use Haversine formula in SQL Queries to search attractions.<br/>
-![Imgur](https://i.imgur.com/PNNRaK5.gif)
+![demo-1.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-1.gif?raw=true)
 
 * Administration authority<br/>
 Share itinerary to user's friend.<br/>
-![Imgur](https://i.imgur.com/EgSNjLX.gif)
+![demo-5.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-5.gif?raw=true)
 * Use service worker<br/>
 Set reminder to remind user about the itinerary will be comming. <br/>
-![Imgur](https://i.imgur.com/ZB6YclS.gif)
-![Imgur](https://i.imgur.com/TKl2suS.png)
+![demo-4.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-4.gif?raw=true)
+![demo-7.png](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-7.png?raw=true)
 
 ## Side Features
 * Check attractions & hotels information<br/>
-![Imgur](https://i.imgur.com/CqU670e.gif)
+![demo-2.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-2.gif?raw=true)
 
 * Check user's itineraries<br/>
-![Imgur](https://i.imgur.com/a493km5.gif)
+![demo-3.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-3.gif?raw=true)
 
 * Login / Register<br/>
-![Imgur](https://i.imgur.com/FgbkdzB.gif)
+![demo-6.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-6.gif?raw=true)
 * Easily change user's profile picture<br/>
-![Imgur](https://i.imgur.com/VbP741x.gif)
+![demo-10.gif](https://github.com/ba40431/Travel-Arrangement/blob/develop/static/pic/demopic/demo-10.gif?raw=true)
 
 ## Contact
 Abby Ho <br/>
