@@ -10,21 +10,38 @@
     <%- include('header'); %>
     <main>
         <div class = 'itinerary-container'>
-            <div class = 'title'>行程安排</div>
+            <div class = 'title'>
+                <div>行程安排</div>
+                <a class = 'share-img' onclick = 'showInput()'><img src = '/pic/icons8-add-male-user-64.png'/></a>
+                <div class = 'share-container'>
+                    <div class = 'share-content'>
+                        <input class = 'share-input' type = 'text' placeholder = '分享給其他會員好友(email)'>
+                        <button class = 'share-button' onclick = 'shareFriend()'>分享</button>
+                        <button class = 'close-button' onclick = 'closeInput()'>取消</button>
+                        <div class = 'share-text'></div>
+                    </div>
+                </div>
+            </div>
+            <div class = 'text'>
+                <div>( 點選行程即可查看景點的詳細資訊 )</div>
+                <div class = 'friend-photo'></div>
+            </div>
             <div class = 'itinerary-content'></div>
         </div>
         <hr/>
+        <div class = 'attraction-container'></div>
         <div class = 'button-container'>
             <a href = '/'>
                 <button class = 'button'>重新安排</button>
             </a>
-            <a href = '/my-itinerary'>
-                <button class = 'button'>我的行程</button>
+            <a href = '/dashboard'>
+                <button class = 'button'>會員中心</button>
             </a>
         </div>
     </main>
 
     <%- include('footer'); %>
     <script type = 'text/javascript' src = '/javascript/itinerary.js'></script>
+    <script type = 'text/javascript' src = '/javascript/location.js'></script>
 </body>
 </html>

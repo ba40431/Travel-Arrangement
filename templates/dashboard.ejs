@@ -9,9 +9,57 @@
 <body>
     <%- include('header'); %>
     <main>
+        <div class= 'profile-container'>
+            <div class = 'user-title'>我的資料</div>
+            <div class = 'user-photo' id = 'user-photo'>
+                <img src = '/pic/profile.jpg'/>
+                <a class = 'update-content'>
+                    <label for = 'update-photo' class = 'update-label'><img src = '/pic/icons8-ball-point-pen-50.png'/></label>
+                    <input type = 'file' name = 'update-photo' id = 'update-photo' class = 'update-input'>
+                </a>
+            </div>
+            <div class = 'user-content'>
+                <div class = 'user-name'>姓名：<span id = 'name-text'></span></div>
+                <div class = 'user-email'>電子信箱：<span id = 'email-text'></span></div>
+                <div class = 'user-password'>修改密碼：<input type = 'password' id = 'user-password'/></div>
+                
+                <!-- <div class = 'user-false'></div><button class = 'password-button' onclick = 'updateName()''>確定修改</button> -->
+                <!-- <div class = 'user-false'></div><button class = 'password-button' onclick = 'updatePassword()''>修改密碼</button> -->
+            </div>
+        </div>
+        <hr/>
+        <div class = 'itinerary-container'>
+            <div class = 'title'>行程列表</div>
+            <div class = 'loader-content'>
+                <div class = 'loader'></div>
+            </div>
+            <div class = 'itinerary-block'></div>
+        </div>
+        <div class = 'button-container'>
+            <a href = '/'>
+                <button class = 'button'>回首頁</button>
+            </a>
+        </div>
+
+        <!-- 遮罩層 -->
+        <div class = 'cover'></div> 
+
+        <div class = 'notification-window'>
+            <div  class = 'window-container'>
+            <div class = 'window-background'></div>
+            <div class = 'window-content'>
+                <div class = 'window-title'>Reminder<a class = 'window-close' onclick = 'closeWindow()'><img src = '/pic/icon_close.png'></a></div>
+                <input type = 'date' class = 'notification-date'/>
+                <input type = 'time' class = 'notification-time'/>
+                <button class = 'window-button' onclick = 'notificationItinerary(this)'>確定</button>
+            </div>
+            </div>
+        </div>
+
     </main>
     
     <%- include('footer'); %>
     <script type = 'text/javascript' src = '/javascript/dashboard.js'></script>
+    <script type = 'text/javascript' src = '/javascript/send-push.js'></script>
 </body>
 </html>

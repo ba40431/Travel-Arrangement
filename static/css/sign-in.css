@@ -1,126 +1,134 @@
 body {
-    background-image: linear-gradient(130deg, #fde5ce 0%, #fdcfd1 100%);
+  background-image: linear-gradient(130deg, #fde5ce 0%, #fdcfd1 100%);
 }
 .sign-in-container {
-    width: 850px;
-    height: 550px;
-    background-color: #fafafc;
-    border-radius: 10px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin: -275px 0 0 -425px;
-    display: grid;
-    grid-template-columns: 50% 50%;
+  width: 850px;
+  height: 550px;
+  background-color: #fafafc;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -275px 0 0 -425px;
+  display: grid;
+  grid-template-columns: 50% 50%;
 }
 .photo-block {
-    overflow: hidden;
-    opacity: 0.75;
-    border-radius: 10px 0 0 10px;
+  overflow: hidden;
+  opacity: 0.75;
+  border-radius: 10px 0 0 10px;
 }
 .photo-block > img {
-    width: 100%;
+  width: 100%;
 }
 .sign-in-block {
-    background-color: #fafafc;
-    border-radius: 10px;
-    position: relative;
+  background-color: #fafafc;
+  border-radius: 10px;
+  position: relative;
 }
 .headline {
-    position: absolute;
-    right: 0;
-    margin-right: 10px;
-    margin-top: 5px;
-    font-family: 'Srisakdi', cursive;
-    font-weight: 700;
-    font-size: 25px;
-    color: #eb9091;
+  position: absolute;
+  right: 0;
+  margin-right: 10px;
+  margin-top: 5px;
+  font-family: 'Srisakdi', cursive;
+  font-weight: 700;
+  font-size: 25px;
+  color: #eb9091;
 }
-.sign-in-content, .sign-up-content{
-    margin-top: 160px;
-    width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
+.sign-in-content,
+.sign-up-content {
+  margin-top: 160px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 .sign-up-content {
-    display: none;
+  display: none;
 }
-.sign-in-title, .sign-up-title {
-    font-weight: 700;
-    font-size: 24px;
-    color: #666666;
-    margin-bottom: 5px;
-    margin-bottom: 10px;
-    font-family: 'Comic Sans MS';
+.sign-in-title,
+.sign-up-title {
+  font-weight: 700;
+  font-size: 24px;
+  color: #666666;
+  margin-bottom: 5px;
+  margin-bottom: 10px;
+  font-family: 'Comic Sans MS';
 }
-.sign-in-content > input, .sign-up-content > input {
-    width: 278px;
-    height: 46px;
-    background-color: #fafafc;;
-    border-bottom: 2px solid #cccccc;
-    border-top: 0px solid #cccccc;
-    border-left: 0px solid #cccccc;
-    border-right: 0px solid #cccccc;
-    padding: 0;
-    color: #666666;
-    font-family: 'Noto Sans TC';
-    font-weight: 400;
-    font-size: 16px;
-    padding-left: 15px;
-    padding-right: 15px;
-    margin-top: 8px;
+.sign-in-content > input,
+.sign-up-content > input {
+  width: 278px;
+  height: 46px;
+  background-color: #fafafc;
+  border-bottom: 2px solid #cccccc;
+  border-top: 0px solid #cccccc;
+  border-left: 0px solid #cccccc;
+  border-right: 0px solid #cccccc;
+  padding: 0;
+  color: #666666;
+  font-family: 'Noto Sans TC';
+  font-weight: 400;
+  font-size: 16px;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 8px;
 }
-.sign-in-button, .sign-up-button {
-    width: 130px;
-    height: 47px;
-    background: #ffbc7d;
-    border: 0px solid #ffbc7d;
-    border-radius: 30px;
-    margin-top: 20px;
-    cursor: pointer;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: 18px;
+.sign-in-button,
+.sign-up-button {
+  width: 130px;
+  height: 47px;
+  background: #ffbc7d;
+  border: 0px solid #ffbc7d;
+  border-radius: 30px;
+  margin-top: 20px;
+  cursor: pointer;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 18px;
 }
-.sign-in-button:hover, .sign-up-button:hover {
-    background: #ffaeaf;
+.sign-in-button:hover,
+.sign-up-button:hover {
+  background: #ffaeaf;
 }
-.sign-in-text, .sign-up-text {
-    font-weight: 400;
-    font-size: 16px;
-    margin-top: 50px;
-    color: #666666;
+.sign-in-text,
+.sign-up-text {
+  font-weight: 400;
+  font-size: 16px;
+  margin-top: 50px;
+  color: #666666;
 }
-.sign-in-text > a, .sign-up-text > a {
-    cursor: pointer;
-    color: #ffbc7d;
+.sign-in-text > a,
+.sign-up-text > a {
+  cursor: pointer;
+  color: #ffbc7d;
 }
-.sign-in-failed, .sign-up-failed {
-    font-weight: 400;
-    font-size: 18px;
-    color: #eb9091;
-    margin-top: 5px;
+.sign-in-failed,
+.sign-up-failed {
+  font-weight: 400;
+  font-size: 18px;
+  color: #eb9091;
+  margin-top: 5px;
 }
 .oauth-block {
-    height: 15px;
-    margin-top: 60px;
-    font-weight: 400;
-    font-size: 16px;
-    color: #666666;
-    margin-left: -20px;
+  height: 15px;
+  margin-top: 60px;
+  font-weight: 400;
+  font-size: 16px;
+  color: #666666;
+  margin-left: -20px;
 }
 .google-icon {
-    margin-left: 10px;
-    cursor: pointer;
+  margin-left: 10px;
+  cursor: pointer;
 }
 .oauth-text > span {
-    margin-right: 10px;
-    padding-top: 5px;
-    position: relative;
+  margin-right: 10px;
+  padding-top: 5px;
+  position: relative;
 }
-.google-icon > a > img{
-    height: 20px;
-    position: absolute;
-    top: 442px
+.google-icon > a > img {
+  height: 20px;
+  position: absolute;
+  top: 442px;
 }
