@@ -107,9 +107,9 @@ userAPI.patch('/user', (req, res) => {
                 method: 'Local'
               };
               const token = jwt.sign(
-                { payload, exp: Math.floor(Date.now() / 1000) + 60 * 15 },
+                { payload, exp: Math.floor(Date.now() / 1000) + 60 * 30 },
                 process.env.JWT_SECRET_KEY
-              ); //exp 15分鐘
+              ); //exp 30分鐘
               res.cookie('token', token, { maxAge: 900000, httpOnly: true });
               return res.status(200).json({
                 ok: true,

@@ -3,8 +3,6 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 const { updateProfile } = require('../../model/dashboard');
-const mysql = require('mysql2');
-const pool = require('../../model/connection');
 const dashboardAPI = express.Router();
 
 require('dotenv').config({ path: './.env' });
