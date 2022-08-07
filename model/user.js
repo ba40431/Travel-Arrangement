@@ -5,7 +5,7 @@ module.exports = {
     const connection = await pool.getConnection();
     try {
       await connection.beginTransaction();
-      const result = connection.query('INSERT INTO `user` (name, email, password, profile) VALUES (?, ?, ?, ?);',
+      const result = await connection.query('INSERT INTO `user` (name, email, password, profile) VALUES (?, ?, ?, ?);',
       [userName, userEmail, userPassword, userPicture]);
       return result
     }catch (error) {
@@ -18,10 +18,12 @@ module.exports = {
   async checkUser(userEmail) {
     const connection = await pool.getConnection();
     try {
+      await connection.beginTransaction();
       const result = await connection.query('SELECT * FROM `user` WHERE email = ?;',[userEmail]);
       return result
     }catch (error) {
       console.log(error)
+      connection.rollback();
     } finally {
       connection.release();
     }

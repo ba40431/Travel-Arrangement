@@ -69,19 +69,21 @@ requireAPI.get('/require', async (req, res) => {
     }
   }
   try {
-    checkTown(
+    const checkedTown = await checkTown(
       checkedCities[0],
       checkedCities[1],
-      checkedCities[2],
-      async (err, result) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({
-            error: true,
-            message: '伺服器發生錯誤',
-          });
-        }
+      checkedCities[2]);
 
+      // async (err, result) => {
+      //   if (err) {
+      //     console.log(err);
+      //     return res.status(500).json({
+      //       error: true,
+      //       message: '伺服器發生錯誤',
+      //     });
+      //   }
+      
+      if(checkedTown) {
         //取得縣市區域
         cityData = result;
         let regionList1 = [];
@@ -134,7 +136,6 @@ requireAPI.get('/require', async (req, res) => {
           checkedCities: data,
         });
       }
-    );
   } catch {
     return res.status(500).json({
       error: true,
@@ -152,18 +153,32 @@ requireAPI.post('/hotels', async (req, res) => {
       townId = cityData[i].zipcode;
     }
   }
-  searchHotel(townId, async (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        error: true,
-        message: '伺服器發生錯誤',
+  try {
+    const searchedHotel = await searchHotel(townId);
+    if(searchedHotel) {
+      return  res.status(200).json({
+        searchedHotel,
       });
     }
-    res.status(200).json({
-      result,
+  }catch {
+    return res.status(500).json({
+      error: true,
+      message: '伺服器發生錯誤',
     });
-  });
+  }
+  
+  // searchHotel(townId, async (err, result) => {
+  //   if (err) {
+  //     console.log(err);
+  //     return res.status(500).json({
+  //       error: true,
+  //       message: '伺服器發生錯誤',
+  //     });
+  //   }
+  //   res.status(200).json({
+  //     result,
+  //   });
+  // });
 });
 
 module.exports = requireAPI;
