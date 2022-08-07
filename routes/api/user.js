@@ -25,46 +25,75 @@ function ensureAuthenticated(req, res, next) {
   });
 }
 
-userAPI.get('/user', ensureAuthenticated, (req, res) => {
+userAPI.get('/user', ensureAuthenticated, async(req, res) => {
   let token = req.cookies.token;
   if (token) {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     try {
-      checkUser(decoded.payload.userEmail, (err, result) => {
-        if (err) {
-          console.log(err);
-          return res.status(500).json({
-            error: true,
-            message: '伺服器發生錯誤',
-          });
-        } else if (result[0] === undefined) {
-          return res.status(200).json({
-            data: null,
-          });
-        } else {
-          return res.status(200).json({
-            data: {
-              id: result[0].id,
-              name: result[0].name,
-              email: result[0].email,
-              profile: result[0].profile,
-            },
-          });
-        }
-      });
-    } catch {
+      const checkedUser = await checkUser(decoded.payload.userEmail);
+      if(checkedUser[0] === undefined) {
+        return res.status(200).json({
+          data: null,
+        });
+      } else {
+        return res.status(200).json({
+          data: {
+            id: result[0].id,
+            name: result[0].name,
+            email: result[0].email,
+            profile: result[0].profile,
+          },
+        });
+      }
+    }catch (error) {
+    if(error) {
       return res.status(200).json({
         data: null,
       });
+      }
     }
   } else {
     return res.status(200).json({
       data: null,
     });
   }
+
+    // try {
+    //   checkUser(decoded.payload.userEmail, (err, result) => {
+    //     if (err) {
+    //       console.log(err);
+    //       return res.status(500).json({
+    //         error: true,
+    //         message: '伺服器發生錯誤',
+    //       });
+    //     } else if (result[0] === undefined) {
+    //       return res.status(200).json({
+    //         data: null,
+    //       });
+    //     } else {
+    //       return res.status(200).json({
+    //         data: {
+    //           id: result[0].id,
+    //           name: result[0].name,
+    //           email: result[0].email,
+    //           profile: result[0].profile,
+    //         },
+    //       });
+    //     }
+    //   });
+    // } catch {
+    //   return res.status(200).json({
+    //     data: null,
+    //   });
+    // }
+  // } else {
+  //   return res.status(200).json({
+  //     data: null,
+  //   });
+  // }
 });
 
-userAPI.patch('/user', (req, res) => {
+userAPI.patch('/user', async(req, res) => {
   if (req.body.email === '' || req.body.password === '') {
     return res.status(400).json({
       error: true,
@@ -81,20 +110,14 @@ userAPI.patch('/user', (req, res) => {
       message: '請勿在密碼輸入特殊符號',
     });
   } else {
-    checkUser(req.body.email, (err, result) => {
-      let userData = result;
-      if (err) {
-        console.log(err);
-        return res.status(500).json({
-          error: true,
-          message: '伺服器發生錯誤',
-        });
-      } else if (userData[0] === undefined) {
+    try {
+      const checkedUser = await checkUser(req.body.email);
+      if(checkedUser[0] === undefined) {
         return res.status(200).json({
           error: true,
           message: '查無此會員帳號',
         });
-      } else {
+      }else {
         bcrypt.compare(
           req.body.password,
           userData[0].password,
@@ -107,9 +130,9 @@ userAPI.patch('/user', (req, res) => {
                 method: 'Local'
               };
               const token = jwt.sign(
-                { payload, exp: Math.floor(Date.now() / 1000) + 60 * 30 },
+                { payload, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
                 process.env.JWT_SECRET_KEY
-              ); //exp 30分鐘
+              );
               res.cookie('token', token, { maxAge: 900000, httpOnly: true });
               return res.status(200).json({
                 ok: true,
@@ -123,11 +146,62 @@ userAPI.patch('/user', (req, res) => {
           }
         );
       }
-    });
+    }catch (error) {
+      if(error) {
+        return res.status(500).json({
+          error: true,
+          message: '伺服器發生錯誤',
+        });
+      }
+    }
+
+    // checkUser(req.body.email, (err, result) => {
+    //   let userData = result;
+    //   if (err) {
+    //     console.log(err);
+    //     return res.status(500).json({
+    //       error: true,
+    //       message: '伺服器發生錯誤',
+    //     });
+    //   } else if (userData[0] === undefined) {
+    //     return res.status(200).json({
+    //       error: true,
+    //       message: '查無此會員帳號',
+    //     });
+    //   } else {
+    //     bcrypt.compare(
+    //       req.body.password,
+    //       userData[0].password,
+    //       function (err, result) {
+    //         if (result === true) {
+    //           const payload = {
+    //             userId: userData[0].id,
+    //             userName: userData[0].name,
+    //             userEmail: userData[0].email,
+    //             method: 'Local'
+    //           };
+    //           const token = jwt.sign(
+    //             { payload, exp: Math.floor(Date.now() / 1000) + 60 * 30 },
+    //             process.env.JWT_SECRET_KEY
+    //           ); //exp 30分鐘
+    //           res.cookie('token', token, { maxAge: 900000, httpOnly: true });
+    //           return res.status(200).json({
+    //             ok: true,
+    //           });
+    //         } else {
+    //           return res.status(400).json({
+    //             error: true,
+    //             message: '登入失敗，電子信箱或密碼輸入錯誤',
+    //           });
+    //         }
+    //       }
+    //     );
+    //   }
+    // });
   }
 });
 
-userAPI.post('/user', (req, res) => {
+userAPI.post('/user', async(req, res) => {
   let userData = req.body;
   if (
     userData.name === '' ||
@@ -149,52 +223,98 @@ userAPI.post('/user', (req, res) => {
       message: '請勿在密碼輸入特殊符號',
     });
   } else {
-    checkUser(userData.email, (err, result) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({
-          error: true,
-          message: '伺服器發生錯誤',
-        });
-      } else if (result[0] !== undefined) {
+    try {
+      const checkedUser = checkUser(userData.email);
+      if (checkedUser[0] !== undefined) {
         return res.status(400).json({
           error: true,
           message: '帳戶已被註冊',
         });
-      } else {
-        bcrypt.hash(userData.password, saltRounds, async (err, hash) => {
-          if (err) {
-            console.log(err);
-            return res.status(400).json({
-              error: true,
-              message: '伺服器發生錯誤',
-            });
-          }
-          let hashedPassword = hash;
-          // Store hash in your password DB.
-          let userPicture = null;
-          insertUser(
-            userData.name,
-            userData.email,
-            hashedPassword,
-            userPicture,
-            (err, result) => {
-              if (err) {
-                console.log(err);
+      }else {
+          bcrypt.hash(userData.password, saltRounds, async (err, hash) => {
+            if (err) {
+              console.log(err);
+              return res.status(400).json({
+                error: true,
+                message: '伺服器發生錯誤',
+              });
+            }
+            let hashedPassword = hash;
+            // Store hash in your password DB.
+            let userPicture = null;
+            try {
+              const insertedUser = await insertUser(userData.name, userData.email, hashedPassword, userPicture);
+              if(insertedUser) {
+                return res.status(200).json({
+                  ok: true,
+                  message: '註冊成功',
+                });
+              }
+            }catch (error) {
+              if(error) {
                 return res.status(500).json({
                   error: true,
                   message: '伺服器發生錯誤',
                 });
               }
-              return res.status(200).json({
-                ok: true,
-                message: '註冊成功',
-              });
             }
-          );
+          });
+        }
+    }catch (error) {
+      if(error) {
+        return res.status(500).json({
+          error: true,
+          message: '伺服器發生錯誤',
         });
       }
-    });
+    }
+
+    // checkUser(userData.email, (err, result) => {
+    //   if (err) {
+    //     console.log(err);
+    //     return res.status(500).json({
+    //       error: true,
+    //       message: '伺服器發生錯誤',
+    //     });
+    //   } else if (result[0] !== undefined) {
+    //     return res.status(400).json({
+    //       error: true,
+    //       message: '帳戶已被註冊',
+    //     });
+    //   } else {
+    //     bcrypt.hash(userData.password, saltRounds, async (err, hash) => {
+    //       if (err) {
+    //         console.log(err);
+    //         return res.status(400).json({
+    //           error: true,
+    //           message: '伺服器發生錯誤',
+    //         });
+    //       }
+    //       let hashedPassword = hash;
+    //       // Store hash in your password DB.
+    //       let userPicture = null;
+    //       insertUser(
+    //         userData.name,
+    //         userData.email,
+    //         hashedPassword,
+    //         userPicture,
+    //         (err, result) => {
+    //           if (err) {
+    //             console.log(err);
+    //             return res.status(500).json({
+    //               error: true,
+    //               message: '伺服器發生錯誤',
+    //             });
+    //           }
+    //           return res.status(200).json({
+    //             ok: true,
+    //             message: '註冊成功',
+    //           });
+    //         }
+    //       );
+    //     });
+    //   }
+    // });
   }
 });
 

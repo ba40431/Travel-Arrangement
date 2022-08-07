@@ -24,12 +24,6 @@ async function init() {
     renderUserData(userData);
     document.body.style.display = 'block';
     itineraryData = await getItineraryData();
-    // if(itineraryData.length === 0) {
-    // let footer = document.querySelector('footer')
-    // footer.style.width = '100%'
-    // footer.style.position = 'absolute'
-    // footer.style.bottom = '0'
-    // }
     renderItinerary(itineraryData);
     loaderContent.style.display = 'none';
   }
@@ -209,7 +203,6 @@ let update = document
         return response.json();
       })
       .then((result) => {
-        // console.log(result)
         if (result.ok) {
           window.location.replace(location.href);
         }

@@ -1,8 +1,6 @@
 # [Travel-Arrangement](https://travel-arrangement.website/)
 
-The project aim at automating to arrange a travel itinerary by choosing the departure date
-and the location where user want to go in Taiwan. Meanwhile, user can share this itinerary
-with friends.<br/>
+The project aim at automating to arrange a travel itinerary by choosing the departure date and the location where the user wants to go in Taiwan. Meanwhile, users can share this itinerary with friends.<br/>
 
 Website link : https://travel-arrangement.website/<br/>
 Test account : test@test<br/>
@@ -34,17 +32,22 @@ Share itinerary to user's friend.<br/>
 ![demo-5.gif](https://github.com/ba40431/Travel-Arrangement/blob/main/static/pic/demopic/demo-5.gif?raw=true)
 
 - Web notification<br/>
-Set reminder by using service worker to remind user about the itinerary will be coming. <br/>
+Set reminder by using service worker to remind user about the itinerary that will be coming. <br/>
 ![demo-4.gif](https://github.com/ba40431/Travel-Arrangement/blob/main/static/pic/demopic/demo-4.gif?raw=true)
 ![demo-7.png](https://github.com/ba40431/Travel-Arrangement/blob/main/static/pic/demopic/demo-7.png?raw=true)
 
 ## Use Skills
 
 - Use Express.js as server framework.
+- Deploy website with Docker.
+- Use the Haversine formula in SQL Queries to search attractions.
+- Set reminder by using service worker to remind user about the itinerary that will be coming.
 - Storage profile pictures and accelerate content delivery by AWS S3 and CloudFront.
-- Use AWS RDS as Database, and do database normalization.
+- Use AWS RDS as Database, normalize the database, and set the index to optimize the query.
 - Improve itinerary's reading speed by AWS ElastiCache. 
-- Setup CI / CD pipeline with Jenkins.
+- Use bcrypt to encode users passwords.
+- Use Nginx as reverse proxy.
+- Set up CI / CD pipeline with Jenkins.
 - Support Google OAuth 2.0 login.
 - Authorize users using JSON Web Tokens.
 
@@ -62,5 +65,5 @@ Set reminder by using service worker to remind user about the itinerary will be 
 ![demo-10.gif](https://github.com/ba40431/Travel-Arrangement/blob/main/static/pic/demopic/demo-10.gif?raw=true)
 
 ## Contact
-Abby Ho <br/>
+何聿庭 Abby Ho <br/>
 E-mail : ba40431@gmail.com
