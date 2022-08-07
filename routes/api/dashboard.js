@@ -3,8 +3,6 @@ const multer = require('multer');
 const multerS3 = require('multer-s3');
 const aws = require('aws-sdk');
 const { updateProfile } = require('../../model/dashboard');
-const mysql = require('mysql2');
-const pool = require('../../model/connection');
 const dashboardAPI = express.Router();
 
 require('dotenv').config({ path: './.env' });
@@ -28,7 +26,6 @@ const upload = multer({
     s3: s3,
     bucket: `${bucketName}/profile`,
     metadata: (req, file, cb) => {
-      // console.log(file);
       cb(null, { fieldName: file.fieldname, ACL: 'public-read' });
     },
     key: function (req, file, cb) {
@@ -40,21 +37,37 @@ const upload = multer({
 dashboardAPI.post(
   '/dashboard',
   upload.single('image'),
-  async (req, res, next) => {
+  async (req, res) => {
     let imageUrl = `https://d92adaktwu3r8.cloudfront.net/profile/${req.file.originalname}`;
-    updateProfile(req.body.title, imageUrl, (err, result) => {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({
-          error: true,
-          message: '伺服器發生錯誤',
+    try {
+      const updatedProfile = await updateProfile(req.body.title, imageUrl);
+      if(updatedProfile) {
+        return res.status(200).json({
+          ok: true,
+          imageUrl: imageUrl,
         });
       }
-      return res.status(200).json({
-        ok: true,
-        imageUrl: imageUrl,
-      });
-    });
+    }catch (error) {
+        if(error) {
+          return res.status(500).json({
+            error: true,
+            message: '伺服器發生錯誤',
+          });
+        }
+    }
+    // updateProfile(req.body.title, imageUrl, (err, result) => {
+    //   if (err) {
+    //     console.log(err);
+    //     return res.status(500).json({
+    //       error: true,
+    //       message: '伺服器發生錯誤',
+    //     });
+    //   }
+    //   return res.status(200).json({
+    //     ok: true,
+    //     imageUrl: imageUrl,
+    //   });
+    // });
   }
 );
 

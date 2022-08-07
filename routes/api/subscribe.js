@@ -14,7 +14,7 @@ const privateVapidKey = process.env.PRIVATE_VAPID_KEY;
 
 //setting vapid keys details
 webpush.setVapidDetails(
-  'mailto:ba40431@gmail.com',
+  'mailto:test@test',
   publicVapidKey,
   privateVapidKey
 );

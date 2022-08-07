@@ -80,14 +80,16 @@ function renderAttraction(data) {
   let phoneSpan = document.createElement('span');
   let addressSpan = document.createElement('span');
   let opentimeSpan = document.createElement('span');
-  let webSpan = document.createElement('span');
+  let webA = document.createElement('a');
   let descriptionSpan = document.createElement('span');
   nameSpan.textContent = data.result[0].name;
   distanceSpan.textContent = `${data.result[0].attraction_distance.toString().slice(0, 3)} KM`;
   phoneSpan.textContent = data.result[0].phone;
   addressSpan.textContent = data.result[0].address;
   opentimeSpan.textContent = data.result[0].opentime;
-  webSpan.textContent = data.result[0].website;
+  webA.textContent = data.result[0].website;
+  webA.href = data.result[0].website;
+  webA.setAttribute('target', '_blank');
   descriptionSpan.textContent = data.result[0].description;
   let attractionName = document.querySelector('#attraction-name');
   let attractionDistance = document.querySelector('#attraction-distance');
@@ -101,7 +103,7 @@ function renderAttraction(data) {
   attractionPhone.appendChild(phoneSpan);
   attractionAddress.appendChild(addressSpan);
   attractionOpentime.appendChild(opentimeSpan);
-  attractionWeb.appendChild(webSpan);
+  attractionWeb.appendChild(webA);
   attractionDescription.appendChild(descriptionSpan);
 }
 function renderHotel(data) {
