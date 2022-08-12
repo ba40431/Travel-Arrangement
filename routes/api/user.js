@@ -31,17 +31,17 @@ userAPI.get('/user', ensureAuthenticated, async(req, res) => {
     const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY);
     try {
       const checkedUser = await checkUser(decoded.payload.userEmail);
-      if(checkedUser[0] === undefined) {
+      if(checkedUser[0][0] === undefined) {
         return res.status(200).json({
           data: null,
         });
       } else {
         return res.status(200).json({
           data: {
-            id: result[0].id,
-            name: result[0].name,
-            email: result[0].email,
-            profile: result[0].profile,
+            id: checkedUser[0][0].id,
+            name: checkedUser[0][0].name,
+            email: checkedUser[0][0].email,
+            profile: checkedUser[0][0].profile,
           },
         });
       }
@@ -112,7 +112,7 @@ userAPI.patch('/user', async(req, res) => {
   } else {
     try {
       const checkedUser = await checkUser(req.body.email);
-      if(checkedUser[0] === undefined) {
+      if(checkedUser[0][0] === undefined) {
         return res.status(200).json({
           error: true,
           message: '查無此會員帳號',
@@ -120,13 +120,13 @@ userAPI.patch('/user', async(req, res) => {
       }else {
         bcrypt.compare(
           req.body.password,
-          userData[0].password,
+          checkedUser[0][0].password,
           function (err, result) {
             if (result === true) {
               const payload = {
-                userId: userData[0].id,
-                userName: userData[0].name,
-                userEmail: userData[0].email,
+                userId: checkedUser[0][0].id,
+                userName: checkedUser[0][0].name,
+                userEmail: checkedUser[0][0].email,
                 method: 'Local'
               };
               const token = jwt.sign(
