@@ -82,10 +82,9 @@ requireAPI.get('/require', async (req, res) => {
       //       message: '伺服器發生錯誤',
       //     });
       //   }
-      
-      if(checkedTown) {
+      if(checkedTown[0]) {
+        cityData = checkedTown[0]
         //取得縣市區域
-        cityData = result;
         let regionList1 = [];
         let regionList2 = [];
         let regionList3 = [];
@@ -155,9 +154,10 @@ requireAPI.post('/hotels', async (req, res) => {
   }
   try {
     const searchedHotel = await searchHotel(townId);
-    if(searchedHotel) {
+    if(searchedHotel[0]) {
+      const result = searchedHotel[0]
       return  res.status(200).json({
-        searchedHotel,
+        result,
       });
     }
   }catch {

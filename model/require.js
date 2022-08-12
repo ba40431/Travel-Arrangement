@@ -2,6 +2,7 @@ const pool = require('./connection-promise');
 
 module.exports = {
   async checkTown(regionA, regionB, regionC) {
+    const connection = await pool.getConnection();
     try {
       await connection.beginTransaction();
       const result = 
@@ -17,6 +18,7 @@ module.exports = {
     }
   },
   async searchHotel(townId) {
+    const connection = await pool.getConnection();
     try {
       await connection.beginTransaction();
       const result = 
