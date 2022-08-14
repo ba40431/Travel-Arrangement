@@ -4,27 +4,20 @@ const { shareItinerary } = require('../../model/my-itinerary');
 const { checkUser } = require('../../model/user');
 const redis = require('redis');
 
-shareAPI.post('/share', (req, res) => {
-  checkUser(req.body.shareEmail, async (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        error: true,
-        message: '伺服器發生錯誤',
-      });
-    }
+shareAPI.post('/share', async(req, res) => {
+  const checkedUser = await checkUser(req.body.shareEmail);
     // console.log(result);
-    if (result.length === 0) {
+    if (checkedUser[0].length === 0) {
       return res.status(400).json({
         error: true,
         message: '查無此使用者',
       });
     } else {
       // console.log(result);
-      let userId = result[0].id;
-      let userName = result[0].name;
-      let userEmail = result[0].email;
-      let userProfile = result[0].profile;
+      let userId = checkedUser[0][0].id;
+      let userName = checkedUser[0][0].name;
+      let userEmail = checkedUser[0][0].email;
+      let userProfile = checkedUser[0][0].profile;
       shareItinerary(
         userId,
         userEmail,
@@ -83,7 +76,7 @@ shareAPI.post('/share', (req, res) => {
         }
       );
     }
-  });
+  // });
 });
 
 module.exports = shareAPI;

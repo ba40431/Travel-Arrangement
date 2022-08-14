@@ -6,9 +6,10 @@ locationAPI.get('/location/:attractionId', async(req, res) => {
   const attractionId = req.params.attractionId;
   try {
     const isattractionDetail = await attractionDetail(attractionId);
+    const result = isattractionDetail[0]
     if(isattractionDetail) {
       return res.status(200).json({
-        isattractionDetail,
+        result
       });
     }
   }catch (error) {
@@ -19,27 +20,16 @@ locationAPI.get('/location/:attractionId', async(req, res) => {
       });
     }
   }  
-  // attractionDetail(attractionId, async (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(500).json({
-  //       error: true,
-  //       message: '伺服器發生錯誤',
-  //     });
-  //   }
-  //   res.status(200).json({
-  //     result,
-  //   });
-  // });
 });
 
 locationAPI.get('/hotel/:hotelId', async(req, res) => {
   const hotelId = req.params.hotelId;
   try {
     const ishotelDetail = await hotelDetail(hotelId);
+    const result = ishotelDetail[0]
     if(ishotelDetail) {
     return res.status(200).json({
-      ishotelDetail,
+      result
     });
     }
   }catch (error) {
@@ -50,18 +40,6 @@ locationAPI.get('/hotel/:hotelId', async(req, res) => {
       });
     }
   }
-  // hotelDetail(hotelId, async (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(500).json({
-  //       error: true,
-  //       message: '伺服器發生錯誤',
-  //     });
-  //   }
-  //   res.status(200).json({
-  //     result,
-  //   });
-  // });
 });
 
 module.exports = locationAPI;

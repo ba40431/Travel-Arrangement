@@ -73,15 +73,6 @@ requireAPI.get('/require', async (req, res) => {
       checkedCities[0],
       checkedCities[1],
       checkedCities[2]);
-
-      // async (err, result) => {
-      //   if (err) {
-      //     console.log(err);
-      //     return res.status(500).json({
-      //       error: true,
-      //       message: '伺服器發生錯誤',
-      //     });
-      //   }
       if(checkedTown[0]) {
         cityData = checkedTown[0]
         //取得縣市區域
@@ -166,19 +157,6 @@ requireAPI.post('/hotels', async (req, res) => {
       message: '伺服器發生錯誤',
     });
   }
-  
-  // searchHotel(townId, async (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(500).json({
-  //       error: true,
-  //       message: '伺服器發生錯誤',
-  //     });
-  //   }
-  //   res.status(200).json({
-  //     result,
-  //   });
-  // });
 });
 
 module.exports = requireAPI;

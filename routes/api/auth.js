@@ -81,38 +81,6 @@ authAPI.get('/auth/google/callback', async(req, res) => {
       });
     }
   }
-
-  // checkUser(email, (err, result) => {
-  //   if (err) {
-  //     console.log(err);
-  //     return res.status(500).json({
-  //       error: true,
-  //       message: '伺服器發生錯誤',
-  //     });
-  //   }
-  //   if (result[0] === undefined) {
-  //     insertUser(fullName, email, googleId, picture, (err, result) => {
-  //       if (err) {
-  //         console.log(err);
-  //         return res.status(500).json({
-  //           error: true,
-  //           message: '伺服器發生錯誤',
-  //         });
-  //       }
-  //     });
-  //   }
-    // const payload = {
-    //   userName: fullName,
-    //   userEmail: email,
-    //   method: 'Google',
-    // };
-    // const token = jwt.sign(
-    //   { payload, exp: Math.floor(Date.now() / 1000) + 60 * 15 },
-    //   process.env.JWT_SECRET_KEY
-    // ); //exp 15分鐘
-    // res.cookie('token', token, { maxAge: 900000, httpOnly: true });
-    // res.redirect('/')
-  // });
 })
 
 module.exports = authAPI;

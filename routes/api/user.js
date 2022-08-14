@@ -57,40 +57,6 @@ userAPI.get('/user', ensureAuthenticated, async(req, res) => {
       data: null,
     });
   }
-
-    // try {
-    //   checkUser(decoded.payload.userEmail, (err, result) => {
-    //     if (err) {
-    //       console.log(err);
-    //       return res.status(500).json({
-    //         error: true,
-    //         message: '伺服器發生錯誤',
-    //       });
-    //     } else if (result[0] === undefined) {
-    //       return res.status(200).json({
-    //         data: null,
-    //       });
-    //     } else {
-    //       return res.status(200).json({
-    //         data: {
-    //           id: result[0].id,
-    //           name: result[0].name,
-    //           email: result[0].email,
-    //           profile: result[0].profile,
-    //         },
-    //       });
-    //     }
-    //   });
-    // } catch {
-    //   return res.status(200).json({
-    //     data: null,
-    //   });
-    // }
-  // } else {
-  //   return res.status(200).json({
-  //     data: null,
-  //   });
-  // }
 });
 
 userAPI.patch('/user', async(req, res) => {
@@ -154,50 +120,6 @@ userAPI.patch('/user', async(req, res) => {
         });
       }
     }
-
-    // checkUser(req.body.email, (err, result) => {
-    //   let userData = result;
-    //   if (err) {
-    //     console.log(err);
-    //     return res.status(500).json({
-    //       error: true,
-    //       message: '伺服器發生錯誤',
-    //     });
-    //   } else if (userData[0] === undefined) {
-    //     return res.status(200).json({
-    //       error: true,
-    //       message: '查無此會員帳號',
-    //     });
-    //   } else {
-    //     bcrypt.compare(
-    //       req.body.password,
-    //       userData[0].password,
-    //       function (err, result) {
-    //         if (result === true) {
-    //           const payload = {
-    //             userId: userData[0].id,
-    //             userName: userData[0].name,
-    //             userEmail: userData[0].email,
-    //             method: 'Local'
-    //           };
-    //           const token = jwt.sign(
-    //             { payload, exp: Math.floor(Date.now() / 1000) + 60 * 30 },
-    //             process.env.JWT_SECRET_KEY
-    //           ); //exp 30分鐘
-    //           res.cookie('token', token, { maxAge: 900000, httpOnly: true });
-    //           return res.status(200).json({
-    //             ok: true,
-    //           });
-    //         } else {
-    //           return res.status(400).json({
-    //             error: true,
-    //             message: '登入失敗，電子信箱或密碼輸入錯誤',
-    //           });
-    //         }
-    //       }
-    //     );
-    //   }
-    // });
   }
 });
 
@@ -268,53 +190,6 @@ userAPI.post('/user', async(req, res) => {
         });
       }
     }
-
-    // checkUser(userData.email, (err, result) => {
-    //   if (err) {
-    //     console.log(err);
-    //     return res.status(500).json({
-    //       error: true,
-    //       message: '伺服器發生錯誤',
-    //     });
-    //   } else if (result[0] !== undefined) {
-    //     return res.status(400).json({
-    //       error: true,
-    //       message: '帳戶已被註冊',
-    //     });
-    //   } else {
-    //     bcrypt.hash(userData.password, saltRounds, async (err, hash) => {
-    //       if (err) {
-    //         console.log(err);
-    //         return res.status(400).json({
-    //           error: true,
-    //           message: '伺服器發生錯誤',
-    //         });
-    //       }
-    //       let hashedPassword = hash;
-    //       // Store hash in your password DB.
-    //       let userPicture = null;
-    //       insertUser(
-    //         userData.name,
-    //         userData.email,
-    //         hashedPassword,
-    //         userPicture,
-    //         (err, result) => {
-    //           if (err) {
-    //             console.log(err);
-    //             return res.status(500).json({
-    //               error: true,
-    //               message: '伺服器發生錯誤',
-    //             });
-    //           }
-    //           return res.status(200).json({
-    //             ok: true,
-    //             message: '註冊成功',
-    //           });
-    //         }
-    //       );
-    //     });
-    //   }
-    // });
   }
 });
 
