@@ -10,20 +10,4 @@ const pool = mysql.createPool({
   database: process.env.RDS_DATABASE,
 });
 
-// connection.connect((err) => {  //直接連接資料庫
-//     if (err) {
-//       return console.error('error: ' + err.message);
-//     }
-
-//     console.log('Connected to the MySQL server.');
-// });
-
-// pool.getConnection((err, connection) => { //使用Connection Pool連資料庫
-//     if (err) {
-//         return console.log(err.message);
-//     }
-//     console.log('Connected to the MySQL server.');
-//     connection.release();
-// });
-
 module.exports = pool;
