@@ -36,32 +36,17 @@ const upload = multer({
   }),
 });
 boardAPI.get('/board', async (req, res) => {
-  checkMessage((err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        error: true,
-        message: '伺服器發生錯誤',
-      });
-    }
-    return res.status(200).json(result);
-  });
+  const boardData = await checkMessage();
+  const result = boardData[0]
+  return res.status(200).json(result);
 });
 
 boardAPI.post('/board', upload.single('image'), async (req, res, next) => {
   let imageUrl = `https://d92adaktwu3r8.cloudfront.net/${req.file.originalname}`;
-  insertMessage(req.body.title, imageUrl, (err, result) => {
-    if (err) {
-      console.log(err);
-      return res.status(500).json({
-        error: true,
-        message: '伺服器發生錯誤',
-      });
-    }
-    return res.status(200).json({
-      data: 'ok',
-      imageUrl: imageUrl,
-    });
+  await insertMessage(req.body.title, imageUrl);
+  return res.status(200).json({
+    data: 'ok',
+    imageUrl: imageUrl,
   });
 });
 
