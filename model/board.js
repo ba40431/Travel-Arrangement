@@ -1,38 +1,32 @@
-const pool = require('./connection');
+const pool = require('./connection-promise');
 //如果要使用board頁面，改connection database: process.env.RDS_BOARD_DATABASE
 module.exports = {
-  insertMessage: (title, imageUrl, cb) => {
-    pool.getConnection((error, connection) => {
-      if (error) {
-        return cb(error.message);
-      }
-      connection.query(
-        'INSERT INTO `message` (title, image_url) VALUES (?, ?);',
-        [title, imageUrl],
-        (error, result) => {
-          if (error) {
-            return cb(error);
-          }
-          // console.log('Number of records inserted: ' + result.affectedRows);
-          return cb(null, result);
-        }
-      );
+  async insertMessage(title, imageUrl) {
+    const connection = await pool.getConnection();
+    try {
+      await connection.beginTransaction();
+      const result = await connection.query(
+        'INSERT INTO `message` (title, image_url) VALUES (?, ?);',[title, imageUrl]);
+      await connection.commit();
+      return result
+    }catch (error) {
+      console.log(error)
+      connection.rollback();
+    } finally {
       connection.release();
-    });
+    }
   },
-  checkMessage: (cb) => {
-    pool.getConnection((error, connection) => {
-      if (error) {
-        return cb(error.message);
-      }
-      // console.log('Connected to the MySQL server.');
-      connection.query('SELECT * FROM `message`', (error, result) => {
-        if (error) {
-          return cb(error);
-        }
-        return cb(null, result);
-      });
+  async checkMessage() {
+    const connection = await pool.getConnection();
+    try {
+      await connection.beginTransaction();
+      const result = await connection.query('SELECT * FROM `message`;');
+      return result
+    }catch (error) {
+      console.log(error)
+      connection.rollback();
+    } finally {
       connection.release();
-    });
-  },
+    }
+  }
 };
